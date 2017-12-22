@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			{{str}}
+			<zhangsan></zhangsan>
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+//		声明组件名称		调用组件
+		var abc = Vue.extend({
+			//模板		这里也可以传入挂载的元素
+			template:"<p>我是普通文本</p>"
+		})
+		//调用			//id		组件名称
+		Vue.component('zhangsan',abc) //component组合，
+		
+		new Vue({//前提：组件必须放在vue实例中
+			el:"#box",
+			data:{
+				str:'内容信息',
+			}
+		})
+		
+	</script>
+</html>

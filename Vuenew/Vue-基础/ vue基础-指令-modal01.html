@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		
+		</style>
+	</head>
+	<body>
+		
+		
+		<!--<div id="app">
+			<input type="text" v-model="str" />			
+			<select v-model="str">
+				<option :value="str">{{str}}</option>
+				<option value="美国">美国</option>
+				<option value="中国">中国</option>
+				<option >four</option>
+			</select>
+			<textarea style="width: 500px;height: 100px;" rows="20" cols="10" v-model="str">{{str}}</textarea>	
+			
+		</div>-->
+		
+		<!--
+			2.0
+		-->
+		<div id="app">
+			<input type="text" v-model="str" />	
+			<select v-model="str">
+				<option :value="str">{{str}}</option>
+				<option value="美国">美国</option>
+				<option value="中国">中国</option>
+				<option >four</option>
+			</select>
+			<select  v-modal="selected">
+				<option v-for="option in options" v-bind:value="option.value">{{option.text}}</option>
+			</select >
+			<textarea style="width: 500px;height: 100px;" rows="20" cols="10" v-model="str">{{str}}</textarea>	
+			<br />
+			<hr />
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el:'#app',
+			data:{			
+				str:"我是默认数据",
+				selected:"B",
+				options:[
+					  {text:'One',value:'A'},
+			          {text:'Two',value:'B'},
+			          {text:'Three',value:'C'}
+				]
+			}
+		});
+	
+	
+	
+		
+		
+	</script>
+</html>

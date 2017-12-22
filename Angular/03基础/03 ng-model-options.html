@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+	</head>
+	<body ng-app="wrapper">
+		<div ng-controller="content">
+			<h2 class="text-center">标题
+				<!--1.debounce  在指定时间范围内进行检测更新
+				2.updateOn  输入完成，鼠标失去焦点执行  后跟参数  "blur"-->
+				<input type="text" ng-model="str" class="form-control" ng-model-options="{debounce:2000}"/>
+				<br />
+				<input type="text" ng-model="str" class="form-control" ng-model-options="{updateOn:'blur'}"/>
+				<br />
+			</h2>
+			
+			<table  class="table table-borderd table-hover">
+				<tr>
+					<th class="text-center">序号</th>
+					<th class="text-center" ng-click="order='name';flg=!flg">姓名</th>
+					<th class="text-center" ng-click="order='age';flg=!flg">年龄</th>
+				</tr>
+				<tr class="text-center" ng-repeat="item in arr|orderBy:order:flg|filter:str" >
+					<td>{{$index+1}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.age}}</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('wrapper',[]);
+		app.controller('content',function ($scope) {
+			$scope.arr = [{name:'鸿富',age:18},{name:'达空',age:38},{name:'浮生',age:8}];
+			$scope.flg = 1;
+		
+		})
+	</script>
+</html>

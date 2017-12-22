@@ -1,0 +1,14 @@
+<table class="table table-borderd table-hover">
+	<tr>
+		<th class="text-center">id</th>
+		<th class="text-center">标题</th>
+		<th class="text-center">发件人</th>
+		<th class="text-center">日期</th>
+	</tr>
+	<tr class="text-center" ng-repeat="item in emailData">
+		<td>{{item.id}}</td>
+		<td><a href="#/detail/{{item.id}}">{{item.emailTile}}</a></td>
+		<td>{{item.fasongren}}</td>
+		<td>{{item.date}}</td>
+	</tr>
+</table>

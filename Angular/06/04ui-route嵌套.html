@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/angular-ui-router.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+		
+	</head>
+	<body ng-controller="content">
+		<h2 class="text-center">{{textText}}</h2>
+		<ul>
+			<li>
+				<a ui-sref="home">首页</a>
+			</li>
+			<li>
+				<a ui-sref="fruit">水果</a>
+			</li>
+			<li>
+				<a ui-sref="vegetable">蔬菜</a>
+			</li>
+		</ul>
+		<div ui-view></div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('myApp',['ui.router']);
+		app.controller('content',function ($scope) {
+			$scope.textText = "路由嵌套";
+		});
+		app.config(function ($stateProvider,$urlRouterProvider) {
+			$urlRouterProvider.otherwise('/home');//默认页面
+			$stateProvider.state('home',{
+				url:'/home',
+				template:"这里是首页数据"
+			})
+			$stateProvider.state('fruit',{
+				url:'/fruit',
+				templateUrl:'04fruit.html' //跳转页面
+			})
+			//水果的子路由
+			$stateProvider.state('fruit.orange',{
+				url:'/orange',
+				templateUrl:'04orange.html' 
+			})
+			$stateProvider.state('fruit.banana',{
+				url:'/banana',
+				templateUrl:'04banana.html' 
+			})
+			$stateProvider.state('fruit.apple',{
+				url:'/apple',
+				templateUrl:'04apple.html' 
+			})
+			//蔬菜
+			$stateProvider.state('vegetable',{
+				url:'/vegetable',
+				templateUrl:'04vegetable.html' 
+			})
+			//蔬菜子路由
+			$stateProvider.state('vegetable.cuke',{
+				url:'/cuke',
+				templateUrl:'04cuke.html'
+			})
+			$stateProvider.state('vegetable.tomato',{
+				url:'/tomato',
+				templateUrl:'04tomato.html' 
+			})
+		})
+	</script>
+</html>

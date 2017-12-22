@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body ng-controller="content">
+		
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box',[]);
+		app.controller('content',function ($scope,$http) {
+			alert(arguments.length)
+		})
+		
+        	/*普通函数——由调用者决定参数
+        			调用者不管要什么
+        	angular.js不能改变js的本质，它也是基于原生js开发
+        	
+        	依赖注入
+        			由定义者决定参数（障眼法）
+        			真正的angular也是调用者决定参数
+        			调用者会参考函数要什么
+        			angular依赖注入的参数几乎是写死的
+    	*/
+	</script>
+</html>

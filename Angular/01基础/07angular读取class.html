@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.red{
+				background-color: red;
+				width: 100px;
+				height: 100px;
+			}
+			.blue{
+				background-color: blue;
+				width: 200px;
+				height: 200px;
+			}
+			.yellow{
+				background-color: yellow;
+				width: 100px;
+				height:100px;
+			}
+			.wh{
+				width: 300px;
+				height: 300px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div ng-app="">
+			<input type="text" ng-model="str" />
+			<!--只能输入现有的类名-->
+			<div class="{{str}}">
+				<!--class读取值要加上{{}}
+				如果是ng-class读取值，不写{{}}-->
+			</div>
+			<hr />
+				<!--注意:数组里的类名如果不是变量必须加引号引号和外面的不能一样-->
+			<!--类的样式一样的，后出现的权值高-->
+			<div ng-init="arr=['red','wh']">
+				<div ng-class="arr[0]">
+					{{arr}}
+				</div>
+			</div>		
+			<hr />
+			<!--类似vue的判断类名真假，真就显示，假就不显示-->
+			<!--这里的类名可以拿字符串包，也可以不包-->
+			<div ng-class="{red:false,'blue':true}">	
+			</div>
+			<hr />
+			<div ng-init="aa=true;bb=false">
+				<div ng-class="{red:bb,'blue':aa}">	
+				</div
+			</div>
+			<hr />
+			<div ng-init="aa=1;bb=0">
+				<div ng-class="{'red':bb,yellow:aa}">	
+				</div
+			</div>
+			<hr />
+			<!--以对象的方式存储类名-->
+			<ul ng-init="json={'red':true,'wh':false}">
+				<li ng-class="json"></li>
+			</ul>
+		</div>
+		
+
+		
+	</body>
+</html>

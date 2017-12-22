@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.blue{
+				background-color: gold;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<!--传递对象的方式-->
+			<p :style="{color:'red'}">撒苦辣</p>
+			
+			<!--这里和:class还是有区别的 :style=""里面只能跟带有css样式，比如color:'red'的对象-->
+			<h4 :style="json">欧力给</h4>
+				
+			<!--两种写法都可行，-->
+			<!--<h2 :style="[a]">妈妈咪呀</h2>-->
+			<h2 :style="[a,b]">妈妈咪呀</h2>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el:'#box',
+			data:{
+//				a:{
+//					color:'red',
+//					backgroundColor:"blue"
+//				}
+				a:{color:'red'},
+				b:{backgroundColor:"blue"},
+				json:{color:'gold'}
+				
+			}
+		})
+		
+		
+	</script>
+</html>

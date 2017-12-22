@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.red{
+				color: red;
+			}
+			.blue{
+				background-color: blue;
+				padding: 10px;
+			}
+			.a{
+				color: red;
+			}
+			.b{
+				font-size: 20px;
+			}
+			.c{
+				background-color: deepskyblue;
+			}
+			.d{
+				border: 10px solid #000;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+				<!--一次添加多个类名，类似一个数组的形式给他存起来-->
+				<!--v-bind:class="[a,b,c]"绑定多个类名时，里面的值不加引号，因为是读取别的对象里面的值
+			里面的值加引号是字符串  注意：[里放的是属性名]-->
+			<h2 :class="[red,bluegogo]">妈妈咪呀</h2>
+			<!--注意第二种写法也可以-->
+			<h2 :class="[aa]">毛线</h2>			<!--aa为一个字符串集合-->
+			<!--如果传递的是对象  前面是属性值，:class="{red:false,blue:true}是true就添加这class名称，fasle就是不添加
+			值的false和true可以写在行间或data里-->
+			<h2 :class="{red:true,blue:true}">卡尼吗</h2>
+			<!--也可直接传递个对象-->
+			<p :class="json">樱桃小丸子</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el:'#box',
+			data:{
+				red:"red",
+				aa:"a b c d",
+				bluegogo:"blue",
+				json:{
+				red:"red",
+				blue:"blue",
+				}
+			}
+			
+		})
+		
+	</script>
+</html>

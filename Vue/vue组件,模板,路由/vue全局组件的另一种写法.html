@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			
+			<wangwu></wangwu>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+	
+		//另一种组件的写法 不定义，直接写，组件没有名字
+		 Vue.component('wangwu',{
+		 	template:"<p>我是组件的另一种写法</p>"
+		 });
+	
+		new Vue({
+			el:"#box",
+			data:{
+				str:'内容信息'
+			}
+		});
+		
+		
+	</script>
+</html>

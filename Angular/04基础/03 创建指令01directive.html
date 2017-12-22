@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<!--指令不能放在控制器里-->
+		<ab>我是默认数据，会被替换</ab>
+		<a-b-c-defg>我是多撒多撒</a-b-c-defg>
+		<!--如果指令名有大写，调用的时候用“-”隔开-->
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box',[]);
+		app.directive('ab',function() {
+			return{//规定return出去的是个对象
+				template:'<div>我是新数据</div>'
+			}
+			//等价于
+//			var json={
+//				template:'<div>我是新数据</div>'
+//			};
+//			return json;
+		});
+		app.directive('aBCDeffg',function() {
+			return{
+				template:'<div>我是新数据有大写字母用-分开</div>',
+				replace:true, //默认用div替换标签
+				restrict:'ECMA'
+				/*
+				 * E(element) 元素，作为一个html的元素出现(标签)
+				 * C(class)类名，作为html的class类名出现(class='xx')
+				 * M(comment) 注释，作为html的注释出现(注释了才会生效，注释里面的代码有效)
+				 * A(attribute)属性，作为html的属性出现<div ab=""><div>
+				 */
+			}
+		});
+		
+		
+	</script>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+	
+		</style>
+	</head>
+	<body ng-app="">
+		正数是从前往后，负数是从后往前
+		截取从0开始3个数字：{{413254646|limitTo:3}}
+		<hr />
+		截取数组:{{[{name:'张三',age:18},{name:'李四',age:28}]|limitTo:1}}
+		<hr />
+		截取数组:{{[11,22,33,44,55]|limitTo:-2}}
+		<hr />
+		不能截取对象
+		 截取对象：{{{name:'张三',age:18},{name:'王五',age:58}|limitTo:1}} 
+	</body>
+</html>

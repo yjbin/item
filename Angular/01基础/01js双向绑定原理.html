@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body ng-app="">
+		<input type="text" name="" id="text" />
+		<p id="p"></p>
+		
+	</body>
+	<script type="text/javascript">
+		var text = document.getElementById("text");
+		var p = document.querySelector('#p');
+		text.oninput = function () {
+			p.innerHTML = text.value;
+			console.log(text.value) //系统给返回的是字符串
+		}
+	</script>
+</html>

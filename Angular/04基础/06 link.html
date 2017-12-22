@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<my-dire></my-dire>
+		<div class="my-dire">
+		</div>
+		<div my-dire name="81班级" biaoqian="学习都不错"></div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box',[]);
+		app.directive('myDire',function() {
+			return{
+				restrict:'ECMA',//属性调用
+				template:'<div><h2>指令种类</h2></div>',
+				replace:true,//默认用div替换标签
+				link:function (scope,element,attrs) {
+					console.log(scope);
+					console.log(element);
+					console.log(attrs);
+					element.css('border',"1px solid red")//设置样式
+					//可以通过element来设置和获取元素的样式和内容
+					console.log(element.css('border'));//获取样式
+					//获取内容
+					console.log(element.text());
+					console.log(element.html());
+					//设置内容
+					element.html('<p>我是p标签</p>');
+					//获取设置的内容
+					console.log(element.html());
+					//获取指令元素上的属性
+					console.log(attrs.name+'==='+attrs.biaoqiao);
+				}
+			}
+		});
+		
+		
+	</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box" >
+			{{a}}
+			<hr />
+			{{json.name}}
+			<hr />
+			{{json.age}}
+		</div>
+		<div id="ball">
+			
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				a:"我是红色"	,
+				json:{name:'yuan',age:18,sex:'男'}
+			}
+		});
+		vm.$watch('json',function () {
+			alert('改变了');
+			var ball = document.getElementById("ball");
+			ball.innerHTML = "我来自虚空";
+			ball.style.backgroundColor ="#00BFFF";
+		},{deep:true});  //如果是json对象必须加{deep:true}才能深度监听
+		
+		document.onclick = function () {
+			vm.json.age *= 10;
+		}
+		
+	</script>
+</html>

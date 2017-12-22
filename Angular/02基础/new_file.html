@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="test">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			#box{
+				margin: 0 auto;
+				width: 500px;
+				height: 500px;
+			}
+			#box input{
+				width: 60px;
+				height: 35px;
+			}
+			#box input.active{
+				background-color: deepskyblue;
+			}
+			#box div{
+				background-color: springgreen;
+				width: 500px;
+				height: 400px;
+				text-align: center;
+				border: 1px solid #000;
+			}
+		</style>
+	</head>
+	<body ng-controller="tab">
+		<div id="box">
+			<input type="button" ng-repeat="item in arr" ng-click="show($index)" class="{{nowIndex==$index?'active':'';}}"  value="{{item.name}}" />
+			<div ng-repeat="item in arr" ng-show="nowIndex==$index">
+				<li ng-repeat="i in item.list"  >
+					{{i.title}}
+					{{i.url}}
+				</li>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('test',[]);
+		app.controller('tab',function ($scope) {
+			$scope.arr = [
+				{name:'北京',list:[{title:'局部有雨',url:'http://www.baidu.com'},
+									{title:'天微凉',url:'http://www.360.com'},
+									{title:'夜难眠',url:'http://www.gogle.com'},
+									{title:'思佳人',url:'http://www.tgp.com'}
+									]},
+				{name:'天津',list:[{title:11111,url:'http://www.hao123.com'}]},
+				{name:'上海',list:[{title:22222,url:'http://www.163.com'}]},
+				{name:'南京',list:[{title:33333,url:'http://www.17173.com'}]}
+			];
+			$scope.nowIndex=0;
+			$scope.show = function (obj) {
+				$scope.nowIndex = obj;
+			}
+		})
+	</script>
+</html>

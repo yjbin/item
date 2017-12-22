@@ -1,0 +1,86 @@
+body,ul,li,h2{
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			a{
+				cursor: pointer;
+			}
+			.bigFont{
+				font-size: 70px;
+				font-family: "微软雅黑";
+			}
+			.red{
+				color: #CF141B;
+			}
+			.fl{
+				float: left;
+			}
+			.fr{
+				float: right;
+			}
+			.center{
+				text-align: center;
+			}
+			.clear{
+				clear: both;
+			}
+			header{
+				width: 100%;
+				height: 45px;
+				line-height: 45px;
+				background-color: #1F2228;
+				text-align: center;
+				color: #fff;
+			}
+			header  a{
+				float: left;
+				margin-left: 10px;
+				cursor: pointer;
+			}
+			header  a img{
+				height: 45px;
+			}
+			.content{
+				
+				width: 100%;
+				height: auto;
+				padding: 10px;
+				box-sizing: border-box;
+			}
+			.content .contentBoy{
+				width: calc(100%-20px);
+				border-bottom: 1px  solid #ccc;
+				background: url(images/1_03.jpg) no-repeat center top;
+				background-size: 100%;
+				padding: 5px ;
+				margin: 5px;
+				box-sizing: border-box;
+			}
+			.content .contentBoy .themes{
+				margin-top: 30px;
+				width: 100%;
+				min-width: 320px;
+				height: auto;
+				overflow: hidden;
+			}
+			.content .contentBoy .themes .time{
+				color: #ddd;
+				margin-right: 10px;
+			}
+			.content .contentBoy .themes .themes-left{
+				padding: 10px;	
+				width: 30%;
+				float: left;
+			}
+			.content .contentBoy .themes .themes-right{
+				padding: 10px;	
+				width: 60%;
+				float: left;
+			}
+			.content .contentBoy .themes .themes-right{
+				font-size: 22px;
+			}
+			.content .contentBoy .themes .themes-right .right img{
+				margin-top:20px ;
+			}

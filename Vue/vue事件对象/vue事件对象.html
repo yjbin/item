@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box" @click="show(22,$event)">
+			哈哈哈
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		new Vue({
+			el:'#box',
+			data:{
+				
+			},
+			methods:{
+			//传参时注意：$event参数位置必须和函数的参数一一对应
+				show:function(num,ev){
+					var x = ev.clientX;
+					var y = ev.clientY;
+					alert('X轴坐标'+x+"Y轴坐标"+y)
+				}
+				
+			}
+		})
+	</script>
+</html>

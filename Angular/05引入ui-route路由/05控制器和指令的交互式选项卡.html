@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			html,body,ul,li{
+				padding:0px;
+				margin:0px;
+				list-style:none;
+			}
+			.tab{
+				width:100%;
+				height: 500px;
+			}
+			.tab ul{
+				width:100%;
+				float:left;
+				text-align:center;
+			}
+			.tab li{
+				width:25%;
+				line-height:40px;
+				text-align:center;
+				float:left;
+			}
+			.tab .active{
+				background:#0062CC;
+				color:#fff;
+			}
+		</style>
+	</head>
+	<body ng-controller="content">
+		<tab-nav  tab-content="arr"></tab-nav>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('myApp',[]);
+		app.controller('content',function ($scope) {
+			$scope.arr = [
+				{name:'北京',content:'北京新闻内容'},
+				{name:'上海',content:'上海新闻内容'},
+				{name:'天津',content:'天津新闻内容'},
+				{name:'南京',content:'南京新闻内容'}
+				]
+		});
+		app.directive('tabNav',function () {
+			return {
+				restrict:'ECMA',
+				replace:false,
+				templateUrl:'05tab.html',
+				//属性交互
+				scope:{
+					tabContent:"="
+				}
+			}
+		});
+		app.controller('tab_info',function ($scope) {
+			$scope.nowIndex = 0;
+			$scope.tab = function(num){
+				$scope.nowIndex = num;
+			}
+		})
+	</script>
+</html>

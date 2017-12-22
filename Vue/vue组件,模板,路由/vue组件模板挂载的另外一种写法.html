@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<abcdef></abcdef>
+		</div>
+		<template id="temp">
+			<ul>
+				<li @click="show">{{str}}</li>
+				<hr />
+				<li v-for="item in arr">{{item}}</li>
+			</ul>
+		</template>
+	</body>
+	<script type="text/javascript">
+	
+	var vm = new Vue({
+			el:"#box",
+			data:{
+			},
+			//局部组件
+			components:{
+				//第一步先找组件的标签名称
+				"abcdef":{
+					//第二步可以给他放数据（必须）
+					data:function () {//这里的data也必须是一个函数
+						return {
+							str:"你瞅啥",
+							arr:["袭击","腹黑","狂妄","做做"]
+						}
+					},
+					methods:{//事件都放在此处,和外面的methods没有关系
+						show(){
+							this.str="瞅你咋的"
+						}
+					},
+					//模板
+					template:"#temp"//挂载（必须必须的）
+				}
+			}
+		});
+	</script>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body> 
+			<!--angular的管辖范围  ng-app之间的代码由angular来管-->
+		<div ng-app="">
+									<!--ng-model表单绑定-->
+			<input type="text" ng-model="str"/>
+			<input type="text" ng-model="str"/>
+						<!--ng-bind用在接受值只是接受值作用和{{}}差不多-->	
+			<p ng-bind="str">{{str}}</p> 
+		</div>
+		
+		<div>
+			<!--这里angular没有作用在这个范围，所以不起作用-->
+			<input type="text" ng-model="num" placeholder="这个就不起作用"/>
+						<!--ng-bind用在接受值-->	
+			<p ng-bind="num"></p>
+		</div>
+		
+	</body>
+</html>

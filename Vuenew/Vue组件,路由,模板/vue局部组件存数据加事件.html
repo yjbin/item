@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+	<body>
+		<div id="box">
+			
+			<p @click="show()">{{str}}</p>
+			<hr />
+			<book></book>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//生命组件    //调用
+	
+		new Vue({
+			el:"#box",
+			data:{
+				str:'我是实例信息'
+			},
+			methods:{
+				show:function(){
+					alert('系统')
+				}
+			},
+			components:{
+				'book':{
+					data:function(){
+						return {num:"我是局部组件信息"}
+					},
+					methods:{
+						show:function(){
+							alert('局部')
+						}
+					},
+					template:"<p @click='show()'>{{num}}</p>"
+				}
+			}
+		})
+	
+	
+	</script>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body ng-controller="content">
+		<input type="text" ng-model="stra"/>
+		+
+		<input type="text" ng-model="strb"/>
+		={{result}}
+		<input type="button" value="和" ng-click="add()"/>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('myApp',[]);
+//		创建服务的种类
+//		1.provideer(最大的服务，可以配置)
+//		2.factory  工厂
+//		3.service
+//		4.value
+//		provider两个参数
+//		自己起的服务名字，一般情况不要用$开头
+//		1.服务的名字
+//		2.该服务执行的方法
+//		
+//		指令，服务，控制器，都是通过模块来创建的(声明的)
+		app.provider('my',function () {
+			//配置一个公用的方法，多次调用
+			this.$get = function () {
+				return {
+					'number':function (a,b) {
+						return a + b;
+					}
+				}
+			}
+		});
+		app.controller('content',function ($scope,my) {
+			$scope.add = function () {
+				$scope.result = my['number'](parseInt($scope.stra),parseInt($scope.strb))
+								//类似于属性调用
+			}
+		})
+	</script>
+</html>

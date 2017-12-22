@@ -1,0 +1,33 @@
+[
+	{
+	"id":1,
+	"name":"赵本山",
+	"age":"18",
+	"sex": "男",
+	"photo":"../images/fl_ad_01.jpg",
+	"ablum":"小草"
+	},
+	{
+	"id":2,
+	"name":"刘德华",
+	"age":"22",
+	"sex":"男",
+	"photo":"../images/fl_ad_02.jpg",
+	"ablum":"忘情水"
+	},
+	{"id":3,
+	"name":"张学友",
+	"age":"33",
+	"sex":"男",
+	"photo":"../images/fl_dl_01.jpg",
+	"ablum":"朋友"
+	},
+	{"id":4,
+	"name":"刘若英",
+	"age":"26",
+	"sex":"女",
+	"photo":"../images/fl_dl_02.jpg",
+	"ablum":"后来"
+	}
+]
+

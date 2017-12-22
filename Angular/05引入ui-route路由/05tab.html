@@ -1,0 +1,9 @@
+<div ng-controller="tab_info" class="tab">
+	<ul>
+		<li ng-repeat="item in tabContent" ng-class="{active:nowIndex==$index}" ng-click="tab($index)">{{item.name}}</li>
+	</ul>
+	<ul ng-repeat="item in tabContent" ng-if="nowIndex==$index">
+		{{item.content}}
+	</ul>
+</div>
+

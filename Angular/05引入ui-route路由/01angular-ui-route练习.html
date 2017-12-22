@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Angular</title>
+		<script src="../js/angular.js" type="text/javascript"></script>
+		<script src="../js/angular-ui-router.min.js" type="text/javascript"></script>
+		<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+		<script>
+			var app=angular.module('myApp',['ui.router']);
+			app.config(function($stateProvider,$urlRouterProvider){
+				$stateProvider.state('home',{
+					url:'/home',//加上url是链接地址目的是让angular添加href="/home"
+					templateUrl:'02home.html',
+					controller:function($scope){
+						$scope.title='首页标题';
+						$scope.content='首页内容';
+					}
+				})
+				$stateProvider.state('news',{
+					url:'/news',
+					templateUrl:'02news.html',
+					controller:function($scope){
+						$scope.title='新闻列表';
+						$scope.content=[
+						{title:'北京天气炎热',url:'http://qq.com'},
+						{title:'北京工资高',url:'http:qq.com'},
+						{title:'北京房租贵',url:'http:qq.com'}
+						];
+					}
+				})
+				$stateProvider.state('user',{
+					url:'/user',
+					templateUrl:'02user.html',
+					controller:function($scope){
+						$scope.title='用户中心';
+						$scope.content=[
+						{title:'我的订单',info:'100'},
+						{title:'我的钱包',info:'500'},
+						{title:'账户安全',info:'1'}
+						];
+					}
+				})
+				$stateProvider.state('about',{
+					url:'/about',
+					templateUrl:'02about.html',
+					controller:function($scope){
+						$scope.title='关于我们';
+						$scope.content='天气微凉，气微盛';
+					}
+				})
+				$urlRouterProvider.otherwise('home');//设置默认页面
+			});
+			
+		</script>
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<ul class="nav nav-tabs" ng-init="flag='home';">
+				<li ng-class="{active:flag=='home'}" ng-click="flag='home'">
+				<a ui-sref="home">首页</a>
+				<!--这里用ui-sref替换href=#-->
+				</li>
+				<li ng-class="{active:flag=='news'}" ng-click="flag='news'">
+				<a ui-sref="news">新闻</a>
+				</li>
+				<li ng-class="{active:flag=='user'}" ng-click="flag='user'">
+				<a ui-sref="user">用户</a>
+				</li>
+				<li ng-class="{active:flag=='about'}" ng-click="flag='about'">
+				<a ui-sref="about">关于</a>
+				</li>
+			</ul>
+		</div>
+		<div ui-view></div>
+	</body>
+</html>

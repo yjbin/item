@@ -1,0 +1,33 @@
+[
+	{
+	"id":1,
+	"fasongren":"xiaoqq@qq.com",
+	"emailTile":"81班学生您好，祝你们早日找到理想工作",
+	"date": "2017年4月21日",
+	"shoujianren":"daqq@126.com",
+	"message":"81班学生您好，祝你们早日找到理想工作!"
+	},
+	{
+	"id":2,
+	"fasongren":"wangwu@qq.com",
+	"emailTile":"您好，公司业务扩展事务",
+	"date":"2017年6月23日",
+	"shoujianren":"zhaosan@163.com",
+	"message":"你好，我是xxx，这是发送给您的邮件。"
+	},
+	{"id":3,
+	"fasongren":"xiaoliu@qq.com",
+	"emailTile":"你好，张三周报，请查收",
+	"date":"2017年5月11日",
+	"shoujianren":"zhangsan@163.com",
+	"message":"你好，我是xxx，这是发送给您的邮件"
+	},
+	{"id":4,
+	"fasongren":"dsfds@qq.com",
+	"emailTile":"您好，入职通知书",
+	"date":"2017年5月01日",
+	"shoujianren":"sddsss@163.com",
+	"message":"你好，我是xxx，这是发送给您的邮件"
+	}
+]
+

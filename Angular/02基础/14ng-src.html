@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body ng-app="content">
+		<div ng-controller="box">
+			<input type="text" ng-model="str" />
+			<img ng-src="{{str}}" />
+			<img ng-src="{{img}}" />
+			<img ng-src="{{imgStr}}" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('content',[]);
+		app.controller('box',function ($scope,$timeout) {
+			$scope.img = '../img/btns.png';
+			$scope.imgStr = '../img/btns.png';
+			var timer = $timeout(function () {
+				$scope.imgStr = '../img/icons.png'
+			},1000)
+		})
+	</script>
+</html>

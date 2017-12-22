@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	<body ng-app="wrapper">
+		<div ng-controller="content">
+			<input type="button" value="按钮父" ng-click="btnClick()"/>
+				我是父控制器的数据:{{title}}  
+			<hr />
+				我是子控制器1传过来的数据:{{info}}   
+			<hr />
+				我是子控制器2传过来的数据:{{mes}}		
+			<hr />
+			<div ng-controller="children1">
+				<input type="button" value="按钮1" ng-click="btnClick()"/>
+				这是我子控制器1本来的数据:{{xiaoming}}	
+				<hr />
+				这是我从父控制器拿来的我兄弟的数据:{{brother}}			
+				
+			</div>
+			<hr />
+			<div ng-controller="children2">
+				<input type="button" value="按钮2" ng-click="btnClick()"/>
+				这是我子控制器2本来的数据:{{baby}}  
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('wrapper',[]);
+		app.controller('content',function ($scope) {
+			$scope.title = '我是父亲';
+			$scope.$on('item1',function (event,data) {
+				$scope.info = data;
+			});  //接收数据
+			$scope.$on('item2',function (event,data) {
+				$scope.mes = data;
+			}); 
+			$scope.btnClick = function () {
+				$scope.$broadcast('item',$scope.mes);  //发送数据
+							//这里发送的名字和下面$on接收的名字必须得一样
+				
+			};
+		});
+		app.controller('children1',function ($scope) {
+			$scope.xiaoming = '我是子控制器1';
+			$scope.btnClick = function () {
+				$scope.$emit('item1','我是子控制器1');  //发送数据
+							//这里发送的名字和下面$on接收的名字必须得一样
+			};
+			$scope.$on('item',function (event,data) {
+				$scope.brother = data;
+			});  //接收父穿过来的控制器2的参数
+		});
+		app.controller('children2',function ($scope) {	
+			$scope.baby = '我是子控制器2';
+			$scope.btnClick = function () {
+				$scope.$emit('item2','我是子控制器2');  //发送数据
+							//这里发送的名字和下面$on接收的名字必须得一样
+			}
+		})
+	</script>
+</html>

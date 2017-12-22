@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="">
+	<head>
+		<meta charset="UTF-8">
+		<title>Angular——课程</title>
+		<script type="text/javascript" src="../js/angular.js"></script>
+		<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+		<style>
+			
+		</style>
+	</head>
+	<body ng-init="json=[{name:'张三',age:18,score:82},{name:'李四',age:28,score:70},{name:'王五',age:18,score:60},{name:'赵六',age:58,score:90}];flag=false;">
+		<br />
+		<input type="text" class="form-control" ng-model="obj" />
+		<hr>
+		<!--
+			|orderBy:order:flag
+			第一个参数：按照什么排序，
+			第二个参数：升序还是降序
+		-->
+		<table class="table table-hover table-borderd">
+			<tr>
+				<th>序号</th>
+				<th>姓名</th>
+				<th ng-click="flag=!flag;order='age'">年龄</th>
+				<th ng-click="flag=!flag;order='score'">分数</th>
+			</tr>
+			<tr ng-repeat="item in json|filter:obj|orderBy:order:flag">
+				<td>{{$index+1}}</td>
+				<td>{{item.name}}</td>
+				<td>{{item.age}}</td>
+				<td>{{item.score}}</td>
+			</tr>
+		</table>
+	</body>
+</html>

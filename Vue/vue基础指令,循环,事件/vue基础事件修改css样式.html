@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue——课程</title>
+		<script type="text/javascript" src="../js/vue.min_01.js"></script>
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<div class="div1">
+			<input type="button" value="事件" @click="show()">
+			<div id="big" @mouseenter="show2()">
+				第三方的
+			</div>
+		</div>
+		<hr>
+		指令可以替代html里的标签属性
+	<script type="text/javascript">
+		
+		new Vue({
+			el:'.div1',//element的简写。选择器,2.0b版本不支持body和html选择
+			data:{
+				str:'数据'
+			},
+			methods:{//所有事件都写在这里
+				show:function(){
+					alert('弹出'+this.str);
+				},
+				
+				show2:function(){
+					var big = document.getElementById('big');
+					big.style.width="500px";
+					big.style.height="500px";
+					big.style.backgroundColor="#0000FF";
+				}
+			}
+		})
+	</script>
+	</body>
+</html>

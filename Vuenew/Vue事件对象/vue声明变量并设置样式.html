@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.layer{
+				width: 200px;
+				height: 300px;
+				background-color: cyan;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			{{str}}
+			
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				str:"忘穿秋裤",
+				obj:"金凤凰"
+			}
+		});
+		
+		vm.$el.style.fontSize = "16px";
+		vm.$el.className= "layer";
+		vm.$el.onclick=function () {
+			vm.$el.style.transition="all 2s ease";
+			vm.$el.style.transform="rotate(-15deg)";
+		}
+		
+		
+		
+	</script>
+</html>

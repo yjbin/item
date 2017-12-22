@@ -1,0 +1,13 @@
+.tableview-cell{
+	height: 44px;
+	line-height: 44px;
+	padding-left: 10px;
+	border-top: 1px solid #ddd;
+}
+.tableview-cell:last-child{
+	border-bottom: 1px solid #ddd;
+}
+.tableview-cell a{
+	text-decoration: none;
+	color: black;
+}

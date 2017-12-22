@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			[ng-cloak]{
+				display: none;
+			}
+		</style>
+	</head>
+	<body ng-app="box">
+		<div ng-controller="content">
+			<div ng-repeat="item in datas" ng-cloak>
+				{{item.Name}}\\\\{{item.age}}\\\\\{{item.sex}}
+			</div>
+		</div>
+	</body>
+	<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var app = angular.module('box',[]);
+		app.controller('content',function ($scope,$http) {
+			$http({
+				methods:'get',
+				url:'test.json',
+				params:{  //请求的参数
+					name:'zhangsan',
+					id:1
+				}
+			}).then(function success (res) {
+				$scope.datas = res.data; // 请求出来的都得带上.data
+			},function error (res) {
+				alert('请求失败'+res.status)
+			})
+		})
+	</script>
+</html>

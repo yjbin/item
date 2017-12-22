@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-resource.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="search">
+			<input type="text" @keyup="getData()" v-model="str" />
+			<ul>
+				<li v-for="item in arr">{{item}}</li>
+			</ul>
+			<ul>
+				<li v-show="arr.length==0">暂无数据</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el:'#search',
+			data:{
+				str:'',//初始化数据
+				arr:[]
+			},
+			methods:{
+				getData:function(){
+						//post请求这里改成post
+					this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{
+						//百度这里wd是获取键码
+						wd:this.str,//参数
+					},{		
+						jsonp:'cb',//不是每个接口都需要，百度独有设置的
+					}).then(function (result) {
+						//	alert(result.data.s); 	
+							//这里的s就是存放的数组
+							this.arr = result.data.s;
+						},function(res){
+							alert('网络错误,请稍后再试'+res.status); //状态码
+						}
+					)
+				}
+			}
+		})
+	</script>
+</html>

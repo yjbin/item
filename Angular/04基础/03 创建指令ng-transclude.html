@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<ul>
+			<li item>111</li>
+			<li item>2222</li>
+			<li>333</li>
+			<li>444</li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box',[]);
+		app.directive('item',function() {
+			return{
+				restrict:'A',//属性调用
+				replace:false,//默认用div替换标签
+				template:'<a href="javascript:;">关{{12*10}}<ng-transclude></ng-transclude>闭</a>',
+//												这里也可以写入表达式
+				transclude:true//追加，嵌入到标签中
+				
+				/*<ng-transclude></ng-transclude>  
+				transclude:true配合使用保留原标签内容，将新内容追加到内容中
+				*/
+			}
+		});
+		
+		
+	</script>
+</html>

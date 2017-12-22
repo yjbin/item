@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="box">
+	<!--第一个参数   过滤器方法-->
+			{{a|date}}
+			<hr />
+			{{b|date}}
+			<hr />
+			{{c|date}}
+		</div>
+	</body>
+	<script type="text/javascript">
+		//自定义的时间过滤器
+		Vue.filter('date',function (a) {
+			var oDate = new Date(a);
+			return oDate.getFullYear()+'-'+(oDate.getMonth()+1)+'-'+oDate.getDate()+" "+oDate.getHours()+":"+oDate.getMinutes()+":"+oDate.getSeconds();
+		})
+		
+		var vm = new Vue({
+			data:{
+				a:1497507934092,
+				b:Date.now(),//默认获取时间戳
+				c:new Date().getTime()//默认获取时间戳
+			},
+			methods:{
+				
+			}
+		}).$mount('#box')
+	
+	</script>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	
+	<body ng-controller="main">
+		<list></list>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box',[]);
+		app.controller('main',function ($scope) {
+			$scope.str='';
+			$scope.arr = ["app","add","bloon","beer","z-index","beez"]
+		})
+		app.directive('list',function() {
+			return{
+				restrict:'E',//属性调用
+				template:'<input type="text" ng-model="str" />\   //这里有换行必须用\
+				<ul><li ng-repeat="item in arr" ng-show="item.indexOf(str)!=-1">{{item}}</li></ul>',
+				replace:false,//默认用div替换标签
+			}
+		});
+		
+		
+	</script>
+</html>

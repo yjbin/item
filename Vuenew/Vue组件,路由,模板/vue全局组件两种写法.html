@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+	<body>
+		<div id="box">
+			{{str}}
+			<book></book>
+			<lib></lib>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//生命组件    //调用
+		
+		var abc = Vue.extend({
+			template:"<p>这是一段文本</p>"
+		})
+		Vue.component('book',abc)
+		
+		//另一种写法
+		Vue.component('lib',{
+			template:"<p>我是lib下的一段文字</p>"
+		})
+		new Vue({
+			el:"#box",
+			data:{
+				str:'内容信息'
+			}
+		})
+	
+	
+	</script>
+</html>

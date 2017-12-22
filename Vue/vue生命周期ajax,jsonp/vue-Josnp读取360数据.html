@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-resource.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.active{
+				background-color: deepskyblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="search">									<!--阻止默认的事件-->
+			<input type="text" @keyup="getData($event)" @keydown.down.prevent="downDate()" @keydown.up.prevent="upDate()"  v-model="str" />
+			<ul>
+				<li v-for="item in arr" :class="{'active':$index==nowIndex}">{{item}}</li>
+			</ul>
+			<ul>
+				<li v-show="arr.length==0">暂无数据</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el:'#search',
+			data:{
+				str:'',//初始化数据
+				arr:[],
+				nowIndex:-1,
+			},
+			methods:{
+				getData:function(ev){
+					if(ev.keyCode==38 || ev.keyCode==40)return;//不让继续请求
+						if(ev.keyCode==13)
+						{
+							window.open('https://www.so.com/s?ie=utf-8&fr=none&src=360sou_newhome&q='+this.str);
+							this.str='';
+						}
+						//post请求这里改成post
+					this.$http.jsonp('https://sug.so.360.cn/suggest?',{
+						//这两行代码是要解决输入中文不显示的问题360规定这么写，顺序不能颠倒
+						encodein:'utf-8',
+						encodeout:'utf-8',
+						word:this.str,//参数		/*360这里wd是获取键码*/
+					},{		
+						callback:'JSON_CALLBACK'//360独有设置的
+					}).then(function (result) {
+						//	alert(result.data.s); 	
+							//这里的s就是存放的数组
+							this.arr = result.data.s;
+						},function(res){
+							alert('网络错误,请稍后再试'+res.status); //状态码
+						}
+					)
+				},
+				downDate:function () {
+					this.nowIndex++;
+					if (this.nowIndex==this.arr.length) {
+						this.nowIndex=0;
+					};
+					this.str = this.arr[this.nowIndex];
+				},
+				upDate:function () {
+					this.nowIndex--;
+					if (this.nowIndex<=-1){
+						this.nowIndex=this.arr.length-1;
+					};
+					this.str = this.arr[this.nowIndex];
+				}
+			}
+		})
+	</script>
+</html>

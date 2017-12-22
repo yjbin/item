@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/work1.css"/>
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+		<header>
+			<a onclick="history.go(-1)">
+				<img src="images/aliwx_common_back_btn_normal.png"/>
+			</a>
+			<h2>优惠券</h2>	
+		</header>
+		<div class="content" ng-controller="privilege">
+			<div class="contentBoy" ng-repeat="item in datas">
+				<div class="themes" >
+					<div class="themes-left">
+						<h2 class="red ">优惠券</h2>
+						<div class="themes-left-info">
+							<img src="images/1_11.jpg"/>
+							<span class="rmb bigFont red">
+								{{item.price}}
+							</span>
+						</div>
+					</div>
+					<div class="themes-right">
+						<a href="" class="fr">
+							<img src="images/2_03.jpg"/>
+						</a>
+						
+						<div class="themes-right-middle fl center clear">
+							<div class="shopName">
+								{{item.shopName}}
+							</div>
+							<hr />
+							<div class="shopInfo">
+								{{item.shopInfo}}
+							</div>
+						</div>
+						<a href="" class="fr right" onclick="location.href='http://www.baidu.com'">
+							<img src="images/1_07.jpg"/>
+						</a>
+					</div>
+					<img src="images/2_14.jpg" width="100%"/>
+					<div class="time fr">
+						{{item.time}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box',[]);
+		app.controller('privilege',function ($scope,$http) {
+			$http({
+				methods:'get',
+				url:"work1.json"
+			}).then(function success (res) {
+				$scope.datas = res.data;
+			},function error (res) {
+				alert('请求失败'+res.status)
+			})
+		})
+	</script>
+</html>

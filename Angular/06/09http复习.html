@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+		<style type="text/css">
+			img{
+				width:30px; height:30px;
+			}
+		</style>
+	</head>
+	<body ng-controller="content">
+		<input type="button" class="btn btn-block btn-lg btn-primary" value="获取数据" ng-click="getData()"/>
+		<table class="table table-borderd table-hover">
+			<tr>
+				<th>姓名</th>
+				<th>年龄</th>
+				<th>性别</th>
+				<th>头像</th>
+				<th>专辑</th>
+			</tr>
+			<tr ng-repeat="item in datas">
+				<td>{{item.name}}</td>
+				<td>{{item.age}}</td>
+				<td>{{item.sex}}</td>
+				<td><img ng-src="{{item.photo}}"></td>
+				<td>{{item.ablum}}</td>
+			</tr>
+		</table>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('myApp',[]);
+		app.controller('content',function ($scope,$http) {
+			$scope.getData = function () {
+				$http({
+					method:'get',
+					url:'test_02.json'
+				}).success(function (res) {
+					$scope.datas = res;
+				}).error(function (res) {
+					alert('请求失败'+res.status)
+				})
+				
+				$http({
+					method:'get',
+					url:'test_02.json'
+				}).then(function (res) {
+					
+				},function (res) {
+					alert('请求失败'+res.status)
+				}
+				
+			}
+			
+		})
+	</script>
+</html>

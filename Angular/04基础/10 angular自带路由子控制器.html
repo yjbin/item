@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/angular-route.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		
+		</style>
+	</head>
+	
+	<body>
+		<ul>
+			<li><a href="#/">首页</a></li>
+			<li><a href="#/news">新闻</a></li>
+			<li><a href="#/about">关于我们</a></li>
+		</ul>
+		<div ng-view></div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box',['ngRoute']);
+		app.config(['$routeProvider',function ($routeProvider) {
+			//$routeProvider配置路由映射
+			$routeProvider
+			.when('/',{template:"这是首页数据"})
+			.when('/news',{
+				template:'<h3>新闻数据{{title}}</h3>',
+				controller:function ($scope) {
+					$scope.title="子集标题"
+				}
+			})
+			.when('/about',{
+				template:"关于我们"
+			})
+			/*when有两个参数
+			 * 1.路由的url地址
+			 * 2.当前url对象的操作
+			 * template(数据)
+			 * templateUrl(另一个页面，模板)
+			 * controller:对应模板的控件控制(可以些控制器名称)
+			*/
+		}])
+
+	
+		
+		
+		
+	</script>
+</html>

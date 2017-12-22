@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/angular-route.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+		<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="controller/product.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+		            <span class="sr-only">切换导航</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		        </button>
+					<a class="navbar-brand" href="#/">LOGO</a>
+				</div>
+				<div class="collapse navbar-collapse" id="example-navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active">
+							<a href="#/news">新闻</a>
+						</li>
+						<li class="dropdown">
+							<a href="#/product" class="dropdown-toggle" data-toggle="dropdown">
+								产品 <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#/product?type=ice">冰箱</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="#/product?type=air">空调</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="#/product?type=TV">电视</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#/about">关于</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<ng-view></ng-view>
+	</body>
+	<script type="text/javascript">
+			var app=angular.module('myApp',['ngRoute','productMod']);
+			app.config(function($routeProvider){
+				$routeProvider.when('/',{
+					templateUrl:'views/home.html',
+				})
+				$routeProvider.when('/news',{
+					templateUrl:'views/news.html',
+				})
+				$routeProvider.when('/product',{
+					templateUrl:'views/product.html',
+					controller:'productController'
+				})
+				$routeProvider.when('/about',{
+					templateUrl:'views/about.html',
+				})
+			})
+	</script>
+
+</html>

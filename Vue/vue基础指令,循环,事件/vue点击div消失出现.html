@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/vue.min_01.js"></script>
+		<style>
+		.box{
+			width:200px;
+			height:200px;
+			background:red;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="div1">
+			<input type="button" value="按钮" @click="show()">
+			<!--思路 ：在数据库里存个真数据，点击时将他便为假v-show="false" 消失，再次点击v-show="true"出现-->
+			<div v-show="aa" class="box">
+				{{str}}
+			</div>
+		</div>
+	
+	<script type="text/javascript">
+		new Vue({
+			el:'.div1',//element的简写。选择器,2.0b版本不支持body和html选择
+			data:{
+				str:'数据信息',
+				aa:true,
+			},
+			methods:{
+				//注意函数里面的变量都得带上this
+				show:function () {
+					this.aa = !this.aa;
+				}
+			}
+		})
+	</script>
+	</body>
+</html>

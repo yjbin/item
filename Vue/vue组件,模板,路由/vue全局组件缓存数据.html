@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			{{str}}
+			<zhangsan></zhangsan>
+		</div>
+	</body>
+	<script type="text/javascript">
+//		声明组件名称		调用组件
+		var abc = Vue.extend({
+			//模板
+			data(){//这里组件规定数据只能以函数的形式返回出去
+				return {
+					num:'我是普通文本'
+				}
+			},
+					//这里想实现调用必须把数据像放在标签中调用一样
+			template:"<p>{{num}}</p>"
+		})
+					//id		组件名称
+		Vue.component('zhangsan',abc) //component组合，调用
+		new Vue({
+			el:"#box",
+			data:{
+				str:'内容信息',
+			}
+		})
+	</script>
+</html>

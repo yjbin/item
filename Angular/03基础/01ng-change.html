@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body ng-app="box">
+		<div ng-controller="content">
+			<input type="text" ng-model="str" ng-change="fn()" />
+			<div>{{item}}</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box',[]);
+		app.controller('content',function ($scope) {
+			$scope.fn = function () {
+				console.log($scope.str);
+				$scope.item = $scope.str;
+			}
+		})
+	</script>
+</html>

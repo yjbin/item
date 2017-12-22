@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+									<!--点击切换默认值-->
+			<input type="button" @click="item='aaa'" value="aaa" />
+			<input type="button" @click="item='bbb'" value="bbb" />
+			<!--规定的写法-->
+			<components :is="item"></components>
+						<!--默认显示哪个组件-->
+			<!--这里类似选项卡，但选项卡是display，实际上是存在的而这个动态模板需要才渲染到页面，不要页面不存在-->
+		</div>
+	
+	</body>
+	<script type="text/javascript">
+	
+	var vm = new Vue({
+			el:"#box",
+			data:{
+				item:"ddd"//显示的是ddd组件的名称
+			},
+			components:{
+				//这里有两个组件名为"aaa"和"bbb"组件的名字
+				"aaa":{
+					template:"<p>我是aaa</p>"
+				},
+				"bbb":{
+					template:"<p>我是bbb</p>"
+				}
+			}
+		});
+	</script>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+	</head>
+	<body ng-controller="content">
+		<div class="container">
+			<h2 class="text-center">添加数据</h2>
+			<form>
+				<div class="form-group">
+					<label for="">描述</label>
+															<!--表单和ag的数据双向绑定-->
+					<input type="text" class="form-control" ng-model="aa" />
+				</div>
+				<div class="form-group">
+					<label for="">网址</label>
+					<input type="text" class="form-control"  ng-model="bb" />
+				</div>
+				<div class="form-group">												<!--点击添加事件-->
+					<input type="button"  value="点击添加" class="btn btn-success btn-lg" ng-click="add()"/>
+				</div>
+			</form>
+			<h2 class="text-center">删除数据</h2>
+			<table  class="table table-borderd table-hover">
+				<tr>
+					<th class="text-center">描述</th>
+					<th class="text-center">网址</th>
+					<th class="text-center">操作</th>				
+				</tr>
+					<!--如果没有数据，显示暂无数据-->
+				<tr class="text-center" ng-if="mes.length==0">
+					<td colspan="3">
+						暂无数据
+					</td>
+				</tr>
+				<tr class="text-center" ng-repeat="item in mes">
+					<td>
+						<input type="text" class="form-control" ng-model="item.desc"/>
+					</td>
+					<td>
+						<input type="text" class="form-control" ng-model="item.url"/>
+					</td>
+					<td>											<!--点击删除 传递的参数为当前点击的位置、索引-->
+						<input type="button" class="btn btn-danger btn-md" value="删除" ng-click="del($index)"/>
+					</td>
+					
+				</tr>
+				<tr class="text-center">
+					<td colspan="3">
+						<input type="button" value="删除全部" class="btn btn-primary btn-sm" ng-click="del(all=-10)"/>
+					</td>
+
+				</tr>
+			</table>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box',[]);
+		app.controller('content',function ($scope) {
+			$scope.mes=[{'url':'http://www.baidu.com','desc':'描述信息'}];
+			$scope.data={
+				aa:'',
+				bb:'',
+				all:''
+			}
+			
+			//点击删除一个
+			$scope.del=function (obj) {
+				if (obj<0) {
+					$scope.mes = [];
+				}else{
+					$scope.mes.splice(obj,1)   //点击截取数组里的对应位置($index)的一个对象
+				}
+			};
+			//点击添加一个
+			$scope.add = function () { 
+				
+				$scope.mes.push({
+					'url':$scope.aa,
+					'desc':$scope.bb
+				});
+				//添加完毕清空输入框
+				$scope.aa='';  //这里的a.url/desc和表单是双向绑定的，这里变化，表单也变化
+				$scope.bb='';
+			}
+		})
+	</script>
+</html>

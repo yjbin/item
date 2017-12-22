@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="content">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body >
+		<div ng-controller="box">
+			<input type="button" ng-click="arr.push(100)" value="深度监视" />
+			{{arr}}
+		</div>
+		<div ng-controller="ball">
+			<input type="text" ng-model="num" />
+			{{num}}
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('content',[]);
+		app.controller('box',function ($scope) {
+			$scope.arr=[1,2,5,80,66];
+			$scope.$watch('arr',function () {
+				alert('我发生改变了')
+				
+			},true)
+			//深度监视，如果碰到数组，json，持续的事件操作普通的监听就监听不了
+			//参数3说明：true就是深度监视，false就不
+			//默认是false
+		})
+		
+		
+		app.controller('ball',function ($scope) {
+			$scope.num='';
+											//新值，旧值
+			$scope.$watch('num',function (newVal,oldVal) {
+				console.log(newVal);
+				console.log(oldVal);
+			},true)
+			
+		})
+	</script>
+</html>

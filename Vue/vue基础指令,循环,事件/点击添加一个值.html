@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue</title>
+		<script src="../js/vue.min_02.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<input type="button" value="添加一个新国家" @click="add()" />
+			<ul>
+				<li v-for="(a,b) in arr">
+					{{a}}{{b}}
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+//			el:'#box',  //element的简写，选择器id,class,*,元素,
+			//注意版本兼容:vue 2.0不支持body.html    vue1.0支持body
+			data:{
+				abc:'欢迎光临vue',
+				arr:['中国','美国','加拿大','秘鲁'],
+				num:18,
+				bool:false,
+				json:{a:'中国',b:'美国',c:'西班牙',d:'澳大利亚'},
+			},
+			methods:{//所有的事件放在这里
+				add(){
+					//ES6的写法，
+					this.arr.push('英国')
+				},
+				//add:function () {
+				//	alert(this.arr.length)
+				//	this.arr.push('英国');//在vue中获取值都要加上this，不加报错
+					//1.0每次添加都是在一个地方添加，2.0每次都重新再添加一个
+			//	},
+//				del:function () {
+//					//添加多个方法	
+//				}
+			}
+		}).$mount('#box');//手动挂载
+		
+	</script>
+</html>

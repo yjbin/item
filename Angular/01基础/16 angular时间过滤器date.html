@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+	
+		</style>
+	</head>
+	<body ng-app="">
+												<!--.sss毫秒	-->		<!--EEE简写星期-->
+		12小时制：{{1498033078626|date:'yyyy-MM-dd hh:mm:ss .sss EEEE'}}
+		<hr />
+		24小时制：{{1498033078626|date:'yyyy-MM-dd HH:mm:ss'}}
+		<hr />
+		年月日制：{{1498033078626|date:'yyyy年MM月dd日 HH:mm:ss'}}
+		<hr />
+		只要日期：{{1498033078626|date:'yyyy-MM-dd'}}
+		<hr />
+		只要时间：{{1498033078626|date:'HH:mm:ss'}}
+	</body>
+</html>

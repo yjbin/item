@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html ng-app="wrap">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/angular-route.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+		<style type="text/css">
+			ul,li,body{
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			.content .shoplist{
+				margin: 0 auto;
+				max-width: 960px;
+				min-width: 320px;
+				margin-bottom: 10px;
+				border-bottom: 1px solid #aaa;
+			}
+			.content .shoplist li{
+				width: 100%;
+			}
+			.content .shoplist li:nth-of-type(1){
+				padding:5px 10px;
+				font-size: 18px;
+				color: #000;
+				background: #F2F2F2;
+				border-top:1px solid #aaa ;
+				border-bottom:1px solid #aaa ;
+				overflow: hidden;
+			}
+			.content .shoplist li .icon-left{
+				display: inline-block;
+				vertical-align: middle;
+				width: 35px;
+				height: 20px;
+				color: #fff;
+				font-size: 14px;
+				text-align: center;
+				line-height: 20px;
+				background: #e4393c;
+				border-radius:5px ;
+			}
+			.content .detail{
+				padding: 10px;
+				overflow: hidden;
+			}
+			.content .detail .left-img{
+				width: 43%;
+				border: 1px solid #ccc;
+			}
+			.content .detail .left-img img{
+				width: 100%;
+				
+			}
+			.content .detail .right-info{
+				width: 55%;
+				display: flex;
+				flex-direction:column ;
+			}
+			.content .detail .right-info p{
+				width: 60px;
+				height: 30px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				color: #fff;
+				background: #ED9345;
+				border-radius:5px ;
+				cursor:pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="nav nav-tabs" ng-init="flg='home'" >
+			<li ng-class="{'active':flg=='home'}" ng-click="flg='home'">
+				<a href="#/">首页</a>
+			</li>
+			<li ng-class="{'active':flg=='category'}" ng-click="flg='category'">
+				<a href="#/category">电器</a>
+			</li>
+			<li ng-class="{'active':flg=='close'}" ng-click="flg='close'">
+				<a href="#/close">服装</a>
+			</li>
+		</ul>
+		<div ng-view></div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('wrap',['ngRoute']);
+		app.config(['$routeProvider',function ($routeProvider) {
+			//配置路由映射
+			$routeProvider.when('/',{
+				templateUrl:'001.html',
+				controller:function ($scope) {
+					$scope.title="首页";
+					$scope.content="我是首页数据";
+				}
+			});
+			$routeProvider.when('/category',{
+				templateUrl:'002.html',
+				controller:function ($scope,$http) {
+					$scope.title="电器详情";
+					$scope.info="订单详情"
+					$scope.show = function () {
+						$http({
+							method:'get',
+							url:'homepage.json'
+						}).then(function success(res){
+							$scope.datas=res.data;
+						},function error(res){
+							alert('连接失败'+res.status)
+						})
+					};
+					$scope.getcode = function () {
+						$http({
+							method:'get',
+							url:'data.json'
+						}).then(function success(res){
+							$scope.result=res.data;
+						},function error(res){
+							alert('连接失败'+res.status)
+						})
+					}
+					
+				}
+			});
+			$routeProvider.when('/close',{
+					templateUrl:'003.html',//模板名称（地址）
+					controller:function($scope){
+						$scope.title='服装';
+						$scope.content="我是服装数据";
+					}
+				})
+		}])
+	</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<abcdef></abcdef>
+		</div>
+			<!--这种写法type类型必须改变-->
+			<!--把模板挂在上面的box中-->
+		<script type="text/x-template" id="x_template">
+			<ul>
+				<li>{{num}}</li>
+				<li @click="show">255</li>
+				<li>555</li>
+			</ul>
+		</script>
+	</body>
+	<script type="text/javascript">
+	
+	var vm = new Vue({
+			el:"#box",
+			data:{
+			},
+			//局部组件
+			components:{//调用组件
+				"abcdef":{//调用的是接收内容的组件名称
+					data:function () {//这里的data和上面的data没有关系
+						return {num:"你瞅啥"}
+						//组件里的data必须是一个函数
+					},
+					methods:{//事件都放在此处,和外面的methods没有关系
+						show(){
+							this.num="瞅你咋的"
+						}
+					},
+					//调用的是发送数据的组件名称id
+					template:"#x_template"//挂载（必须必须的）
+				}
+			},
+			
+			//这里的方法是Vue实例的,局部的组件访问不到
+			methods:{
+				show1(){
+					alert('系统的');
+				}
+			}
+		});
+	</script>
+</html>

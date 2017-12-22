@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.header{
+				width:100%;
+				padding:0px;
+				margin:0px;
+			}
+			.header li{
+				width: 25%;
+				float: left;
+				line-height: 40px;
+				text-align: center;
+				border-bottom: 1px solid #ddd;
+			}
+			.footer{
+				position: fixed;
+				bottom: 0;
+				width:100%;
+				padding:10px;
+				margin:0px;
+				text-align:center;
+			}
+		</style>
+	</head>
+	<body ng-app="" ng-init="item=['首页','新闻','产品','联系'];title='新星科技有限公司'">
+		<!--
+			引入页面时注意一定要加单引号
+		-->
+		<!--注意这两个页面不能再有html和body-->
+		<div ng-include="'header.html'">
+			主题内容
+		</div>
+		<div ng-include="'footer.html'">
+			
+		</div>
+	</body>
+</html>

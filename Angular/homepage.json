@@ -1,0 +1,34 @@
+[
+{"title":"DD变频静心系列滚筒洗衣机",
+"id":1,
+"nowPrice":2888,
+"price":3000,
+"count":2850,
+"src":"images/fl_dl_02.jpg",
+"adress":"北京"
+},
+{"title":"Apple MacBook MF8396...",
+"id":2,
+"nowPrice":8808,
+"price":8999,
+"count":250,
+"src":"images/fl_dl_01.jpg",
+"adress":"北京"
+},
+{"title":" Iphone 9s",
+"id":3,
+"nowPrice":6666,
+"price":7777,
+"count":40000,
+"src":"images/fl_dl_03.jpg",
+"adress":"上海"
+},
+{"title":"小米9K",
+"id":4,
+"nowPrice":10000,
+"price":8020,
+"count":2000000,
+"src":"images/fl_dl_04.jpg",
+"adress":"南京"
+}
+]

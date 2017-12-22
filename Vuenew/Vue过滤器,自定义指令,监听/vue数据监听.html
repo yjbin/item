@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box" >
+			{{a}}
+			<hr />
+			{{b}}
+		</div>
+		<div id="ball">
+			
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				a:"我是红色"	,
+				b:"我是第二"
+			}
+		});
+		vm.$watch('a',function () {
+			alert('改变了');
+			var ball = document.getElementById("ball");
+			ball.innerHTML = "我来自虚空";
+			ball.style.backgroundColor ="#00BFFF";
+		})
+		document.onclick = function () {
+			vm.a = "我是绿色";
+		}
+		
+	</script>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+	
+		</style>
+	</head>
+	<body ng-app="">
+		<input type="text" ng-model="str" />
+		<hr />
+		大写：{{str|uppercase}}
+		<hr />
+		小写：{{str|lowercase}}
+		<!--{{str|lowercase|capitalize}}不支持capitalize-->
+		<input type="text" ng-model="num" />
+		保留几位小数{{num|number:3}}
+					number:(num数字)
+	</body>
+</html>

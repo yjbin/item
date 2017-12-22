@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<aabb>ssss</aabb>
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.elementDirective('aabb',{
+			bind:function () {
+				this.el.style.fontSize="50px";
+				this.el.style.background="blue";
+			}
+		})
+		
+	var vm = new Vue({
+			el:"#box",
+			data:{
+				str:"我是默认"
+			}
+		})
+	</script>
+</html>

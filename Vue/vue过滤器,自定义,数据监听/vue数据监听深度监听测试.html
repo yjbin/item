@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<div v-for="item in json">{{item.name}}==={{item.age}}</div>
+			
+			<hr />
+			{{b|currency}}
+		</div>
+	
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				json:[{name:"小明",age:18},
+					{name:"小黄",age:38},
+					{name:"小盈",age:28},
+					{name:"小英",age:58},
+					{name:"小李",age:88}
+				],
+				b:"558"
+			},
+			methods:{
+			}
+		})
+		//添加数据监听,数据改变产生业务逻辑
+		vm.$watch('json',function () {
+			vm.b *= 2;
+		
+			alert('数据改变了');
+			
+		},{deep:true})
+		document.onclick = function () {
+			 //如果是json数据，没有深度监听{deep:true}就监听不了了
+			 //想要使用json数组长度就必须的用vue的实例vm
+			 for (var i=0;i<vm.json.length;i++) {
+			 	vm.json[i].age*=10;
+			 }
+		}
+	</script>
+</html>

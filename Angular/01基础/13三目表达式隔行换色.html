@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		.bg1{
+			background-color: red;
+		}
+		.bg2{
+			background-color: purple;
+		}
+		</style>
+	</head>
+	<body ng-app="">
+		<div ng-init="arr=[12,45,64,98,52]">
+										<!--style后面的属性得加引号  字符串形式-->
+			<div ng-repeat="item in arr track by $index" style="{{$index%2==0?'background:blue':'background:yellow';}}">
+				{{$index}}>>>>{{item}}
+			</div>
+			<hr />
+			<div ng-repeat="(index,item) in arr track by $index" style="{{index%2==0?'background:blue':'background:yellow';}}">
+				{{index}}>>>>{{item}}
+			</div>
+		</div>
+		<hr />
+		<!--$odd奇数行   $even偶数行-->
+		<div ng-init="str=['小米','大米','米聊','咪咪','锤子','求求']">
+																		<!--ng-style后跟对象-->
+			<div ng-repeat="item in str track by $index" ng-style="$odd?{background:'red'}:{background:'purple'};">
+				{{$index}}>>>>{{item}}
+			</div>
+			<hr />											<!--style后跟字符串-->
+			<div ng-repeat="item in str track by $index" style="{{$odd?'background:lightgreen':'background:black';}}">
+				{{$index}}>>>>{{item}}
+			</div>
+			<hr />					
+			<div ng-repeat="(index,item) in str track by $index" ng-class="{'bg1':$odd,'bg2':$even}">
+				{{index}}>>>>{{item}}
+			</div>
+		</div>
+		
+	</body>
+</html>

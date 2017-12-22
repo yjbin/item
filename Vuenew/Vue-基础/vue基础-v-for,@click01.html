@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.layer{
+				width: 200px;
+				height: 300px;
+				background-color: cyan;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+	
+			<ul>
+				<li v-for="(item,index) in arr">编号：{{index}}||值：{{item}} </li>
+			</ul>
+			<ul>
+				<li v-for="(a,b,c) in json">编号：{{c}}键名:{{b}},键值：{{a}}</li>
+				<li>{{json}}</li>
+				<li>{{arr}}</li>
+				<li>{{str}}</li>
+			</ul>
+			
+		</div>
+		<br />
+		<hr />
+		
+		
+		<div id="app">
+			<button  v-on:mouseover="add()"/>按钮1</button>
+			<button @click="del(),show()" />按钮2</button>
+		</div>
+		
+		<br />
+		<hr />
+		<div id="div1">
+			<button  @click="show()"/>按钮1</button>
+			<div v-show="aa" class="layer">
+				{{str}}
+			</div>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el:'#box',
+			data:{
+				arr:["张硕丹","演绎着那个","谁谁谁"],
+				json:{
+					a:'中国',b:'美国',c:'西班牙',d:'澳大利亚'
+				},
+				str:"顺丰"
+			}
+		});
+		new Vue({
+			
+			data:{
+				str1:"弹出层",
+				str2:"modal"
+			},
+			methods:{
+				add:function () {
+					alert(this.str1)
+				},
+				del:function(){
+					alert(this.str2)
+				},
+				show:function () {
+					var col = document.getElementById("app");
+					app.style.width = "500px",
+					app.style.backgroundColor = "pink"
+				}
+			}
+		}).$mount('#app');   //手动挂载
+		new Vue({
+			el:"#div1",
+			data:{
+				aa:true,
+				str:"测试"
+			},
+			methods:{
+				show:function () {
+					this.aa = !this.aa;
+				}
+			}
+		})
+		
+		
+		
+	</script>
+</html>

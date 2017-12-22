@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		
+		<style type="text/css">
+			#box{
+				width: 500px;
+				height: 300px;
+				background-color: deepskyblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box" onclick="show()">
+											<!--阻止事件冒泡，只需要在事件之后加   .stop-->
+			<input type="button" value="按我" onclick="show2()"/>
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		function show2(ev){
+				var e = ev || window.event;
+				e = window.event?e.cancelBubble=true:e.stopPropagation();			
+									//兼容ie			//兼容其他浏览器	
+				alert(1);
+			}
+		function show(ev){
+			var e=(ev)?ev:window.event;
+			if(window.event)
+			{
+				e.cancelBubble=true;//兼容ie
+			}
+			else
+			{
+				e.stopPropagation();
+			}
+			alert(2);
+		}
+	</script>
+</html>

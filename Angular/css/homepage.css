@@ -1,0 +1,184 @@
+body,ul,li,ol{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+h3{
+	margin: 10px 5px;
+}
+a{
+	text-decoration: none;
+}
+.red{
+	color: red;
+}
+.lineth{
+	text-decoration:line-through;
+}
+.homePage{
+	margin-left: 30%;
+}
+.navbar{
+	margin-bottom: 0;
+}
+/*搜索*/
+.search{
+	width: 100%;
+	height:55px;
+	padding:10px;
+	background: #F1F1F1;
+	display: flex;
+}
+.search .search-left{
+	width: 10%;
+	height: 30px;
+	background: url(../images/必须做2_03_03.jpg) no-repeat left center;
+	background-size:30px 30px;
+}
+.search input{
+	width: 73%;
+	font-size: 18px;
+	border: none;
+	outline: none;
+	background: #F1F1F1;
+}
+.search .search-right{
+	width: 16%;
+	display: flex;
+	flex-direction: column;
+	color: #ccc;
+}
+/*选项卡*/
+.content{
+	width: 100%;
+	margin-bottom: 55px;
+}
+.content ol{
+	display: flex;
+	font-size: 20px;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 10px;
+}
+.content ol li{
+	width: 33.333%;
+	text-align: center;
+	padding:5px 0;
+}
+.content ol li:hover{
+	color:red;
+	border-bottom: 1px solid red;
+}
+.content ol li span{
+	display: inline-block;
+	width: 100%;
+	border-right:1px solid #ccc ;
+	color: #aaa;
+	text-decoration: none;
+}
+.content .shoplist{
+	margin: 0 auto;
+	max-width: 960px;
+	min-width: 320px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #aaa;
+}
+.content .shoplist li{
+	width: 100%;
+}
+.content .shoplist li:nth-of-type(1){
+	padding:5px 10px;
+	font-size: 18px;
+	color: #000;
+	background: #F2F2F2;
+	border-top:1px solid #aaa ;
+	border-bottom:1px solid #aaa ;
+	overflow: hidden;
+}
+.content .shoplist li .icon-left{
+	display: inline-block;
+	vertical-align: middle;
+	width: 35px;
+	height: 20px;
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	line-height: 20px;
+	background: #e4393c;
+	border-radius:5px ;
+}
+.content .detail{
+	padding: 10px;
+	overflow: hidden;
+}
+.content .detail .left-img{
+	width: 43%;
+	border: 1px solid #ccc;
+}
+.content .detail .left-img img{
+	width: 100%;
+	
+}
+.content .detail .right-info{
+	width: 55%;
+	display: flex;
+	flex-direction:column ;
+}
+.content .detail .right-info p{
+	width: 60px;
+	height: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #fff;
+	background: #ED9345;
+	border-radius:5px ;
+	cursor: pointer;
+}
+
+/*底部*/
+footer{
+	width: 100%;
+	height: 50px;
+	border-top: 1px solid red;
+	position: fixed;
+	bottom: 0;
+	background: #fff;
+}
+footer ul{
+	display: flex;
+}
+footer ul a{
+	display: inline-block;
+	width: 20%;
+	height: 50px;
+	text-align: center;
+}
+footer ul a li {
+	width: 100%;
+}
+footer ul a li i{
+	display: block;
+	width: 100%;
+	height: 30px;
+	margin-top: 3px;
+}
+footer ul a li .first{
+	background: url(../images/必须做2_03_07.jpg) no-repeat center center;
+	background-size: 30px 30px;
+}
+footer ul a li .category{
+	background: url(../images/必须做2_03_09.jpg) no-repeat center center;
+	background-size: 30px 30px;
+}
+footer ul a li .shop{
+	background: url(../images/必须做2_03_11.jpg) no-repeat center center;
+	background-size: 30px 30px;
+}
+footer ul a li .find{
+	background: url(../images/必须做2_03_13.jpg) no-repeat center center;
+	background-size: 30px 30px;
+}
+footer ul a li .my{
+	background: url(../images/必须做2_03_15.jpg) no-repeat center center;
+	background-size: 30px 30px;
+}

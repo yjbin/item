@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.v-link-active{
+				color:lawngreen;
+				font-size: 16px;
+				font-weight: 600;
+			}
+			router-link{	
+				float: left;
+				width: 50px;
+				height: 20px;
+				list-style: none;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			
+				<router-link to='/home'>首页</router-link>
+				<router-link to='/news'>新闻</router-link>
+				<router-link to='/user'>用户</router-link>
+				<router-view></router-view>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+
+//1.组件  //只能用js/vue-router.js   显示2.0的路由
+		var Home = {
+			template:"<p>我是首页的数据</p>"
+		};
+		var News = {
+			template:"<p>我是新闻的数据</p>"
+		};
+		var User = {
+			template:"<p>我是用户的数据</p>"
+		};
+		//2.配置路由
+		const routes = [
+			{path:'/home',component:Home},
+			{path:'/news',component:News},
+			{path:'/user',component:User},
+			{path:'*',redirect:'/home'}
+		];
+		//3.生成路由
+		const router = new VueRouter({
+			routes
+		});
+
+		//4.挂在到vue身上
+		var vm = new Vue({
+			router,
+			el:'#box'
+		})
+	
+	
+	
+	</script>
+</html>

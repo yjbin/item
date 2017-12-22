@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="test">
+	<head>
+		<meta charset="UTF-8">
+		<title>Angular——课程</title>
+		<script src="../js/angular.js" type="text/javascript"></script>
+		<script>
+			var app=angular.module('test',[]);
+			app.controller('cont1',function($scope){
+				$scope.name="张三";
+				$scope.sex="男";
+				$scope.score=15;
+			})
+			app.controller('cont2',function($scope){
+				$scope.age=18;
+				$scope.sex='女';
+				$scope.name='刘若英';
+			})
+			/*
+			自控制器中拥有的属性值，首先使用自己的 ，
+			如果没有就向上查找，比如：性别
+			*/
+		</script>
+		
+	</head>
+	<body ng-controller="cont1">
+		{{name}}<hr>
+		{{sex}}<hr>
+		{{age}}
+		<div ng-controller="cont2">
+			{{name}}<hr />
+			{{sex}}<hr />
+			{{age}}<hr />
+			{{score}}
+		</div>
+	</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="box">
+			<!--这里的num就相当于调用函数传递的第一个参数  ，20才是第二个参数-->
+			{{num|abc 50}}
+		
+		</div>
+	</body>
+	<script type="text/javascript">
+		//强大之处，允许用户自定义方法
+	//自定义全局过滤器    过滤器名字abc  过滤器对事件操作的方法
+		Vue.filter('abc',function (a,b) {
+							//第一个参数是过滤的内容  这里是num
+							//第二个参数开始，是我们自己定义的参数
+							//至少要接收一个参数(要过滤的内容),可以有多个参数
+			return a>b?'值大于了a为'+a:"值不大于50b为"+b;
+		})
+		var vm = new Vue({
+			data:{
+				num:10
+			},
+			//自定义局部过滤器
+			filters:{//要加上s，因为它里面可以写多个方法
+				//写在这里的都是局部的，只有这个box可以用
+				abc:function (a,b) {	
+					return a>b?'值大于了a为'+a:"值不大于50b为"+b;
+				}
+			}
+		}).$mount('#box')
+	
+	</script>
+
+</html>

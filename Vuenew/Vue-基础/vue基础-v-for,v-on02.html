@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.layer{
+				width: 200px;
+				height: 300px;
+				background-color: cyan;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+	
+			<button @click="add()">点击添加</button>
+			<button v-on:click="del()">点击删除</button>
+			<ul>
+				<li v-for="(item,index) in arr">{{index}}{{item}}</li>
+			</ul>
+		</div>
+	
+		<br />
+		<hr />
+	
+	</body>
+	<script type="text/javascript">
+	 new Vue({
+	 	el:"#box",
+	 	data:{
+	 		arr:['中国','美国','日本','法国']
+	 	},
+	 	methods:{
+	 		add:function () {
+	 			this.arr.push("菲律宾")
+	 		},
+	 		del:function (){
+	 			this.arr.pop()
+	 		}
+	 	}
+	 })
+		
+		
+	</script>
+</html>

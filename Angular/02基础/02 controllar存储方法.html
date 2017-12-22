@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body ng-app="test">
+		<!--<div ng-controller="book">
+	
+				{{str}}
+		</div>-->
+
+		<div ng-controller="lisi">	
+				{{a}}	
+			<input type="text" ng-model="code"/>
+			<input type="button"  value="嗯我" ng-click="show(code)" />
+		</div>
+	</body>
+	<script type="text/javascript">
+//								模块名称
+		var app = angular.module('test',[]);
+//						控制器名称
+//		app.controller('book',function ($scope) {
+//			$scope.str="我是来自控制器的东西";
+//			$scope.show = function () {
+//				alert(str)
+//			}
+//		})
+	
+//		控制器另一种写法   默认上下的这两个控制器的数据不互通
+//								数组这里可以传入多个参数
+		app.controller('lisi',['$scope',function (obj) {
+			obj.a="我是控制器的另一种写法";
+			
+			obj.show=function (a) {
+				alert(a);
+			}
+		}])
+	</script>
+</html>

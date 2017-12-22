@@ -1,0 +1,31 @@
+*{
+	margin: 0px;
+}
+
+.read-title{
+	padding-left: 20px;
+	padding-top: 30px;
+	padding-bottom: 20px;
+	font-size: 24px;
+}
+.read-author{
+	padding-left: 20px;
+	padding-top: 5px;
+	color: #aaa;
+}
+.read-content{
+	padding: 20px;
+	font-weight: 100;
+	color: #555;
+}
+
+.tool-bar{
+	border-top: 1px solid #eee;
+	text-align: right;
+	padding-right: 10px;
+}
+.tool-bar img{
+	width: 35px;
+	height: 35px;
+	cursor:pointer;
+}

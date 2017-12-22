@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head >
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/angular-ui-router.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<ul>
+			<li><a ui-sref="go">跳转</a></li>
+		</ul>
+		<div ui-view></div>
+	</body>
+	<script type="text/javascript">
+		var app= angular.module('myApp',['ui.router']);
+		app.config(function ($stateProvider,$urlRouterProvider) {
+			$stateProvider.state('go',{
+				url:'/go',
+				template:'<a ui-sref="user({id:id})">编号是:{{id}}的数据</a>',
+//									在页面中相当于user/id
+									//	id: 设置    后面的id获取$scope.id的值
+				controller:function ($scope) {
+					$scope.id = '10';
+				}
+			})
+			$stateProvider.state('user',{
+				url:'/user/:id',//设置参数id的值
+				template:'<p>当前id是{{userId}}</p>',
+				controller:function ($scope,$stateParams) {
+					$scope.userId=$stateParams.id;
+				//	$stateParams.id 获取url中  id的值
+					$scope.userId = $stateParams.id;
+				}
+			})
+			
+		})
+	</script>
+</html>

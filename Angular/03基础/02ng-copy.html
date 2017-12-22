@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="test">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript"></script>
+		
+	<body ng-controller="cont1">
+		<input type="text" ng-model="str" ng-copy="show('我是复制','复制')" ng-cut="show('我是剪切','剪切')" ng-paste="show('我是粘贴','粘贴')" />
+		<!--ng-copy  复制时触发的函数
+		ng-cut		剪切时触发的函数
+		ng-paste	粘贴时触发的函数-->
+		<div>{{item}}</div>
+	</body>
+	<script type="text/javascript">
+			var app=angular.module('test',[]);
+			app.controller('cont1',['$scope',function($scope){
+				$scope.show=function(obj,datas){
+					console.log(obj);
+					$scope.item='您目前的操作是：'+datas;
+				}
+			}]);
+		</script>
+	</head>
+</html>

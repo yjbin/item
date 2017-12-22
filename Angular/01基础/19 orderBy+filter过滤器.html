@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body ng-app="">
+		数组排序，返回的是一个排序后的数组
+		<ul ng-init="arr=[18,88,22,108]">
+			<li ng-repeat="item in arr|orderBy:item">{{item}}</li>
+		</ul>
+		
+		<hr> 第二个参数：0正序排列，非0(正负数)则是降序排列（从大到小）
+		<ul ng-init="arr2=[18,88,22,108]">
+			<li ng-repeat="item in arr2|orderBy:item:1">{{item}}</li>
+		</ul>
+		<hr> 按照年龄排序
+		<ul ng-init="json=[{name:'aaa',age:18},{name:ccc,age:28},{name:'bbb',age:25}]">
+			<li ng-repeat="item in json|orderBy:'age'">
+				姓名：{{item.name}}年龄：{{item.age}}
+			</li>
+		</ul>
+		<hr>
+		<input type="text" ng-model="str_item" />
+		<ul ng-init="arr_02=['aabb','bbcc','ccaa','ddee','eebb','ccdd']">
+			<li ng-repeat="item in arr_02|filter:str_item|orderBy:item">
+				{{item}}
+			</li>
+		</ul>
+	</body>
+
+</html>

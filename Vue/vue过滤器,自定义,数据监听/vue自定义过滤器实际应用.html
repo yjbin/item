@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="box">
+			<ul>
+				<li v-for="item in num" >
+					商品名称：{{item.title}}
+					<br />
+										add,自定义的过滤器方法
+					商品价格：{{item.price|add|currency '￥'}}
+		
+				</li>
+			</ul>
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		//强大之处，允许用户自定义方法
+	//自定义过滤器格式    过滤器名字abc  过滤器对事件操作的方法
+		Vue.filter('add',function (a) {
+		//第一个参数是过滤的内容  这里是num
+		//第二个参数开始，是我们自己定义的参数
+		//至少要接收一个参数(要过滤的内容),可以有多个参数，参数可以是一个或多个变量
+			return a*1000;   //num[index].price*100
+			
+		})
+		var vm = new Vue({
+			data:{
+				num:[
+					{title:"小米",price:10,},
+					{title:"华为",price:20,},
+					{title:"苹果",price:30,},
+					{title:"三星",price:50,}
+				]
+			}
+		}).$mount('#box')
+	
+	
+	</script>
+
+</html>

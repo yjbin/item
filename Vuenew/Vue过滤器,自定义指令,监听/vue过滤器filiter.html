@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+	<body>
+		<div id="box">
+			{{str_2|uppercase}}			<!--转换成大写字母-->
+			<hr />
+			{{str_3|lowercase}}			<!--转换成小写字母-->
+			<hr />
+			{{str_3|lowercase|capitalize}}	<!--先转换成小写字母，首字母变成大写字母-->
+							//首字母大写
+			<hr />
+			{{str_4|currency}}		<!--默认是美元-->
+			<hr />
+			
+			{{str_4|currency "￥"}}		<!--加参数，用空格分开-->
+			<ul>
+				<li v-for="item in arr|orderBy 1">{{item}}</li>
+				<!--如果>0正序；<0倒序这里的大小是按数值大小排的,数字正常，字母按asc码大小,汉字按encd码排-->
+			</ul>
+			
+			<ul>				<!--这里的大小是按数值大小排的,数字正常，字母按asc码大小,汉字按encd码排-->
+									<!--json对象这里需要产一个比较的属性-->
+				<li v-for="item in json|orderBy 'age' 1">
+					姓名：{{item.name}}
+					年龄：{{item.age}}
+				</li>
+			</ul>
+			<ul>
+				<li v-for="item in json|orderBy 'age' add()">
+				姓名：{{item.name}}
+				年龄：{{item.age}}
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			data:{
+				flg:0,
+				str_1:"前端攻城狮",
+				str_2:'welcome',
+				str_3:'WELCOME',
+				str_4:'100',
+				arr:['18','15','20','1'],
+				json:[
+					{name:"aaa",age:18},
+					{name:"bbb",age:28},
+					{name:"ccc",age:38},
+					{name:"ddd",age:58}
+					]
+				},
+			methods:{
+					add:function(flg){
+						if (flg) {
+							return 1;
+							flg=0;
+						}else{
+							return -1;
+							flg=1;
+						}
+					}
+				}
+		}).$mount('#box')
+	
+	
+	</script>
+</html>

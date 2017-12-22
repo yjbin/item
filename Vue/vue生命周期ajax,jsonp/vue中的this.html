@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="first">
+			<input type="button" @click="show()" value="点击获取值1" />
+		</div>
+		<hr />
+		<div id="second">
+			<input type="button" @click="show()" value="点击获取值2" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		//简单的来说vue中的this就是指的外围包裹的容器，即el选择器选中的容器
+		var vm = new Vue({
+			el:'#first',
+			data:{
+				str:"我是红色"
+			},
+			methods:{
+				show:function () {
+					alert(vm.str)
+				}
+			}
+		})
+		
+		var bm = new Vue({
+			el:'#second',
+			data:{
+				str:"我是绿色"
+			},
+			methods:{
+				show:function () {
+					alert(this.str)
+				}
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box" >
+			<ul>
+				<li>						<!--键盘事件@keydown-->
+					<input type="text" value="键盘按下" @keydown="show('键盘按下')"/>
+				</li>
+				<li>	
+					<input type="text" value="键盘抬起" @keyup="show('键盘抬起')"/>
+				</li>
+				<li>
+					<input type="text" value="按下回车" @keydown="show2($event,'按下回车')"/>
+				</li>
+				<li>
+					<input type="text" value="按下回车" @keydown.13="show('按下回车')"/>
+				</li>
+				<li>
+					<input type="text" value="按下回车" @keydown.enter="show('按下回车')"/>
+				</li>
+				<li>
+					<input type="text" value="上方向键" @keydown.up="show('上方向键')"/>
+				</li>
+				<li>
+					<input type="text" value="下方向键" @keydown.down="show('下方向键')"/>
+				</li>
+				<li>
+					<input type="text" value="左方向键" @keydown.left="show('左方向键')"/>
+				</li>
+				<li>
+					<input type="text" value="右方向键" @keydown.right="show('右方向键')"/>
+				</li>	
+					
+					
+				<!--注意:2.0不兼容 @keydown.left    @keydown.right
+				<li>
+					<input type="text" value="左方向键" @keydown="show2($event,'按下回车')"/>
+				</li>
+				<li>
+					<input type="text" value="右方向键" @keydown="show2($event,'按下回车')"/>
+				</li>-->
+				
+			</ul>
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		new Vue({
+			el:'#box',
+			data:{
+				
+			},
+			methods:{
+			//传参时注意：$event参数位置必须和函数的参数一一对应
+				show:function(obj){
+					alert(obj);
+				},
+				show2:function (ev,obj) {
+					//  .keyCode获取键盘的按键值
+					if(ev.keyCode==13)
+						{
+							alert(ev.keyCode+obj);
+						}
+					//注意:2.0不兼容 @keydown.left    @keydown.right
+					if(ev.keyCode==37)
+						{
+							alert(ev.keyCode+obj);
+						}
+					if(ev.keyCode==39)
+						{
+							alert(ev.keyCode+obj);
+						}
+				}
+			}
+		})
+	</script>
+</html>

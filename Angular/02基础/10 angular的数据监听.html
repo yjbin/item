@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="content">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body >
+		<div ng-controller="box">
+			<input type="text" ng-model="item" value="监视" />
+			{{item}}
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('content',[]);
+		app.controller('box',function ($scope) {
+			$scope.item='监视';
+			$scope.$watch('item',function () {
+				alert('我发生改变了')
+			})
+		})
+		
+	</script>
+</html>

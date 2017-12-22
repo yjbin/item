@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<div id="box">
+			<ul>全读出来：
+				<li v-for="item in arr">{{item}}</li>
+			</ul>
+			<hr />
+			<ul>从头开始读两个：
+				<li v-for="item in arr|limitBy 2">
+					{{item}}
+				</li>								
+			</ul>
+			<hr />
+			<ul>默认从0开始，从第三个开始，读两个：
+				<li v-for="item in arr|limitBy 2 3">
+					{{item}}
+				</li>								
+			</ul>
+			<ul>从倒数第三个开始，读三个：
+				<li v-for="item in arr|limitBy 3 arr.length-3">
+					{{item}}
+				</li>									
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			data:{
+				arr:['aaa','bbb','ccc','ddd','fff','ggg']
+			}
+		}).$mount('#box')
+	
+	
+	</script>
+</html>

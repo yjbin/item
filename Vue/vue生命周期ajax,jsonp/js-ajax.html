@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+
+	</head>
+	<body>
+		<input type="button" id="btn" value="获取数据" />
+		<ul id="show">
+			
+		</ul>
+	</body>
+	<script type="text/javascript">
+		var btn = document.getElementById("btn");
+		var show = document.getElementById("show");
+		btn.onclick = function () {
+			//加上时间，解决缓存问题，每次求情都会变,也可以是个随机数写法左边字符串   注意这里的这个加号
+			ajax('03.json?='+new Date().getTime(),function(result) {
+				//	alert(result);
+					//eval 用js语法进行转换
+					//对解析的进行操作
+					var arr = eval(result);
+					//console.log(arr)
+					for (var i=0;i<arr.length;i++) {
+						var li = document.createElement('li');
+						li.innerHTML += arr[i].title;
+						show.appendChild(li);
+					}
+				},function () {
+					alert('失败了')
+				}
+			)
+		}
+		
+		
+		
+		
+		
+		
+		
+		//创建ajax请求可以封装为函数进行调用
+		function ajax (url,fnSurc,fnFaild) {
+			//1.创建对象
+			if (window.XMLHttpRequest) {
+				var xhr = new XMLHttpRequest();
+				
+			}else{
+				var xhr = new ActiveXObject('Microsoft.XMLHTTP');			
+			}
+			//2.连接服务器          true为异步
+			xhr.open('GET',url,true);
+			//3发送
+			xhr.send();
+			//4.接收
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState==4) {
+					if (xhr.status==200) {
+						fnSurc(xhr.responseText);
+					}
+					else{
+						if (fnFaild) {
+							fnFail('请求失败');
+						}
+					
+					}
+				}
+			}
+		}
+		
+	</script>
+</html>

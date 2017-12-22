@@ -1,0 +1,12 @@
+﻿//视频列表控制器
+app.controller('movieListController',function($scope,$rootScope,$routeParams,$http){
+	$rootScope.navTitle="影视列表";
+	$rootScope.navLeftImage="img/search_min.png";
+	$rootScope.navLeftUrl="#/search/1";
+})
+//视频详情控制器
+app.controller('movieDetailController',function($scope,$rootScope,$routeParams,$http){
+	$rootScope.navTitle="视频详情";
+	$rootScope.navLeftImage="img/aliwx_common_back_btn_normal.png";
+	$rootScope.navLeftUrl="javascript:history.go(-1)";
+})

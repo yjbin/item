@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-resource.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.active{
+				background: lightgreen;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box" >
+			<input type="text"  @keyup="getData($event)" v-model="str" @keydown.down.prevent="downData()" @keydown.up.prevent="upData()"/>
+			<ul>
+				<li v-for="(item,index) in arr" :class="{'active':index==nowIndex}">{{item}}</li>
+				<li v-show="arr.length==0">暂无数据</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				str:"",
+				arr:[],
+				nowIndex:-1
+			},
+			methods:{
+				getData:function (e) {
+					if (e.keyCode==38||e.keyCode==40)return;
+					if (e.keyCode == 13) {
+						window.open('https://www.so.com/s?ie=utf-8&fr=none&src=360sou_newhome&q='+this.str);
+						this.str='';
+						this.nowIndex =-1;
+					}
+					this.$http.jsonp('https://sug.so.360.cn/suggest?',{
+						encodein:'utf-8',
+						encodeout:'utf-8',
+						word:this.str,//参数	
+					},{
+						callback:'JSON_CALLBACK'//360独有设置的
+					}).then(function (res) {
+						 this.arr = res.data.s;
+						
+					},function (sa) {
+						alert('失败')
+					})
+				},
+				upData:function () {
+					if (this.nowIndex<=0) {
+						this.nowIndex = this.arr.length-1;
+					}else{
+						this.nowIndex--;
+					}			
+					this.str = this.arr[this.nowIndex];
+				},
+				downData:function () {
+				
+					this.nowIndex++;
+					if (this.nowIndex == this.arr.length) {
+						this.nowIndex = 0;
+					}
+					this.str = this.arr[this.nowIndex];
+				}
+			}
+			
+		})
+		
+
+			
+		
+		
+		
+	</script>
+</html>

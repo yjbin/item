@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+	<body>
+		<div id="box">
+			<input type="button" @click="item='aaa'" value="aaa" />
+			<input type="button" @click="item='bbb'" value="bbb" />
+			<components :is="item"></components>
+		</div>
+	
+	</body>
+	<script type="text/javascript">
+		//生命组件    //调用
+		
+		new Vue({
+			el:"#box",
+			data:{
+				item:'ddd'
+			},
+			components:{
+				'aaa':{
+					template:"<p>我是aaa</p>"
+				},
+				'bbb':{
+					template:"<p>我是bbb</p>"
+				}
+			}
+		})
+	
+	
+	</script>
+</html>

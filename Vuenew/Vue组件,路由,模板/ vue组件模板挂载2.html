@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+	<body>
+		<div id="box">
+			<lib></lib>
+			<template  id="temp">
+				<p @click='show()'>{{num}}</p>
+			</template>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var book = Vue.extend({
+			data:function () {
+				return {num:18}
+			},
+			methods:{
+				show:function () {
+					alert(this.num+1)
+				}
+			},
+			template:"#temp"
+		})
+		new Vue({
+			el:"#box",
+			data:{
+				str:'ddd'
+			},
+			methods:{
+				show:function () {
+					alert('系统')
+				}
+			},
+			components:{
+				'lib':book
+			}
+		})
+	
+	
+	</script>
+</html>

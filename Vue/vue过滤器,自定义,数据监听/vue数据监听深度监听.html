@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			{{json.name}}
+			<hr />
+			{{b}}
+		</div>
+	
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				json:{name:"小明",age:18},
+				b:"这是第二组数据"
+			},
+			methods:{
+			}
+		})
+		//添加数据监听,数据改变产生业务逻辑
+		vm.$watch('json',function () {
+			vm.b = "588";
+			alert('数据改变了');
+			
+		},{deep:true})
+		document.onclick = function () {
+			vm.json.name ="235"; //如果是json数据，没有深度监听{deep:true}就监听不了了
+		}
+	</script>
+</html>

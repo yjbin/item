@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div ng-app="">
+			<!--循环读取数组-->
+			<!--
+			ng-init就是初始化值
+			用value是不行，因为ng-model会替换value--
+			-->
+			<ul ng-init="arr=[1,20,5,6,33,588]">
+				<li ng-repeat="item in arr">{{item}}</li>
+			</ul>
+			<hr />
+			<!--如果数组遇到重复的读不出来,  原因不允许collection(收集)有相同的-->
+			<!--一般都加上防止出现数组里相同的  track by $index-->
+			<ul ng-init="array=[1,20,5,6,33,588,5]">
+				<li ng-repeat="item in array track by $index">{{item}}</li>
+				<!--解决加track by $index -->
+			</ul>
+			<hr />
+			<!--循环读取json-->
+			<ul ng-init="json={a:'北京',b:'上海',c:'天津'}">
+				<li ng-repeat="(a,b) in json">位置：{{$index}} 键名：{{a}}||键值：{{b}}</li>
+			</ul>
+			<!--a对应的就是json的键名
+			b对应的就是json的键值
+			$index就是序号，从0开始-->
+			<hr />
+			<!--注意双引号和单引号的嵌套-->
+			<ul ng-init="code=[{name:'张丹',age:18},{name:'刘翔',age:26},{name:'踏步',age:28},{name:'暗探',age:6}]">
+				<li ng-repeat="(a,b) in code">编号：{{$index}}||键名：{{b.name}}||键值：{{b.age}}</li>
+				<hr />
+				<li ng-repeat="item in code">编号：{{$index}}||键名：{{item.name}}||键值：{{item.age}}</li>
+			</ul>
+		</div>
+	</body>
+</html>

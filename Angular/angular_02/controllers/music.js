@@ -1,0 +1,12 @@
+﻿//音乐列表控制器
+app.controller('musicListController',function($scope,$rootScope,$routeParams,$http){
+	$rootScope.navTitle="音乐列表";
+	$rootScope.navLeftImage="img/search_min.png";
+	$rootScope.navLeftUrl="#/search/1";
+})
+//音乐详情控制器
+app.controller('musicDetailController',function($scope,$rootScope,$routeParams,$http){
+	$rootScope.navTitle="音乐详情";
+	$rootScope.navLeftImage="img/aliwx_common_back_btn_normal.png";
+	$rootScope.navLeftUrl="javascript:history.go(-1)";
+})

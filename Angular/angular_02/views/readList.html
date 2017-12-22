@@ -1,0 +1,26 @@
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<div class="table-view">
+	<div class="common-cell" ng-repeat="item in itemList">
+		<a ng-href="#/readDetail/{{item.id}}">
+			<div class="common-cell-tag">
+				<span>- 阅读 -</span>
+			</div>
+			<div class="common-cell-title">
+				<span>{{item.title}} </span>
+			</div>
+			<div class="common-cell-author">
+				<span>作者: {{item.author_name}}</span>
+			</div>
+			<div class="common-cell-icon">
+				<img ng-src="{{imagePrefix+item.img_url}}">
+			</div>
+			<div class="common-cell-forward">
+				<span>{{item.forward}}</span>
+			</div>
+			<div class="common-cell-tool">
+				<span>{{item.post_date}}</span>
+				<span>收藏: {{item.like_count}}</span>
+			</div>
+		</a>
+	</div>
+</div>

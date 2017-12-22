@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<input type="button" id="btn" value="jq请求" />
+		<ul id="ul">
+		
+		</ul>
+	</body>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#btn').click(function () {
+				$.ajax({
+					type:"get",
+					url:"03.json",
+					async:true,
+					dataType:"json",  //格式
+					success:function (result) {
+						var arr = eval(result);
+//						for (var i=0;i<arr.length;i++) {
+//							var str = '';
+//							str += "<li>"+arr[i].title+"</li>";
+//							$('#ul').append(str);
+//						}
+						arr.forEach(function (el,index) {
+							var str="";
+							str += "<li>"+arr[index].title+"</li>";
+							$('#ul').append(str);
+						})
+					}
+				});
+			})
+			
+		})
+	</script>
+</html>

@@ -1,0 +1,148 @@
+*{
+	margin: 0px;
+}
+
+body{
+	background-color: #eee;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+
+
+/*cell*/
+.table-view{
+	background-color: #eee;
+}
+.music-cell{
+	width: 100%;
+	/*height: 600px;*/
+	background-color: white;
+	margin-bottom: 10px;
+	
+	position: relative;
+	height: 160px;
+}
+.music-cell a{
+	display:block;
+	width:100%;
+}
+.music-cell-tag{
+	text-align: center;
+	color: #bbb;
+	margin-bottom: 10px;
+	display: none;
+}
+.music-cell-title{
+	font-size: 16px;
+	
+	left: 120px;
+	top: 15px;
+	position: absolute;
+	
+}
+.music-cell-author{
+	
+	color: #aaa;
+	
+	left: 120px;
+	top: 65px;
+	position: absolute;
+}
+.music-cell-icon{
+	width: 80px;
+	height: 80px;
+
+	
+	left: 20px;
+	top: 20px;
+	position: absolute;
+	
+}
+.music-cell-icon img{
+	position: absolute;
+	width: calc(100%);
+	border-radius: 40px;
+}
+.music-cell-icon div{
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	left: 30px;
+	top: 30px;
+	background-color: white;
+	border-radius: 10px;
+	
+}
+.music-cell-forward{
+
+	color: #aaa;
+	
+	left: 20px;
+	top: 110px;
+	position: absolute;
+	font-size: 14px;
+}
+.music-cell-tool{
+
+	color: #bbb;
+	
+	left: 120px;
+	top: 85px;
+	position: absolute;
+}
+
+/*详情*/
+.music-detail-icon{
+	padding: 20px;
+	overflow:hidden;
+}
+.music-detail-icon img{
+	width: 100%;
+	border-radius: 50%;
+	animation: CircleAnimation 10s linear infinite;
+	position: relative;
+	z-index: -1;
+}
+@keyframes CircleAnimation{
+	from{
+		transform: rotate(0deg);
+	}
+	to{
+		transform: rotate(360deg);
+	}
+}
+.music-detail-album{
+	text-align: center;
+	color: #aaa;
+}
+.music-detail-author-title{
+	text-align: center;
+	color: #aaa;
+}
+
+.music-detail-story{
+	padding-top: 20px;
+}
+.music-detail-story-title{
+	padding-left: 20px;
+	padding-right: 20px;
+	font-size: 24px;
+	text-align: center;
+}
+.music-detail-story-author{
+	padding-top: 5px;
+	text-align: center;
+	padding-bottom: 5px;
+	color: #aaa;
+}
+.music-detail-story-content{
+	padding: 10px;
+}
+
+.player-box audio{
+	width: 100%;
+}

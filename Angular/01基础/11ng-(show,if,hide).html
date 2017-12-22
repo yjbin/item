@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body ng-app="">
+		<div ng-init="aa=true;bb=false">
+			<!--ng-if为真显示(指页面渲染不渲染)-->
+			<div ng-if="aa">
+				广东省股份
+			</div>
+			<div ng-if="bb">
+				鸿星尔克
+			</div>
+			<!--ng-hide为真消失-->
+			<div ng-hide="aa">
+				快人一步
+			</div>
+			<div ng-hide="bb">
+				非一般的感觉
+			</div>
+			<!--ng-show为真显示(相当于display作用)-->
+			<div ng-show="aa">
+				看看什么鬼
+			</div>
+			<div ng-show="bb">
+				你妈卖批
+			</div>
+		</div>
+		
+	</body>
+</html>

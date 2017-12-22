@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body ng-app="content">
+		<div ng-controller="box">
+			<a href="{{href}}">这是什么官网</a>
+			<hr />
+			<a ng-href="{{href}}">大幅度网</a>
+			<hr />
+			<a href="http://www.360.com" ng-href="{{href}}">{{name}}</a>
+			<!--ng-href可以替换原生html里的href-->
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('content',[]);
+		app.controller('box',function ($scope) {
+			$scope.href = 'http://www.baidu.com';
+			$scope.name = '点击到百度';
+		})
+	</script>
+</html>

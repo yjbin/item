@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body ng-app="">
+		<div ng-init="json=[{name:'小明',age:18},{name:'小公',age:28},{name:'小花',age:28},{name:'小楼',age:58},{name:'小慧',age:8},{name:'小晶',age:68},]">
+			<input type="text" ng-model="str" autofocus/>
+			<div ng-repeat="item in json|filter:{name:str}:true">
+										<!--这里类似过滤一个对象  name为str(所输入的值)的对象-->
+								<!--若是数值，则不行，这里只会过滤字符串-->
+				<div>
+					{{item.name}} || {{item.age}}
+				</div>
+				<!--过滤器的搜索：不写默认模糊搜素
+				true和false就是精确搜索和模糊搜索
+				精确搜索：filter:{name:str}:true
+				模糊搜索：filter:{name:str}:false-->
+			</div>
+		</div>
+	</body>
+</html>

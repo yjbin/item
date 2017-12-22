@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="box">
+			<input type="button" @click="$options.show()" value="按钮" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			data:{
+				str:"你为什么呢"
+			},
+			aaa:111,
+			abc:222,
+			methods:{
+				
+			},
+			show(){
+					//读取自定义属性的变量数据
+				alert(vm.$options.aaa)
+			}
+		}).$mount("#box");
+		//vue自定义属性的show()方法进行一次调用
+		vm.$options.show();
+	</script>
+
+</html>

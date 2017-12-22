@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div ng-app="">
+			<!--出现：解决ng-bind所在标签内不能书写内容-->					
+			<input type="text" ng-model="stra"/>
+			+
+			<input type="text" ng-model="strb"/>
+			=
+			<p>{{stra+strb}}</p>
+			<hr />
+			<input type="text" ng-model="strc"/>
+			*
+			<input type="text" ng-model="strd"/>
+			=
+			<p >{{strc}}*{{strd}}===={{strc*strd}}</p>
+			<!--模板里可以存三目运算符-->
+			<h3>{{strc>10?strc*strd:strc-strd;}}</h3>
+		</div>
+		
+
+		
+	</body>
+</html>

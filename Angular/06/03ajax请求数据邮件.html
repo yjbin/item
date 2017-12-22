@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title>邮件</title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/angular-route.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+	</head>
+	<body ng-controller="content">
+		<h2 class="text-center">{{textText}}</h2>
+		<hr />
+		<div ng-view></div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('myApp',['ngRoute']);
+		app.controller('content',function ($scope) {
+			$scope.textText = '模拟邮件信息';
+		})
+		//配置路由
+		app.config(function ($routeProvider) {
+			$routeProvider.when('/list',{
+				templateUrl:'list.html',
+				controller:'listController'
+				//controller:listController //对应另一种写法的调用
+			});
+			$routeProvider.when('/detail/:id',{//在id前加上冒号,从而指定了一个参数化的url
+				templateUrl:'detail.html',
+				controller:'detailController'
+			//	controller:detailController
+			});
+			//默认跳转地址
+			$routeProvider.otherwise({redirectTo:'/list'});
+		})
+		//定义邮件数量外部请求
+//		emailData=[
+//		{id:1,fasongren:'dssssd@qq.com',emailTile:'早上好，请收邮件',date:'2017-05-22',shoujianren:'fffdd@qq.com',message:'邮件的内容'},
+//		{id:2,fasongren:'fdsaf@qq.com',emailTile:'下午好，请收邮件',date:'2017-06-22',shoujianren:'aaa44@qq.com',message:'邮件的内容'},
+//		{id:3,fasongren:'zhangsan@qq.com',emailTile:'晚上好，请收邮件',date:'2017-03-22',shoujianren:'lisi@qq.com',message:'邮件的内容'}
+//		];
+		
+		//列表控制器
+		app.controller('listController',function ($scope,$http) {
+			$http({
+				methods:'get',
+				url:'test.json'
+			}).success(function (res) {
+				$scope.emailData = res;
+			}).error(function (res) {
+				alert('请求失败'+res.status)
+			})
+			
+		})
+//		另一种写法，相当于给函数起了一个名字，调用的时候直接调用名字，传递的就是函数
+//		function listController($scope){
+//			$scope.emailData=emailData;
+//		}
+
+		//详情控制器
+		app.controller('detailController',function ($scope,$routeParams,$http) {
+			$http({
+				methods:'get',
+				url:'test.json'
+			}).success(function (res) {
+				$scope.message = res[$routeParams.id-1];
+			}).error(function (res) {
+				alert('请求失败'+res.status)
+			})
+			//$routeParams.id获取父级模板传过来的id参数
+			 //emailData的数组比emailData的id长度少1
+		})
+//		function detailController($scope,$routeParams){
+//			$scope.message=emailData[$routeParams.id-1];
+//		}
+	</script>
+</html>

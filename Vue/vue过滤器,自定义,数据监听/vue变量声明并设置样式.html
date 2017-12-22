@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		</style>
+	</head>
+
+	<body>
+		<div id="box">
+			{{str}}
+		</div>
+		<div class="ball">
+			{{str}}
+		</div>
+	
+	</body>
+	<script type="text/javascript">
+	
+		var vm = new Vue({
+			el:'#box',
+			data:{
+				str:"dsds",
+			},
+			methods:{
+				
+			}
+		})
+		
+		var mvvm = new Vue({
+			el:".ball",
+			data:{
+				str:"桃花一朵朵"
+			}
+		})
+		//alert(vm.$el);
+		
+//		拿变量获取vue实例,对他进行样式操作
+		//vm.$el  当成一个已经获取的元素来看
+		vm.$el.style.fontSize="50px";
+		mvvm.$el.style.fontSize="50px";
+		mvvm.$el.style.backgroundColor="blue";
+		mvvm.$el.onclick=function () {
+			mvvm.$el.style.transition="all 2s ease";
+			mvvm.$el.style.transform="rotate(-15deg)";
+		}
+		
+
+	</script>
+
+</html>

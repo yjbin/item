@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/angular-route.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		
+		</style>
+	</head>
+	
+	<body>
+		<ul>
+			<li><a href="#/">首页</a></li>
+			<li><a href="#/news">新闻</a></li>
+			<li><a href="#/about">关于我们</a></li>
+		</ul>
+		<div ng-view></div>
+		<!--也可写成 <ng-view></ng-view>-->
+			
+		
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box',['ngRoute']);
+		app.config(['$routeProvider',function ($routeProvider) {
+			//$routeProvider配置路由映射
+			$routeProvider.when('/',{template:"这是首页数据"}), //内容少，不用放到外部页面
+			$routeProvider.when('/news',{template:"这是新闻数据"}),
+			$routeProvider.when('/about',{template:"这是我们数据"})
+		}])
+//		//**另外一种写法，不要数组
+//		app.config(function($routeProvider){
+//				$routeProvider.when('/user',{
+//					templateUrl:'views/user.html', //***内容多，需要放到外部页面请求出来
+//					controller:'userController'
+//				})
+//				$routeProvider.when('/article',{
+//					templateUrl:'views/article.html',
+//					controller:'articleController'
+//				})
+//				$routeProvider.when('/setting',{
+//					templateUrl:'views/setting.html',
+//				})
+			})
+			
+
+	
+		
+		
+		
+	</script>
+</html>

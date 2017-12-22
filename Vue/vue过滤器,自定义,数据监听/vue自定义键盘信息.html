@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			show()函数可以不写括号  show|debounce 3000  延时三秒
+			<input type="text" value="请按下t键盘" @keydown.t="show()"/>
+			<input type="text" value="请按下ctrl键盘" @keydown.17="show()" />
+			<input type="text" value="请按下ctrl键盘" @keydown.ctrl="show()" />
+			
+			<input type="text" value="请按下q键盘" @keydown.q ="show|debounce 3000"/>
+			<input type="text" value="请按下回车键盘" @keydown.huiche="show()" />
+												
+		</div>
+	</body>
+	<script type="text/javascript">
+		//自定义键盘信息
+		Vue.directive('on').keyCodes.ctrl=17;
+		Vue.directive('on').keyCodes.huiche=13;	//可以看成huiche==13
+			var mvvm= new Vue({
+				el:'#box',
+				data:{
+					str:'请拖拽'
+				},
+				methods:{
+					show()
+					{//处理函数
+						alert(1);
+					}
+				}
+			})
+	</script>
+</html>

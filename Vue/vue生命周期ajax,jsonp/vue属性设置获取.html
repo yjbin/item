@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<ul id="box" @click="add()">
+			{{a}}
+			{{b}}
+		</ul>
+	</body>
+	<script type="text/javascript">
+		//如果需要多于一个表达式的逻辑，应当使用**计算属性**
+
+		var mvvm = new Vue({
+					el:'#box',
+					data:{
+						a:18
+						//可以放数组，可以放json，但不可以放业务逻辑代码
+					},
+					computed:{
+						b:{	//这看起来是个函数，其实是一个属性，里面可以写业务逻辑
+							get:function(){//获取
+								return this.a+8;
+							},
+							set:function(str){//设置传递参数
+								this.a=str;
+							}
+						}
+					}
+				})
+			document.onclick = function(){
+				//在其他函数里调用vue的实例,相当于传个参数给set
+					mvvm.b=100;
+			}
+	
+	</script>
+</html>

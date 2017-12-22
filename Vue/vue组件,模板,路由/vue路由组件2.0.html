@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_02.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.router-link-active{
+				font-size: 18px;
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div id="box">
+			<router-link to="/home">首页</router-link>
+			<router-link to="/news">新闻</router-link>
+			<router-view></router-view>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//只能用js/vue-router.js   显示2.0的路由
+		//1.组件
+		var Home = {
+			template:"<h3>我是首页数据</h3>"
+		}
+		var News = {
+			template:"<h3>我是新闻数据</h3>"
+		}
+		//2.配置路由
+		const  routes = [
+			//		url		挂载模板
+			{path:'/home',component:Home},	//首页
+			{path:'/news',component:News},	//新闻
+			{path:'*',redirect:'/home'},	//设置默认页 默认跳转地址
+		];
+		//3.生成路由
+		const  router = new VueRouter({
+			routes
+		});
+		//4.挂载路由到vue上
+		new Vue({
+			router,
+			el:'#box'
+		})
+	</script>
+</html>

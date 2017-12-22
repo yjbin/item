@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Angular——课程</title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/angular-route.js" type="text/javascript" charset="utf-8"></script>
+		<script src="controller/11user.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+		<script>
+			//实际项目不这样写
+			var app=angular.module('myApp',['ngRoute','userMod']);
+												//存在另一个页面的控制器，从js引入就的写在这
+			app.config(function($routeProvider){
+				$routeProvider.when('/user',{
+					templateUrl:'views/11user.html', //包含子目录的路径
+					controller:'userController'
+					//别的页面的控制器
+				})
+				$routeProvider.when('/article',{
+					template:'<p>articlearticlearticle</p>',
+				})
+				$routeProvider.when('/setting',{
+					templateUrl:'setting',//这里实际上是传递了一个Id
+					//templateUrl:'setting.html',//写成这样也只是传递了一个id，并不是页面
+				})
+			})
+			
+		</script>
+		<style type="text/css">
+		</style>
+	</head>
+	<body>
+		<a href="#/user">用户中心</a>
+		<a href="#/article">文章列表</a>
+		<a href="#/setting">系统设置</a>
+		<ng-view></ng-view>
+		<!--下面的这个script的type被改变了，变成一个template跳转的id标签-->
+		<script type="text/ng-template" id="setting">
+	<!--<script type="text/ng-template" id="setting.html">-->
+			<ul>
+				<li>
+					<a href="">多撒多撒</a>
+				</li>
+			</ul>
+		</script>
+	</body>
+</html>

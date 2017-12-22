@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<div id="box">
+			{{str}}
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+			
+			var vm = new Vue({
+					el:'#box',
+					data:{
+						str:'生命周期',
+					},
+//					beforeCreate:function(){
+//						alert('创建之前2.0');		//还没有创建Vue就执行
+//					},
+					created:function(){				//Vue实例已经创建
+						alert('Vue实例已经创建');    //兼容2.0和1.0，其他只兼容1.0
+					},
+					compiled:function(){
+						alert('编译之后');
+					},
+					beforeCompile:function () {
+						alert('编译之前');				//el的选择器已经获取到元素而且在这个{{str}}调用之前操作
+					},
+					ready:function(){
+						alert('内容插入到页面中');
+					},
+					beforeDestroy:function(){
+						alert('销毁之前');
+					},
+					destroyed:function(){
+						alert('销毁之后');
+					}
+				})
+			document.onclick=function(){
+					vm.$destroy();
+			}
+		</script>
+</html>

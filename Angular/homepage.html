@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<script src="js/jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/homepage.css"/>
+		<style type="text/css">
+			[ng-cloak]{
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body ng-app="box" >
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+		            <span class="sr-only">切换导航</span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		        	</button>
+		        	<a href="javascript:;" onclick="history.back()" class="pull-left">
+		        		<img src="images/aliwx_common_back_btn_normal.png" height="45"/>
+		        	</a>
+					<a class="navbar-brand homePage" href="#">首页</a>
+				</div>
+				<div class="collapse navbar-collapse" id="example-navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active">
+							<a href="#">家具</a>
+						</li>
+						<li>
+							<a href="#">电器</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								旅行 <b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="#">一个人去看海</a>
+								</li>
+								<li>
+									<a href="#">夜听窗外风雨声</a>
+								</li>
+								<li>
+									<a href="#">一个人的世界</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="#">两个人的想念</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="#">强势逆袭</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="search">
+			<div class="search-left">
+			</div>
+			<input type="search" placeholder="请输入搜索内容" x-webkit-speech="" x-webkit-grammar="builtin:search" lang="zh-CN">
+			<div class="search-right pull-right text-center">
+				<a href=""><img src="images/必须做2_03.jpg" height="25px"/></a>			
+				扫一扫
+			</div>
+		</div>
+		<div class="content" ng-controller="content" ng-colak>
+			<ol>
+				<li ng-click="sort=adress;flg=!flg">
+					<span>离我最近</span>
+				</li>
+				<li ng-click="sort=nowPrice;flg=!flg">
+					<span>评价最高</span>
+				</li>
+				<li ng-click="sort=count;flg=!flg">
+					<span>销量最好</span>
+				</li>
+			</ol>
+			<ul class="shoplist" ng-repeat="item in datas|orderBy:sort:flg">
+				<li >
+					<span>苏宁易购</span>
+					<span class="icon-left">自营</span>
+					<span class="pull-right">86500人评价<span class="red">100%</span>好评</span>	
+				</li>
+				<li class="detail"  >
+					<div class="left-img pull-left text-center">
+						<a href="">
+							<img ng-src="{{item.src}}"/>
+						</a>
+					</div>
+					<div class="right-info pull-right">
+						<h3>{{item.title}}</h3>
+						<h3 class="red">￥{{item.nowPrice}}</h3>
+						<span class="lineth">原价:￥{{item.price}}</span>
+						<div class="">
+							<span>销量：<span class="red">{{item.count}}</span></span>
+							<p class="pull-right" ng-click="show(id=$index,$index)">{{info}}</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<footer>
+			<ul>
+				<a href="">
+					<li>
+						<i class="first"></i>
+						<span>首页</span>
+					</li>
+				</a>
+				<a href="">
+					<li>
+						<i class="category"></i>
+						<span>分类</span>
+					</li>
+				</a>
+				<a href="">
+					<li>
+						<i class="shop"></i>
+						<span>购物车</span>
+					</li>
+				</a>
+				<a href="">
+					<li>
+						<i class="find"></i>
+						<span>发现</span>
+					</li>
+				</a>
+				<a href="">
+					<li>
+						<i class="my"></i>
+						<span>我的</span>
+					</li>
+				</a>
+			</ul>
+		</footer>
+	</body>
+	<script type="text/javascript">
+		var app= angular.module('box',[]);
+		app.controller('content',function ($scope,$http) {
+			$http({
+				methods:'get',
+				url:"homepage.json"
+			}).then(function success (res) {
+				$scope.datas = res.data;
+				
+			},function error (res) {
+				alert('请求失败'+res.status)
+			})
+			$scope.id='';
+			$scope.sort='';
+			$scope.flg=1;
+			$scope.info="预订";
+			$scope.show=function (aa,bb) {
+				if ($scope.id==bb) {
+					alert('已预订');
+					$scope.info="已预订";		
+				}else{
+					$scope.info="预订";
+					alert('已取消');	
+				}
+			}
+			
+		})
+	</script>
+
+</html>

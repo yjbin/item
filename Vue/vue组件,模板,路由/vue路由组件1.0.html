@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue-路由</title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-router.min0713.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.v-link-active{
+				color:red;
+				font-size: 16px;
+				font-weight: 600;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li>
+					<a v-link="{path:'/home'}">首页</a>
+					<a v-link="{path:'/news'}">新闻</a>
+					<a v-link="{path:'/user'}">用户</a>
+				</li>
+			</ul>
+	
+				<!--将路由的内容渲染到这个标签内-->
+			<router-view></router-view>
+
+		</div>
+	
+	</body>
+	<script type="text/javascript">
+		//1.准备根组件
+		var myApp = Vue.extend();
+		//2.组件的准备
+		var Home = Vue.extend({
+			template:'<p>我是首页的数据</p>'
+		})
+		var News = Vue.extend({
+			template:'<p>我是新闻的数据</p>'
+		})
+		var User = Vue.extend({
+			template:'<p>我是用户的数据</p>'
+		})
+		//3.准备路由
+		var router = new VueRouter();
+		//4.关联
+		router.map({
+			'home':{//url地址
+				component:Home  //数据关联
+			},
+			'news':{
+				component:News
+			},
+			'user':{
+				component:User
+			}
+		});
+		//5.启动路由 两个参数   1.根组件名称   2.渲染到哪个元素中
+		router.start(myApp,'#box')
+		//6.默认显示哪个页面
+		router.redirect({
+			'/':'/home'		//两个参数。1.url显示的。2.跳转的页面
+		})
+	</script>
+</html>

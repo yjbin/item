@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Angular——课程</title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/angular-route.js" type="text/javascript" charset="utf-8"></script>
+		<script src="01user.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+		<script src="01article.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			//实际项目不这样写
+			var app=angular.module('myApp',['ngRoute','userMod','articleMod']);
+												//存在另一个页面的控制器，从js引入就的写在这
+			app.config(function($routeProvider){
+				$routeProvider.when('/user',{
+					templateUrl:'01user.html', //包含子目录的路径
+					controller:'userController',
+					//别的页面的控制器
+				})
+				$routeProvider.when('/article',{
+					templateUrl:'01article.html', //
+					controller:'articleController',
+					//延迟加载开始，把信息延迟2s渲染
+					resolve:{
+						delay:function ($q) {//参数实际就是所说的promise
+							var delay = $q.defer();//它只到resolve执行了才算完事
+							setTimeout(function(){
+								delay.resolve();//resolve执行
+							},2000)
+							return delay.promise;
+						}
+					}
+					//延迟加载结束
+				})
+				$routeProvider.when('/setting',{
+					templateUrl:'setting',//这里实际上是传递了一个Id
+					//templateUrl:'setting.html',//写成这样也只是传递了一个id，并不是页面
+				})
+			});
+			app.controller('content',function ($scope) {
+				$scope.flg = false;
+				//加载前
+				$scope.$on('$routeChangeStart',function(){
+					$scope.flg = true;
+				})
+				//加载成功
+				$scope.$on('$routeChangeSuccess',function(){
+					$scope.flg = false;
+				})
+				//加载失败
+				$scope.$on('$routeChangeError',function(){
+					$scope.flg = false;
+				})
+			})
+//			路由跳转前后发生的处理事件
+//			app.run(function ($rootScope,$location) {
+//				$rootScope.flg = false;
+//				//加载前
+//				$rootScope.$on('$routeChangeStart',function () {
+//					$rootScope.flg = true;
+//				})
+//				//加载成功
+//				$rootScope.$on('$routeChangeSuccess',function () {
+//					$rootScope.flg = false;
+//				})
+//				//加载失败
+//				$rootScope.$on('$routeChangeError',function () {
+//					$rootScope.flg = false;
+//				})			
+//			})
+	</script>
+	</head>
+	<body ng-controller="content">
+		<a href="#/user">用户中心</a>
+		<a href="#/article">文章列表</a>
+		<a href="#/setting">系统设置</a>
+		<ng-view ng-hide="flg"></ng-view>
+		<!--下面的这个script的type被改变了，变成一个template跳转的id标签-->
+		<script type="text/ng-template" id="setting">
+	<!--<script type="text/ng-template" id="setting.html">-->
+			<ul>
+				<li>
+					<a href="">多撒多撒</a>
+				</li>
+			</ul>
+		</script>
+		<div ng-show="flg">页面加载中，请稍后······</div>
+	</body>
+</html>

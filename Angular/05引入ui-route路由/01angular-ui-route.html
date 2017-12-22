@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head >
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/angular-ui-router.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<ul>
+			<li><a ui-sref="home">首页</a></li>
+			<li><a ui-sref="user">用户</a></li>
+		</ul>
+		<div ui-view></div>
+	</body>
+	<script type="text/javascript">
+		var app= angular.module('myApp',['ui.router']);
+		app.config(function ($stateProvider,$urlRouterProvider) {
+			$stateProvider.state('home',{
+				url:'/home',//加上url是连接地址，目的是让angular添加href="/home"
+				template:'<div>{{title}}</div>',
+				controller:function ($scope) {
+					$scope.title = '首页标题';
+				}
+			})
+			$stateProvider.state('user',{
+				url:'/user',
+				template:'<div>{{title}}</div>',
+				controller:function ($scope) {
+					$scope.title = '用户中心';
+				}
+			})
+			$urlRouterProvider.otherwise('home');//设置默认页面
+		})
+	</script>
+</html>

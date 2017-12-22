@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.div1{
+				width: 200px;
+				height: 200px;
+				background-color: red;
+				position: absolute;
+				left: 0;
+				top: 0;
+				cursor: pointer;
+				z-index:1;
+			}
+		</style>
+	</head>
+	
+	<body ng-controller="main">
+		<div my-dire class="div1" style="background: blue;left: 300px;">
+			1111
+		</div>
+		<div my-dire class="div1" >
+			3333
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box',[]);
+		app.controller('main',function ($scope) {
+			
+		})
+		app.directive('myDire',function() {
+			return{
+				
+				link:function (scope,element,attrs) {
+					element.on('mousedown',function (ev) {
+						var disX = ev.pageX - this.offsetLeft;
+						var disY = ev.pageY - this.offsetTop;
+						element.css({
+							zIndex:999
+						})
+						//当鼠标移动的时候，不间断计算盒子的left和top值
+//angular.element将js对象转换成angular对象
+//就像当时的js对象转换成jQuery对象一样
+						angular.element(document).on('mousemove',function (ev) {
+							var changeX = ev.pageX - disX;
+							var changeY = ev.pageY - disY;
+							//设置元素的style样式
+							element.css({
+								left:changeX + 'px',
+								top:changeY + 'px'
+							})
+						});
+						angular.element(document).on('mouseup',function () {
+							//off移出元素上绑定的一个或多个事件处理函数
+							angular.element(document).off();
+							element.css({
+								zIndex:1
+							})
+						});
+						//取消默认行为
+						ev.preventDefault();
+					});
+				}
+			}
+		});
+		
+		
+	</script>
+</html>

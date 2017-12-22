@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue</title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<!--注意，循环体不能在被选择器选中的元素上操作-->
+			<ul>							<!--位置-->   <!-- 下标对应的值-->
+				<li v-for="item in arr">编号：{{$index}},国家:{{item}}</li>
+			</ul>
+			<ul>
+				
+				<li v-for="item in json">编号：{{$index}},值:{{$key}},键值:{{item}}</li>
+											<!--位置-->   <!--json的属性名-->    <!--属性值-->
+				<li>{{json}}</li>
+				1.0不能直接读取json，必须通过循环
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el:'#box',  //element的简写，选择器id,class,*,元素,
+			//注意版本兼容:vue 2.0不支持body.html    vue1.0支持body
+			data:{
+				abc:'欢迎光临vue',
+				arr:['中国','美国','加拿大','秘鲁'],
+				num:18,
+				bool:false,
+				json:{a:'中国',b:'美国',c:'西班牙',d:'澳大利亚'}
+			}
+		})
+	</script>
+</html>

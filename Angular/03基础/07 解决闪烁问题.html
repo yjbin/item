@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<style type="text/css">
+			[ng-cloak]{
+				display: none;
+			}
+		</style>
+	</head>
+	<body ng-app="box">
+		<div ng-controller="content">
+			<div>{{str}}</div>
+			<div ng-bind="name"></div>
+			<div ng-bind-template="{{name}}{{arr}}"></div>
+			<div ng-cloak>{{json}}</div>
+		</div>
+	</body>
+	<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var app = angular.module('box',[]);
+		app.controller('content',function ($scope) {
+			$scope.str = '谢贤';
+			$scope.name = '谢霆锋';
+			$scope.arr = '谢韵';
+			$scope.json = '谢婷婷';
+		})
+	</script>
+</html>

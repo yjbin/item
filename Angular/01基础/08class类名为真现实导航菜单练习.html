@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+	</head>
+	<body ng-app="">
+		
+		<div ng-init="item='home'">
+			<ul class="nav nav-tabs">
+				<li ng-class="{active:item=='home'}" ng-click="item='home'">
+					<a href="javascipt:;">首页</a>
+				</li>
+				<li ng-class="{active:item=='news'}" ng-click="item='news'">
+					<a href="javascipt:;">新闻</a>
+				</li>
+				<li ng-class="{active:item=='about'}" ng-click="item='about'">
+					<a href="javascipt:;">关于</a>
+				</li>
+			</ul>
+			
+		</div>
+		
+	</body>
+</html>

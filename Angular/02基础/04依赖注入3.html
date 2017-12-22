@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="test">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			var json={a:11,b:22,c:33,d:44,e:55};
+			function show(a,b,c){
+				alert(b);
+				//alert(arguments.length);
+			}
+			//show(1);
+			//依赖注入
+			//1.我们知道show这个函数要什么参数
+			//toString()把一个逻辑值转换成字符串，并返回结果
+			var str=show.toString();
+			//alert(str);
+			//alert(str.split('{')[0]);//把{右边切割
+			//match在字符串内检索指定的值，找到一个或多个正则匹配
+			//alert(str.split('{')[0].match(/\(.*\)/)[0]);
+			//测试得到[a,b]
+			str=str.split('{')[0].match(/\(.*\)/)[0];
+			//substring提取字符串指定下标之间的字符
+			str=str.substring(1,str.length-1);
+			//alert(str);
+			var arr=str.split(',');
+			//alert('show函数要了：'+arr.length+'个参数');
+			var arrLength=[];
+			for(var i=0; i<arr.length; i++)
+			{
+				arrLength[i]=json[arr[i].match(/\S+/)];//去空格
+				//alert('第'+i+'个参数是：'+arr[i]);
+			}
+			show.apply(null,arrLength);
+		</script>
+	</head>
+	<body>
+		<!--
+        	普通函数——由调用者决定参数
+        			调用者不管要什么
+        	angular.js不能改变js的本质，它也是基于原生js开发
+        	
+        	依赖注入
+        			由定义者决定参数（障眼法）
+        			真正的angular也是调用者决定参数
+        			调用者会参考函数要什么
+        			angular依赖注入的参数几乎是写死的
+        -->
+	</body>
+</html>

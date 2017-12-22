@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<p>{{str}}</p>
+			<zhangsan></zhangsan>
+			<lisi></lisi>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		var abc = Vue.extend({
+			data(){
+				return {
+					num:'我是普通的文字'
+				}
+			},
+			template:"<p>{{num}}</p>"
+		})
+						//id		组件名称
+		Vue.component('zhangsan',abc); //component组合，调用
+	
+	
+		new Vue({
+			el:"#box",
+			data:{
+				str:'内容信息'
+			},
+			//局部组件  调用
+			components:{"lisi":abc}
+			//注意区别和全局组件不一样的地方是这里是以对象的形式写
+			
+		});
+	</script>
+</html>

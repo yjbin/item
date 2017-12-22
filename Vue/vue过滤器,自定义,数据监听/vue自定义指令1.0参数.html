@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="box">
+			{{str}}
+			<span v-test>自定义指令，调用时，要加上"v-"，定义正常写</span>
+		</div>
+	</body>
+	<script type="text/javascript">
+	//自定义指令的格式	  指令id  	方法				调用格式 v-"id名"
+		Vue.directive('test',function () {
+			this.el.style.fontSize="50px";//这里的el 不需要加$
+			this.el.style.backgroundColor="lightblue";
+		})
+		
+		var vm = new Vue({
+			data:{
+				str:"花，开在太阳下"
+			}
+		}).$mount('#box')
+	
+	</script>
+
+</html>

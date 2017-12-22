@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			{{a}}
+			<hr />
+			{{b}}
+		</div>
+		<div id="ball">
+			<p>多撒大多撒多</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				a:"这是第一组数据",
+				b:"这是第二组数据"
+			},
+			methods:{
+			}
+		})
+		//添加数据监听,数据改变产生业务逻辑
+		vm.$watch('a',function () {
+			vm.b = "588";
+			alert('数据改变了');
+			var ball = document.getElementById("ball");
+				var p = ball.firstElementChild;
+				console.log(ball);
+				console.log(p);
+				//存在点小问题ball.children获取不出来p??????
+				p.style.backgroundColor="blue";
+				p.style.fontSize="50px";
+		})
+		document.onclick = function () {
+			vm.a ="235";
+		}
+	</script>
+</html>

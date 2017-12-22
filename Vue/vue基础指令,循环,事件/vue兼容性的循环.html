@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue</title>
+		<script src="../js/vue.min_02.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<!--注意，循环体不能在被选定的元素上操作
+				2.0不认识{{$index}},{{$key}}，但是认识{{json}}，所以产生了兼容
+				1.0不认识传递三个参数的
+			-->
+			<ul>
+				<li v-for="(item,index) in arr">编号：{{index}},值:{{item}}</li>
+						<!--
+							2.0注意2个参数时:
+								2.0第一个参数是值，第二个参数是位置
+								1.0第一个参数是位置，第二个参数是值
+						-->
+			</ul>
+			<ul>
+					<!--a:属性名  b:属性值  c:位置下标-->
+				<li v-for="(a,b,c) in json">编号：{{c}},键名:{{b}},键值:{{a}}</li>
+				<li>{{json}}</li>
+				<li>{{a}}{{b}}{{c}}</li>
+			</ul>
+			<!--这种兼容了1.0  2.0的循环-->
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el:'#box',  //element的简写，选择器id,class,*,元素,
+			//注意版本兼容:vue 2.0不支持body.html    vue1.0支持body
+			data:{
+				abc:'欢迎光临vue',
+				arr:['中国','美国','加拿大','秘鲁'],
+				num:18,
+				bool:false,
+				json:{a:'中国',b:'美国',c:'西班牙',d:'澳大利亚'}
+			}
+		})
+	</script>
+</html>

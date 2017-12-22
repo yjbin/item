@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-router.min0713.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			ul,li,a{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				text-decoration: none;
+			}
+			body{
+				width: 100%;
+				height: 1300px;
+			}
+			nav ul{
+				display: flex;
+				width: 100%;
+				height: 45px;
+				margin: 50px atuo;
+				background-color: darkorange;
+				justify-content:flex-end;
+				align-items: center;	
+				
+			}
+			nav ul input{
+				width: 30%;
+				height: 30px;
+				font-size: 16px;
+				border-radius:10px ;
+				outline: none;
+				border: none;
+				padding-left: 6px;
+				margin:0 20px;
+			}
+			nav ul li a{
+				font-size: 20px;
+				font-weight: 600;
+				color: #fdd;
+				padding:0 20px;
+			}
+			nav ul li a:hover{
+				cursor: pointer;
+				color: deepskyblue;
+			}
+			/*标题样式*/
+			.base{
+				font-family: "微软雅黑";
+				font-size: 30px;
+				font-weight: 800;
+				margin-left:45%;
+			}
+			/*文本样式 */
+			.text{
+				text-indent: 20px;
+				color: #204D74;
+			}
+			.img{
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<nav>
+				<ul>
+					<h3>logo</h3>
+					<input type="search" name="" required="" placeholder="Search">
+					<li>
+						<a v-link="{path:'/home'}">首页</a>
+						<a v-link="{path:'/about'}">关于我们</a>
+						<a v-link="{path:'/product'}">产品展示</a>
+						<a v-link="{path:'/news'}">公司新闻</a>
+						<a v-link="{path:'/contract'}">联系我们</a>
+					</li>
+				</ul>
+			</nav>
+			<router-view></router-view>
+		</div>
+		<template id="homepage">
+			<h3 class="base">欢迎您!</h3>
+			<img src="../img/bg.jpg"/>
+			<p class="text">某科技公司是一个诞生于1023年机器人浪潮来袭前级，总部位于“硬件最都”深圳
+
+某科技公司是一个诞生于1023年机器人浪潮来袭前级，总部位于“硬件最都”深圳，目前有史料记载的是兰州牛肉面始于清朝嘉庆年间，创始人：陈维精[1] 。经后人传承改进，以“一清(汤)二白(萝卜)三红(辣子)四绿(香菜蒜苗)五黄(面条黄亮)”统一了兰州牛肉面的标准。其制作的五大步骤无论从选料、和面、饧面，还是溜条和拉面，都巧妙地运用了所含成分的物理性能，即面筋蛋白质的延伸性和弹性。
+
+某科技公司是一个诞生于1023年机器人浪潮来袭前级，总部位于“硬件最都”深圳</p>
+			<router-view></router-view>
+		</template>
+		<template id="aboutOur">
+			<h3 class="base">关于我们</h3>
+			<hr />
+			<img src="../img/zs3_03.png" class="img"/>
+			<p class="text">某科技公司是一个诞生于1023年机器人浪潮来袭前级，总部位于“硬件最都”深圳
+
+某科技公司是一个诞生于1023年机器人浪潮来袭前级，总部位于“硬件最都”深圳，目前有史料记载的是兰州牛肉面始于清朝嘉庆年间，创始人：陈维精[1] 。经后人传承改进，以“一清(汤)二白(萝卜)三红(辣子)四绿(香菜蒜苗)五黄(面条黄亮)”统一了兰州牛肉面的标准。其制作的五大步骤无论从选料、和面、饧面，还是溜条和拉面，都巧妙地运用了所含成分的物理性能，即面筋蛋白质的延伸性和弹性。
+
+某科技公司是一个诞生于1023年机器人浪潮来袭前级，总部位于“硬件最都”深圳</p>
+			<router-view></router-view>
+		</template>
+		<template id="productList">
+			<h3 class="base">产品展示</h3>
+			<img src="../img/zs2_02.png" class="img"/>
+			<h3>产品详情</h3>
+			<ul>
+				<li>
+					<a v-link="{path:'/product/detail/01'}">无人机</a>
+					<a v-link="{path:'/product/detail/02'}">虚拟VR</a>
+				</li>
+			</ul>
+			<router-view></router-view>
+		</template>
+		<template id="detail">
+			<!--<div v-for="item in json">
+				<img :src="item.img"/>
+			</div>-->
+			
+			{{$route.params | json}}
+		</template>
+		<template id="newsList">
+			<h3 class="base">新闻</h3>
+			<img src="../img/home_5.png" class="img"/>
+			<h3>新闻详情</h3>
+			<ul>
+				<li>
+					<a v-link="{path:'/news/round'}">一带一路</a>
+					<a v-link="{path:'/news/share'}">分享是个好东西</a>
+				</li>
+			</ul>
+			<router-view></router-view>
+		</template>
+	</body>
+	<script type="text/javascript">
+		
+		
+		
+		var myApp = Vue.extend();
+		
+		var Home = Vue.extend({
+			template:"#homepage"
+		})
+		var About = Vue.extend({
+			template:"#aboutOur"
+		})
+		var Product = Vue.extend({
+			template:"#productList"
+		})
+		var ProductDetail = Vue.extend({
+			template:"#detail"
+		})
+		var News = Vue.extend({
+			template:"#newsList"
+		})
+		var Contract = Vue.extend({
+			template:"<p>来联系我们吧</p>"
+		})
+		
+		var router = new VueRouter();
+		
+		router.map({
+			'home':{
+				component:Home
+			},
+			'about':{
+				component:About
+			},
+			'product':{
+				component:Product,
+				//挂载子路由
+				subRoutes:{
+					'/detail/:id':{ 
+						component:ProductDetail 
+					}
+				}
+			},
+			'news':{
+				component:News,
+				subRoutes:{
+					'share':{
+						component:{
+							template:"<h2>李宗吾是个大大混蛋</h2>"
+						}
+					},
+					'round':{
+						component:{
+							template:"<h2>可是是个很有才的人</h2>"
+						} 
+					},
+				}
+			},
+			'contract':{
+				component:Contract
+			}
+		})
+		
+		router.start(myApp,"#box")
+		
+		router.redirect({
+			'/':'/home'
+		})
+		
+		
+		var vm = new Vue({
+			el:"#detail",
+			data:{
+				bloo:1,
+				json:[
+						{img:'../img/home_4.png',title:"还不设置"},
+						{img:'../img/home_6.png',title:"还不设置"}
+					],
+			},
+			methods:{
+				
+			}
+		})
+		
+	</script>
+</html>

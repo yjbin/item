@@ -1,0 +1,20 @@
+<link rel="stylesheet" type="text/css" href="css/read.css"/>
+阅读详情
+
+<hr>
+
+
+
+<div class="read-title">
+    <span>{{data.hp_title}}</span>
+</div>
+<div class="read-author">
+    <span>作者: {{data.author_name}}</span>
+</div>
+<div class="read-content" ng-bind-html="content">
+</div>
+<div class="tool-bar">
+	<span ng-click="dealCollect()">
+		<img class="collect-button" src="img/bubble_collect.png"/>
+	</span>
+</div>

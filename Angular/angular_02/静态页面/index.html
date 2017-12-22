@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>app页面</title>
+		<script src="js/angular/angular.min.js" ></script>
+		<script src="js/angular/angular-route.min.js" ></script>
+		<link rel="stylesheet" href="css/app.css" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	</head>
+	<body>
+		<div>
+			<div>
+				<!-- 导航条 -->
+				<div class="header">
+					<div class="headerLeft">
+						
+						<a href="views/search.html">
+							<img src="img/search_min.png"/></a>	
+					</div>
+					<div class="headerTitle">
+						3333
+					</div>	
+					<div class="headerRight">
+						<a href="views/login.html">
+							<img src="img/individual_center.png"/>
+						</a>
+					</div>
+				</div>
+				<!-- 内容 -->
+				<div class="wrap">
+					<div ng-view class="view">
+						内容
+					</div>
+				</div>
+				<!-- 标签栏 -->
+				<div class="footer">
+					<li class="active">
+						<a href="#">
+						<span class="tab-item-icon"><img src="img/main.png"/></span>
+						<span class="tab-item-title">首页</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="tab-item-icon"><img src="img/read.png"/></span>
+							<span class="tab-item-title">阅读</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="tab-item-icon"><img src="img/music.png"/></span>
+							<span class="tab-item-title">音乐</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="tab-item-icon"><img src="img/movie.png"/></span>
+							<span class="tab-item-title">影视</span>
+						</a>
+					</li>
+				</div>			
+			</div>
+		</div>
+<!-- app初始化,路由配置 -->
+<script src="controllers/app.js"></script>
+<!-- 接口代码 -->
+<script src="controllers/base64.js"></script>
+<script src="interface/interface.js"></script>
+<!-- 页面控制器的代码 -->
+<script src="controllers/controllers.js"></script>
+<script src="controllers/main.js"></script>
+<script src="controllers/read.js"></script>
+<script src="controllers/music.js"></script>
+<script src="controllers/movie.js"></script>
+<script src="controllers/search.js"></script>
+<script src="controllers/user.js"></script>
+	</body>
+</html>

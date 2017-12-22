@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue-路由</title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-router.min0713.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.v-link-active{
+				color:red;
+				font-size: 16px;
+				font-weight: 600;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li>
+					<!--这里v-link绑在a标签里-->
+					<!--路径必须得带上''引号-->
+					<a v-link="{path:'/home'}">首页</a>
+					<a v-link="{path:'/news'}">新闻</a>
+					<a v-link="{path:'/user'}">用户</a>
+				</li>
+			</ul>
+				<!--将路由的内容渲染到这个标签内-->
+				<router-view></router-view>
+				<!--这个标签 必须包在被调用的路由标签内-->
+			
+		</div>
+		
+		<!--思路：让template由模板创建出来-->
+		<template id="newsList">
+			<h3>爆炸新闻</h3>
+			<ul>
+				<li>
+					<a v-link="{path:'/news/detail/01'}">新闻详情01</a>
+					<a v-link="{path:'/news/detail/02'}">新闻详情02</a>
+				</li>
+			</ul>
+			<router-view></router-view>
+		</template>
+		<!--新闻详情的挂件-->
+		<template id="detail">
+			<!--路由以json格式获取路径参数的方法-->
+			{{$route.params | json}}
+			
+		</template>
+		<template id="userList">
+			<h3>程序猿~~~京东欢迎您</h3>
+			<ul>
+				<li>	
+						<!--跟第一层的路由一样创建  这里是在user页面之下-->
+					<a v-link="{path:'/user/ext'}">进入程序猿大本营</a>
+					<a v-link="{path:'/user/set'}">找一间属于你的home</a>
+				</li>
+			</ul>
+			<div>
+				<!--将路由的内容渲染到这个标签内-->
+				<router-view></router-view>
+			</div>	
+		</template>
+	</body>
+	<script type="text/javascript">
+		//1.准备根组件
+		//	组件名	//实例化一个根组件
+		var myApp = Vue.extend();
+		//2.组件的准备
+		//首页
+		var Home = Vue.extend({
+			template:'<p>我是首页的数据</p>'	//内容较少时直接在这里写
+		})
+		//新闻列表
+		var News = Vue.extend({
+			//挂载模板
+			template:'#newsList'		//内容多的时候到页面去写，在创建一个模板
+		})
+		
+		//创建新闻详情模板
+		var detail = Vue.extend({
+			template:'#detail'
+		})
+		//用户列表
+		var User = Vue.extend({
+			//挂载
+			template:'#userList'
+		})
+		
+		
+		//3.准备路由
+		var router = new VueRouter();
+		//4.关联组件
+		router.map({
+			'home':{//url地址
+				//调用组件
+				component:Home  //数据关联
+			},
+			'news':{
+				component:News,
+				subRoutes:{
+					'/detail/:id':{//:id是获取id的值（参数）
+						component:detail  //挂载detail模板
+					}
+				}
+			},
+			'user':{
+				component:User,
+				subRoutes:{//增加子路由
+					'ext':{
+						component:{
+							template:"<span>退出成功</span>"
+						}
+					},
+					'set':{
+						component:{
+							template:"<span>这里没有什么可以设置的</span>"
+						}
+					}
+				}
+			}
+		});
+		//5.启动路由 两个参数   1.根组件名称   2.渲染到哪个元素中
+		router.start(myApp,'#box')
+		//6.默认显示哪个页面
+		router.redirect({
+			'/':'/news',	//设置默认首页
+			'/news/':'/news/detail/01'		//两个参数。1.url显示的。2.跳转的页面
+			//设置子路由的默认页
+		})
+	</script>
+</html>

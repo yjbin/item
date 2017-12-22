@@ -1,0 +1,38 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue</title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+
+		<div class="ball">
+			<!--
+				两个事件：
+					1.onchange  值改变了，失去焦点之后才执行
+					2.oninput	值改变了就立刻执行
+			-->
+			<!--
+				lazy相当于我们的change事件，失去焦点执行
+				不写lazy就是oninput  值改变了就立刻执行
+				debounce就是延时执行，类似于setTimeout
+			-->
+			<input type="text" v-model="str" lazy/>
+			
+			<input type="text" v-model="str" debounce="2000"/>
+		</div>
+		
+		
+	</body>
+	<script type="text/javascript">
+	
+		new Vue({
+			el:'.ball',  //element的简写，选择器id,class,*,元素,
+			//注意版本兼容:vue 2.0不支持body.html    vue1.0支持body
+			data:{
+				str:'默认的',
+			}
+		})
+	</script>
+</html>

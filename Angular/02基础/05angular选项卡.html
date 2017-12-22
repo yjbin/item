@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#box{
+				margin: 0 auto;
+				width: 500px;
+				height: 500px;
+			}
+			#box input{
+				width: 60px;
+				height: 35px;
+			}
+			#box input.active{
+				background-color: deepskyblue;
+			}
+			#box div{
+				background-color: springgreen;
+				width: 500px;
+				height: 400px;
+				line-height: 400px;
+				text-align: center;
+				font-size: 30px;
+				border: 1px solid #000;
+			}
+		</style>
+	</head>
+	<body ng-app="">
+		<div id="box" ng-init="nowIndex=0">
+			<input type="button" value="北京" ng-click="nowIndex=0" class="{{nowIndex==0?'active':'';}}"/>
+			<input type="button" value="上海" ng-click="nowIndex=1" class="{{nowIndex==1?'active':'';}}"/>
+			<input type="button" value="天津" ng-click="nowIndex=2" class="{{nowIndex==2?'active':'';}}"/>
+			<input type="button" value="南京" ng-click="nowIndex=3" class="{{nowIndex==3?'active':'';}}"/>
+			<div ng-if="nowIndex==0">北京新闻</div>
+			<div ng-if="nowIndex==1">上海新闻</div>
+			<div ng-if="nowIndex==2">天津新闻</div>
+			<div ng-if="nowIndex==3">南京新闻</div>
+		</div>
+	</body>
+</html>

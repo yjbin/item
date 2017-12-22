@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title>Angular——课程</title>
+		<script src="../js/angular.js" type="text/javascript"></script>
+		<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+		<script>
+			var app=angular.module('myApp',[]);
+			app.controller('testController',function($scope){
+				$scope.result=function(){
+					$scope.result=parseInt($scope.str_a)+parseInt($scope.str_b);
+				}
+			})
+	</script>
+		<style type="text/css">
+		</style>
+	</head>
+	<body ng-controller="testController">
+		<input type="text" ng-model="str_a" />
+		+
+		<input type="text" ng-model="str_b" />
+		={{result}}
+		<input type="button" ng-click="result()" value="求和" />
+	</body>
+</html>

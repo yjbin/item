@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body ng-controller="content">
+		<input type="text" ng-model="stra"/>
+		+
+		<input type="text" ng-model="strb"/>
+		={{result}}
+		<input type="button" value="和" ng-click="add()"/>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('myApp',[]);
+
+		app.service('my',function () {
+			//service直接用this来接收参数
+			this.currency="￥";  //自定义变量
+			this.number=function (a,b) {
+				return this.currency+(parseInt(a)+parseInt(b));
+			}
+		});
+		app.controller('content',function ($scope,my) {
+			$scope.add = function () {
+				$scope.result = my['number']($scope.stra,$scope.strb)
+				
+			}
+		})
+	</script>
+</html>

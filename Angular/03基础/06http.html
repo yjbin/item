@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="test">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Angular——课程</title>
+		<script src="js/angular.js" type="text/javascript"></script>
+		<link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+		<script>
+			var app = angular.module('test', []);
+			app.controller('contParent',function($scope,$http){//父控制器
+				$http({
+					method:'get',
+					url:'test.json',
+					params:{
+						name:'zhangsan',
+						id:1
+					}
+				}).then(function success(res){
+					//console.log(res.data.sites);
+					//console.log(res.status+'成功了');
+					$scope.datas=res.data.sites;
+					//成功
+				},function(res){
+					//失败
+					console.log(res.status+'失败了');
+				})
+			})
+			
+		</script>
+	</head>
+	<body ng-controller="contParent">
+		<ul>
+			<li ng-repeat="item in datas">
+				{{item.Name}}====={{item.age}}====={{item.sex}}
+			</li>
+		</ul>
+	</body>
+</html>

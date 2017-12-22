@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	<body ng-app="wrapper">
+		<div ng-controller="content">
+			{{info}}
+			
+			<div ng-controller="children">
+				<input type="button" value="按钮" ng-click="btnClick()"/>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('wrapper',[]);
+		app.controller('content',function ($scope) {
+			$scope.$on('item',function (event,data) {
+				//这个event一定不能省去，名字可以改，但一般不要去改,这里规定的第一个参数就是event事件对象,不写，第一个参数还是event事件对象
+				//event就是js中的事件对象，
+				$scope.info = data;
+				console.log($scope.info);
+				console.log(event)
+			});  //接收数据
+		});
+		app.controller('children',function ($scope) {	
+			
+			$scope.btnClick = function () {
+				$scope.$emit('item','我是子控制器');  //发送数据
+							//这里发送的名字和下面$on接收的名字必须得一样
+			}
+		})
+	</script>
+</html>

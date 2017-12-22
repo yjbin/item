@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		{{title}}
+	</div>
+	<div class="panel-body">
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="item in content">
+				<a ng-href="{{item.url}}">{{item.title}}</a>
+			</li>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.bj1{
+				background-color: red;
+			}
+			.bj2{
+				background-color: green;
+			}
+			.bj3{
+				background-color: yellow;
+			}
+		</style>
+	</head>
+	
+	<body ng-app="">
+		<div ng-init="aa=false;bb=true;">
+			<button type="button" ng-click="aa=!aa">点击切换class</button>	
+			<hr />
+			<!--后面跟一个数组，true的显示，false的不显示当成对象的属性来看-->
+			<div ng-class="{true:'bj1',false:'bj2'}[aa]">
+				人生就像一张茶几 
+			</div>
+			<hr />
+			<!--=!把他自己取反后，再赋值给他自己
+			{true:'bj_01',false:'bj_02'}
+			只能执行一个，执行谁，就取决与后面[里的值]-->
+			<hr>
+			<button type="button" ng-click="bb=!bb">点击改变class</button>
+			<div ng-class="{bj1:bb}">
+				好瞌睡啊
+			</div>
+		</div>
+		
+
+		
+	</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<h2 @mousedown="show3">{{str}}</h2>
+			<hr />
+			<book></book>
+			<product></product>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var abc = Vue.extend({
+			data(){
+				return {num:"书山有路勤为径"}
+			},
+			methods:{
+				show1:function () {
+					alert("学海无涯苦作舟")
+				}
+			},
+			template:"<p @click='show1''>{{num}}</p>"
+		})
+		
+		Vue.component('book',abc)
+		
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				str:"默认内容"
+			},
+			components:{
+				"product":{
+					data(){
+						return {num:"书中自有黄金屋"}
+					},
+					methods:{
+						show:function (ev) {
+							alert("点击的位置X"+ev.clientX)
+						}
+					},
+					template:"<h2 @click='show($event)'>{{num}}</h2>"
+				}
+				
+			},
+			methods:{
+				show3(){
+					alert('1')
+				}
+			}
+		})
+	</script>
+</html>

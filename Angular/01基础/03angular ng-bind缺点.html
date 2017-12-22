@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div ng-app="">
+			<!--+加号会被默认为字符串的拼接-->					
+			<input type="text" ng-model="stra"/>
+			+
+			<input type="text" ng-model="strb"/>
+			=
+			<p ng-bind="(stra+strb)">这里不能写东西写的都会被覆盖</p>
+			<input type="text" ng-model="stra"/>
+			*
+			<input type="text" ng-model="strb"/>
+			=
+			<p ng-bind="stra*strb">这里不能写东西写的都会被覆盖</p>
+		</div>
+		
+
+		
+	</body>
+</html>

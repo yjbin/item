@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div ng-app="">
+			<!--两种解决angular加法字符串拼接的办法-->
+			<!--angular和js语法是不互通的这样不行，解决办法就是用controller-->	
+			<input type="text" ng-model="stra"/>
+			+
+			<input type="text" ng-model="strb" />
+			<input type="button" value="弹一下第一个框的值" onclick="alert(stra)"/>
+			<span>发现弹不了→angular和js语法是不互通的</span>
+			<p >={{stra*1+strb*1}}</p>
+			<h3>{{parseInt(stra)+parseInt(strb)}}</h3>
+			<hr />
+			<input type="number" ng-model="a"/>
+			+
+			<input type="number" ng-model="b" />
+			=
+			<p >{{a+b}}</p>
+			<h3 >{{a+b+aa}}</h3>
+			<!--不认识aa-->
+		</div>
+		
+
+		
+	</body>
+	<script type="text/javascript">
+		window.onload=function () {
+			var aa = 100;
+		}
+		
+	</script>
+</html>

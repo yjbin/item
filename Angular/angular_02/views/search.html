@@ -1,0 +1,24 @@
+<input type="text" ng-model="str" />
+<input type="button" value="点击搜索" ng-click="search()" />
+<!--
+{{read_list.length}}
+<hr>
+{{music_list.length}}
+<hr>
+{{movie_list.length}}
+-->
+<ul ng-if="read_list.length!=0">
+	<li ng-repeat="item in read_list">
+		<a ng-href="#/readDetail/{{item.id}}">{{item.title}}</a>
+	</li>
+</ul>
+<ul ng-if="music_list.length!=0">
+	<li ng-repeat="item in music_list">
+		<a ng-href="#/musicDetail/{{item.id}}">{{item.title}}</a>
+	</li>
+</ul>
+<ul ng-if="movie_list.length!=0">
+	<li ng-repeat="item in movie_list">
+		<a ng-href="#/movieDetail/{{item.id}}">{{item.title}}</a>
+	</li>
+</ul>

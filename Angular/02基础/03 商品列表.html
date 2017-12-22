@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body ng-app="test">
+		<div ng-controller="list">
+			<div ng-repeat="i in items">
+				<h3>
+					{{i.name}}
+				</h3>
+				<div id="">
+					{{i.price|currency}}|{{i.time|date:"yyyy-MM-dd HH:mm:ss"}}
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('test',[]);
+		app.controller('list',function ($scope) {
+			$scope.items=[
+				{name:'金刚狼',price:38,time:1498101646267},
+				{name:'誓约',price:58,time:1498601646267},
+				{name:'速八',price:68,time:1496101646267},
+				{name:'特种部队',price:88,time:1497101646267},
+			]
+		})
+	</script>
+</html>

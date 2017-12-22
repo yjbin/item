@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="box">
+			{{str}}
+		</div>
+		<div class="ball">
+			{{str}}
+		</div>
+	
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+//			el:'#box',
+			data:{
+				str:"dsds",
+			},
+		})
+		
+	//	1.)拿变量挂载
+		vm.$mount('#box');
+		//  2.）手动挂载，和上面实现的功能是一样的
+		var mvvm = new Vue({
+			
+			data:{
+				str:"桃花一朵朵",
+			},
+		}).$mount('.ball')
+	
+		
+	
+		
+
+	</script>
+
+</html>

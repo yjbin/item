@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<p @click="show1">{{str}}</p>
+			
+			<lisi></lisi>
+		</div>
+	</body>
+	<script type="text/javascript">
+	
+		new Vue({
+			el:"#box",
+			data:{
+				str:'内容信息'
+			},
+			//创建局部组件
+			components:{
+				"lisi":{//调用组件
+					data:function () {//这里的data和上面的data没有关系
+						return {num:"张三"}
+					},
+					methods:{//事件都放在此处,和弦的methods没有关系
+						show(){
+							this.num="李四"
+						}
+					},
+					//模板//模板和其他都是平级的关系用逗号隔开,注意字符串拼接""里不能有""
+					template:"<h2 @click='show'>{{num}}</h2>"
+				}
+			},
+			
+			//这里的方法是Vue实例的,局部的组件访问不到
+			methods:{
+				show1(){
+					alert('系统的');
+				}
+			}
+		});
+	</script>
+</html>

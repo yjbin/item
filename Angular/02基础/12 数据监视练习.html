@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="content">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body >
+		<div ng-controller="box">
+			<div>书的名称：{{book.name}}</div>
+			<div>书的价格：{{book.price}}</div>
+			<div>书的运费：{{book.post}}</div>
+			<div>书的数量:<input type="text" ng-model="book.count"/></div>
+			<div>书的总价：{{book.count*book.price}}</div>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('content',[]);
+		app.controller('box',function ($scope) {
+			$scope.book = {name:"谢文东传奇",price:18,post:10,count:1};
+			$scope.$watch('book.count',function (newVal) {
+				if (newVal*$scope.book.price>50) {
+					$scope.book.post = 0;
+				}else{
+					$scope.book.post = 10;
+				}
+			},true)
+			
+		})
+		
+	</script>
+</html>

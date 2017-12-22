@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<form  method="post">
+				<h2 class="text-center">我是标题</h2>
+				<div class="form-group">
+					<label for="">用户名：</label>
+					<input type="text"  class="form-control" v-model="name"/>
+				</div>
+				<div class="form-group">
+					<label for="">年龄：</label>
+					<input type="text"  class="form-control" v-model="age"/>
+				</div>
+				<div class="form-group">
+					<label for="">性别：</label>
+					<select v-model="sex" class="form-control" v-model="sex">
+						<option value="男">男</option>
+						<option value="女">女</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<input type="button" value="提交" class="btn btn-success btn-sm" @click="add()"/>
+					<input type="button" value="重置" class="btn btn-danger btn-sm"/>
+				</div>
+			</form>
+			
+			
+			<table class="table table-hover table-bordered text-center">
+				<tr>
+					<th>序号</th>
+					<th>名字</th>
+					<th>年龄</th>
+					<th>性别</th>
+					<th>操作</th>
+				</tr>
+				<tr v-for="item in mes">
+					<th>{{$index+1}}</th>
+					<th>{{item.name}}</th>
+					<th>{{item.age}}</th>
+					<th>{{item.sex}}</th>
+					<th>
+						<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" @click="nowIndex=$index">删除</button>
+					</th>
+				</tr>
+				<tr>
+					<td colspan="5">
+						<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal" v-show="mes.length!=0" @click="nowIndex=-1">全部删除</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="5" v-show="mes.length==0">
+						暂无数据
+					</td>
+				</tr>
+			</table>
+			
+		
+			<!-- 模态框（Modal） -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">你确定吗标题</h4>
+						</div>
+						<div class="modal-body">你想删掉我吗</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal" @click="del(nowIndex)">确定</button>
+							<button type="button" class="btn btn-primary" >取消</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal -->
+			</div>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el:".container",
+			data:{
+				//最后初始化数据
+				mes:[{
+					//初始化数据
+					name:'周润发',
+					age:58,
+					sex:'男'
+					},
+					{
+					name:'章子怡',
+					age:28,
+					sex:'女'
+					},
+					{
+					name:'杨紫钰',
+					age:28,
+					sex:'女'
+					},
+				],
+				name:'',
+				age:'',
+				sex:'',
+				//思路:因为访问不到那个循环体中的$index，每一个删除，和全部删除点击的时候类似自己记录自己的位置存一个nowIndex
+				//全部删除时 让这个数组的下标变为<0的数，判断的时候比0小数组清空
+				nowIndex:-10			
+			},
+			methods:{
+				//添加
+				add:function () {
+					this.mes.push({
+						name:this.name,
+						age:this.age,
+						sex:this.sex,
+					})
+					
+					//完后清空
+					this.name='';
+					this.age='';
+					this.sex='';
+				},
+				del:function(num){
+					if(num<0){
+						this.mes=[];
+					}else{
+						this.mes.splice(num,1)
+					}
+				}
+			}
+		})
+	</script>
+</html>

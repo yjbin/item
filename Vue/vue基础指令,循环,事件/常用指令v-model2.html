@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue</title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+
+		<div class="ball">
+			<input type="text" v-model="str" />
+			{{str}}
+			<input type="checkbox" v-model="checked" />
+			{{checked?"选中":"不选"}}
+			
+			<input type="radio" name="male" value="男" v-model="one"/>男
+			<input type="radio" name="male" value="女" v-model="one"/>女
+			{{one}}
+			
+			<select v-model="two">
+				<option>one</option>	
+				<option>two</option>
+				<!--默认第二个选中-->
+			</select>
+			{{two}}
+			
+			<hr />
+<!--			多选下拉菜单-->
+			<select v-model="mul" multiple>
+				<option >one</option>
+				<option >two</option>
+				<option >three</option>	
+			</select>
+			{{mul}}
+		</div>
+		
+		
+	</body>
+	<script type="text/javascript">
+	
+		new Vue({
+			el:'.ball',  //element的简写，选择器id,class,*,元素,
+			//注意版本兼容:vue 2.0不支持body.html    vue1.0支持body
+			data:{
+				str:'我是默认的',
+				checked:true,
+				one:'222',
+				two:'two',
+				mul:['one','three']
+			}
+		})
+	</script>
+</html>

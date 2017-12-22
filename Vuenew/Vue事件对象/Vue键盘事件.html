@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<ul>
+				<li>
+					<input type="text" value="键盘按下" @keydown="show('键盘按下')" />
+				</li>
+				<li>
+					<input type="text" value="键盘抬起" @keyup="show('键盘抬起')" />
+				</li>
+				<li>
+					<input type="text" value="按下回车" @keydown="show2($event,'按下回车')" />
+				</li>
+				<li>
+					<input type="text" value="按下回车" @keydown.13="show('按下回车')" />
+				</li>
+				<li>
+					<input type="text" value="按下回车" @keydown.enter="show('按下回车')" />
+				</li>
+				
+				<li>
+					<input type="text" value="按下上键" @keydown.up="show('按下上键')" />
+				</li>
+				<li>
+					<input type="text" value="按下下键" @keydown.down="show('按下下键')" />
+				</li>
+				<li>
+					<input type="text" value="按下左键" @keydown.left="show2($event,'按下左键')" />
+		
+					<input type="text" value="按下左 键" @keydown.37="show2($event,'按下左键')" />
+			
+				</li>
+				<li>
+					<input type="text" value="按下右键" @keydown.right="show2($event,'按下右键')" />
+				</li>
+			</ul>
+		</div>
+	
+	
+	</body>
+	<script type="text/javascript">
+	 new Vue({
+	 	el:"#box",
+	 	data:{
+	 		
+	 	},
+	 	methods:{
+	 		show:function (obj) {
+	 			alert(obj);
+	 		},
+	 		show2:function (ev,obj) {
+	 			if (ev.keyCode==13) {
+	 				alert(ev.keyCode+obj)
+	 			}
+	 			if (ev.keyCode==37) {
+	 				alert(ev.keyCode+obj);
+	 			}if (ev.keyCode==39) {
+	 				alert(ev.keyCode+obj);
+	 			}
+	 			
+	 		}
+	 	}
+	 })
+		
+		
+	</script>
+</html>

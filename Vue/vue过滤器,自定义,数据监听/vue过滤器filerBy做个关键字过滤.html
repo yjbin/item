@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="box">
+			<input type="text" v-model="str"/>
+			<hr />
+			<ul>包含a的过滤出来：
+											<!--这里的str是个变量-->被双向绑定了
+											<!--过滤器规定这样写可以访问到Vue实例里的变量-->
+				<li v-for="item in arr|filterBy str">
+					{{item}}
+				</li>								
+			</ul>
+		
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			data:{
+				str:"",
+				arr:['aaaccss','bbbdddas','cccdsadcs','dddadvvg','fffgd','gggsffs']
+			}
+		}).$mount('#box')
+	
+	
+	</script>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Vue</title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.ball{
+				width: 500px;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="box">
+			{{url}}
+			
+			<a href="{{url}}">百度</a>
+			<hr />
+				<!--v-bind:href	这里的{{}}可以省略了-->
+							<!--指令可以替代标签里的href属性-->
+			<a v-bind:href="url" href="www.qq.con">看看这是什么</a>
+				<img src="img/home_1.png" :title="tt" />
+				
+			<a v-bind:href="url" href="www.qq.con">
+				<!--<img  v-bind:src="src"  v-bind:title="tt" v-bind:class="bClass"/>-->
+				<img :src="src"  :title="tt" :class="bClass" :height="500"/>
+				<!--v-bind:vue的绑定
+				简写  :src  :title :width :height :class :id 这些都是html的属性-->
+			</a>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+	
+		new Vue({
+			el:'#box',  //element的简写，选择器id,class,*,元素,
+			//注意版本兼容:vue 2.0不支持body.html    vue1.0支持body
+			data:{
+				url:"http://www.baidu.com",
+				src:"img/home_1.png",
+				tt:"鼠标经过显示title",
+				bClass:"ball"
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+	
+		</style>
+	</head>
+	<body ng-app="">
+		
+		货币：<input type="text" ng-model="str"/>
+		<hr />
+		美元：	<p>{{str|currency:"$"}}</p>
+		人民币：<p>{{str|currency:'￥'}}</p>
+		其它：	<p>{{str|currency:'&'}}</p>
+		<hr />
+		将普通的对象转换成json对象
+		{{{name:'张三'}|json}}
+		{{{age:18}|json}}
+	</body>
+</html>

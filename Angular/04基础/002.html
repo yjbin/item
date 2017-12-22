@@ -1,0 +1,58 @@
+<div class="panel panel-default" ng-click="show()">
+	<div class="panel-heading">{{title}}</div>
+	<div class="panel-body content">
+		<ul class="shoplist" ng-repeat="item in datas">
+				<li >
+					<span>苏宁易购</span>
+					<span class="icon-left">自营</span>
+					<span class="pull-right">86500人评价<span class="red">100%</span>好评</span>	
+				</li>
+				<li class="detail">
+					<div class="left-img pull-left text-center">
+						<a href="">
+							<img ng-src="{{item.src}}"/>
+						</a>
+					</div>
+					<div class="right-info pull-right">
+						<h3>{{item.title}}</h3>
+						<h3 class="red">￥{{item.nowPrice}}</h3>
+						<span class="lineth">原价:￥{{item.price}}</span>
+						<div class="">
+							<span>销量：<span class="red">{{item.count}}</span></span>
+							<p class="pull-right" ng-click="getcode()" >{{info}}</p>
+							
+						</div>
+						
+					</div>
+					
+				</li>
+				<li ng-repeat="item in result">
+					<table class="list table table-borderd table-hover" >
+						<tr >
+							<th class="text-center" style="width: 30%;">
+								{{item.author}}
+							</th>
+							<th class="text-center"  style="width: 30%;">
+								产品
+							</th>
+							<th class="text-center"  style="width: 30%;">
+								价格
+							</th>
+						</tr>
+						<tr class="text-center">
+							<td style="width: 30%;">
+								{{item.name}}
+							</td>
+							<td  style="width: 30%;">
+								{{item.product}}
+							</td>
+							<td  style="width: 30%;">
+								{{item.price}}
+							</td>
+						</tr>
+					</table>
+				</li>
+			</ul>
+			
+	</div>
+</div>

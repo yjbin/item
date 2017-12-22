@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_02.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="box">
+			{{str}}
+			<input  v-focus />
+			<span v-test="{a:'lightblue',b:'50px'}">自定义指令</span>
+		</div>
+	</body>
+	<script type="text/javascript">
+					//指令名称
+		Vue.directive('test',{
+				//如果需要接收一个对象，这里要把对象传递进来			
+			inserted:function (ele,json) {	//第一个参数代表this.el当前元素，第二个参数就是传递的参数对象
+
+				//***2.0取json值，要加上.value
+				ele.style.fontSize=json.value.b;
+				ele.style.background=json.value.a;
+			}
+		})
+		
+		
+		var vm = new Vue({
+			data:{
+				str:"花，开在太阳下"
+			},
+			//局部的自定义指令
+			directives:{//要加上s，因为它里面可以写多个方法
+				//写在这里的都是局部的，只有这个box可以用
+				focus:{
+					inserted:function (el) {
+						el.focus();
+					}
+				}
+			}
+		}).$mount('#box')
+	
+	</script>
+
+</html>

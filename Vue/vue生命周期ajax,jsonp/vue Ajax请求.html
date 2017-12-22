@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-resource.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<input type="button" @click="getMes()" value="vueajax请求" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el:'#box',
+			data:{
+				
+			},
+			methods:{
+				getMes:function(){
+					this.$http.get('text.txt').then(function (result) {
+						//规定	请求出来的数据点都得带上.data
+						alert(result.data);
+					}),function(){
+						alert('网络错误,请稍后再试')
+					}
+//					this.$http.get/post('接口地址'(可以加上时间戳)).then(function(result){
+//						alert(result.data)
+//						**请求出来的数据都得加 .data
+//					},function(){
+//						alert('网络错误,请稍后再试')
+//					}
+				}
+			}
+		})
+	</script>
+</html>

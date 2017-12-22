@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html >
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body ng-app="test">
+		<div ng-controller="book">
+			<book id="book">
+				{{str}}
+			</book>
+			
+		</div>
+		<div class="">			
+				{{str}}     <!--出了controller就不起作用-->
+		</div>
+		
+		<div ng-controller="lisi">
+			<lisi>
+				{{a}}
+			</lisi>
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+//								模块名称
+		var app = angular.module('test',[]);
+//						控制器名称
+		app.controller('book',function ($scope) {
+			$scope.str="我是来自控制器的东西";
+		})
+		
+		
+		/*
+		 * angular.module
+		 * 参数1：模块的名字，和ng-app创建的模块名字对应  相当于vue实例的el
+		 * 参数2：模块的依赖，当我们的模块需要依赖其他模块的时候，
+		 * 写其他模块名称，可以写多个(数组形式)
+		 * 注意：参数2必须写，即使没有依赖，也要写一个空的数组
+		 * controller控制器
+		 * 是通过模块来创建的，创建控制器的时候会自动创建一个作用域，
+		 * 作用域的函数由$scope来管理
+		 * $scope就相当于mvvm中的vm
+		 */
+		
+//		控制器另一种写法   默认上下的这两个控制器的数据不互通
+//								数组这里可以传入多个参数如果要传入计数器这样写
+			//这里注意要加上引号
+		app.controller('lisi',['$scope','$interval',function (obj,$interval) {
+			obj.a="我是控制器的另一种写法"
+			//这里就不用$scope.a=了
+		}])
+	</script>
+</html>

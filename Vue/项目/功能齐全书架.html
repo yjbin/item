@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-resource.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			[v-cloak] {
+				display: none;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1 class="text-center">Book Read</h1>
+			<div class="app" v-cloak>
+				<div class="input-group">
+																		<!--实现搜索和过滤的绑定-->
+					<input type="search"  class="form-control input-lg" v-model="seek"/>
+					<span class="btn btn-success btn-lg input-group-addon">搜索</span>
+				</div>
+				<br />
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr >
+							<th class="text-center" @click="sort='id'">序号</th>
+							<th class="text-center"  @click="sort='name'">书名</th>
+							<th class="text-center"  @click="sort='author'">作者</th>
+							<th class="text-center"  @click="sort='price'">价格</th>
+							<th class="text-center" >操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="text-center" v-for="item in message| orderBy sort|filterBy seek">
+							<td>{{item.id}}</td>
+							<td>{{item.name}}</td>
+							<td>{{item.author}}</td>
+							<td>{{item.price}}</td>	
+							<!--隔行换色-->
+							<td v-if="item.id%2==0">
+																						<!--点击删除-->
+								<input type="button" class="btn btn-success" value="删除" @click="delBook(item)"/>
+							</td>
+							<td v-else>
+								<input type="button" class="btn btn-danger" value="删除"  @click="delBook(item)"/>
+							</td>
+						</tr>
+						<tr>
+									<!--没有数据显示暂无数据-->
+							<td class="text-center" v-if="message.length==0" colspan=5>
+									<h3>暂无数据</h3>														
+							</td>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<div class="pull-right">
+									<h4>总价：{{num}}</h4>
+								</div>
+							</td>
+						</tr>
+							
+					</tbody>
+				</table>
+				<div class="addCode">
+					<legend>添加书籍</legend>
+					<label for="">书名：</label>			<!--	双向绑定book.name-->
+					<input type="text" class="form-control" v-model="book.name" />
+					<label for="">作者：</label>
+					<input type="text" class="form-control" v-model="book.author" />
+					<label for="">价格：</label>
+					<input type="text" class="form-control" v-model="book.price" />
+					<br />																<!--点击添加-->
+					<input type="button" class="btn btn-primary form-control" value="添加" @click="addBook()"/>
+				</div>
+			</div>
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el:".app",
+			ready:function(){
+				this.$http.get('data.json').then(function(result){
+					//this.message = result.data;
+					this.$set('message',result.data)
+				},function(data,status,sdad){
+					alert('请求失败'+status);
+				})
+			},
+			//上面这种不管是resource.min.js 还是resource.js都适用
+//			ready: function() {
+//					this.$http.get('data.json', function(data, status) {
+//						this.$set('message', data);
+//					}).error(function(data, status, request) {
+//						console.log('fail' + status + "," + request);
+//					})
+//				},
+//				这种只适用resource.js
+			data:{
+				message:"",
+				//点击的时候把book这个对象添加到mss ajax请求的数组里
+				book:{
+					id:'',
+					name:'',
+					author:'',
+					price:''
+				},
+				sort:""
+			},
+			//计算属性
+			computed:{
+				
+				num:function(){
+					var result=0;
+					//循环遍历出所有的price
+					for(var i=0;i<this.message.length;i++){
+						//这里添加进去的出来是字符串，用Number转化
+						result += Number(this.message[i].price);
+					}
+					return result; //计算属性拿return返回出去
+				} 
+			},
+			methods:{
+				
+				addBook(){					
+					//id比原先mes数组的长度多1
+					this.book.id = this.message.length+1;
+					//点击添加内容(对象)到信息这个数组里
+					this.message.push(this.book);
+					//添加完了后又把数据清空
+					this.book = '';
+				},
+				delBook(mes){
+					//***删数组里一条数据的方法
+					this.message.$remove(mes)
+				},
+				sortB(){
+					//这里也可以写一个点击排序函数this.sort=(传过来的值)，上面调用
+				}
+				
+			}
+			
+		})
+	</script>
+</html>

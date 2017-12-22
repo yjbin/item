@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			
+		</style>
+	</head>
+	
+	<body>
+		<div ng-app="">
+				<!--字符串形式-->
+			<div ng-init="item='width:300px;height:300px;background:blue;'">
+			<!--	这里直接style 必须跟{{}}-->
+				<div style="{{item}}">
+					{{item}}
+				</div>
+			</div>		
+			<hr />
+				<!--json形式的对象--> <!--如果是读取json可以加{{}}也可以不加{{}}  json属性值必须加引号-->
+			<div ng-init="json={width:'300px',height:'300px',background:'red'}">
+				<div ng-style="json">
+					{{json}}
+				</div>
+			</div>		
+			
+			<hr />
+			<div ng-init="ak='width:300px;height:300px;background:yellow;'">
+				<div ng-style="{{ak}}">
+					{{ak}}
+				</div>
+			</div>		
+			<!--总结：style不可以解析json对象形式的，ng-style解析不了字符串形式的-->
+		
+		</div>
+		
+
+		
+	</body>
+</html>

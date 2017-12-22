@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<book>
+				<ul>
+					<li>aaa</li>
+					<li>bbbb</li>
+					<li>ccccc</li>
+					<li>dddddd</li>
+				</ul>
+			</book>	
+			<hr />
+			<book>
+				
+			</book>
+			<hr />
+			<template id="temp">
+				<h1>大标题</h1>
+				<!--原来有标签内容的情况：
+				slot下边的数据，会自动插入到组件内容后面
+				原来标签有值，不读取slot的值，否则读取slot的值
+				
+				原来没有内容情况：
+					slot前面的值，和slot本身的值和后面的值一起插入到组件标签中-->
+				<slot>原标签有值我就不显示，没值我就显示</slot>
+				<p>有点菜</p>
+			</template>
+		</div>
+	
+	</body>
+	<script type="text/javascript">
+	
+	var vm = new Vue({
+			el:"#box",
+			data:{
+			
+			},
+			components:{
+				"book":{
+					template:"#temp"
+				}
+			}
+		});
+	</script>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="box">
+			<<!--span v-test>{{str}}</span>-->
+			页面加载完毕,input显示默认值
+			<hr />
+			<input v-test="{a:'red',b:'lightblue',content:'默认值'}" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		//1.0也可以传json参数
+		Vue.directive('test',function (them) {
+			this.el.value=them.content;
+		//	this.el.style.backgroundColor=them.b;
+			this.el.focus();   //自动获焦
+		})
+		
+		var vm = new Vue({
+			data:{
+				str:"花，开在太阳下"
+			}
+		}).$mount('#box')
+	
+	</script>
+
+</html>

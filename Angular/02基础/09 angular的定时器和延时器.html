@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="content">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body >
+		<div ng-controller="box">
+			{{a}}
+		</div>
+		<div ng-controller="ball">
+			{{b}}
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('content',[]);
+		//定时器
+		app.controller('box',function ($scope,$interval) {
+			$scope.a = 0;
+			var timer=null;
+			timer = $interval(function () {	//angular提供的定时器
+					$scope.a++;
+					if ($scope.a>100) {
+						$interval.cancel(timer)//angular停止定时器的方法
+					}
+			},100)
+		})
+		//延时器
+		app.controller('ball',function ($scope,$timeout) {
+			$scope.b = 0;
+			var timeId=null;
+			timeId = $timeout(function () {	//angular提供的定时器
+					$scope.b+=5;
+				
+			},5000)
+		})
+	</script>
+</html>

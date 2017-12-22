@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+		
+		</style>
+	</head>
+	<body>
+		<ul id="box">
+	
+		</ul>
+		<button id="btn">请求</button>
+	</body>
+	<script type="text/javascript">
+		$(function () {
+			$("#btn").on('click',function () {
+				$.ajax({
+					type:"get",
+					url:"data.json",
+					async:true,
+					dataType:"json",
+					success:function (res) {
+						if (res.length) {
+							var arr = eval(res);
+							var str = "";
+							arr.forEach(function (item,index) {
+								
+								str += "<li>"+item.title+"</li>";
+								
+							})
+							$("#box").append(str)
+						}
+					}
+				});
+			
+
+			
+			
+		})
+		
+		
+	</script>
+</html>

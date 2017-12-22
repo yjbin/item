@@ -1,0 +1,34 @@
+k<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<ul id="box">
+			{{numa}}
+			{{numb}}
+		</ul>
+	</body>
+	<script type="text/javascript">
+		var mvvm = new Vue({
+					el:'#box',
+					data:{
+						numa:18,
+					},
+					computed:{
+						numb:function(){
+							return this.numa+1;//可以写业务逻辑，比如循环判断
+						}
+					}
+					
+				})
+			document.onclick = function(){
+				//在其他函数里调用vue的实例
+					mvvm.numa += 10;
+			}
+			console.log(mvvm.numa);
+			console.log(mvvm.numb);
+	</script>
+</html>

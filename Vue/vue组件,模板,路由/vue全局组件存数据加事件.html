@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="box">
+			<p @click="show()">{{str}}</p>
+			<zhangsan></zhangsan>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//组件和系统内部的数据，方法是不互通的系统的访问不到组件的data,methods,组件的也访问不到系统的,局部的也一样
+//		声明组件名称		调用组件
+
+//		这种全局写法先定义,再调用
+		var abc = Vue.extend({
+			data(){
+				return {
+					num:'我是普通的文字'
+				}
+			},
+			methods:{
+				show1(){
+					alert('22112')
+				}
+			},
+			//模板和其他都是平级的关系用逗号隔开,注意字符串拼接""里不能有""
+			template:"<p @click='show1()'>{{num}}</p>"
+		})
+					//id		组件名称
+		Vue.component('zhangsan',abc) //component组合，调用
+		
+		new Vue({
+			el:"#box",
+			data:{
+				str:'内容信息'
+			},
+			methods:{
+				show(){
+					alert('3322')
+				}
+			}
+		})
+	</script>
+</html>

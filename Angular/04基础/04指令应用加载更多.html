@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.more{
+				width: 300px;
+				height: 60px;
+				line-height: 20px;
+				overflow: hidden;
+				border: 1px solid #000;
+			}
+			.more2{
+				width: 300px;
+				line-height: 20px;
+				border: 1px solid #000;
+			}
+		</style>
+	</head>
+	<body ng-controller="content">
+		<more>
+			发的所发生的发生大幅度是个十大歌手的公发的所发生的发生大幅度是个十大歌手的公司大股东是广东省发送到发送到大师傅打算范德萨发的说法师傅的说法是否大师傅爽肤水发司大股东是广东省发送到发送到大师傅打算范德萨发的说法师傅的说法是否大师傅爽肤水发的是是发的是
+		</more>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box',[]);
+		app.controller('content',function ($scope) {
+			$scope.show = false;
+		})
+		app.directive('more',function () {
+			return {
+				restrict:'E',
+				template:'<div class="{{show?\'more2\':\'more\'}}">\
+				//单引号里面套双引号，双引号里再出现单引号必须用转义字符
+					<a href="javascript:;" ng-click="show=!show">显示更多</a>\
+					<ng-transclude></ng-transclude>\   
+					//这里的相当于原文本内容
+					</div>',
+					replace:false,//替换标签
+					transclude:true
+					//追加、嵌入到到标签中
+				
+			}
+		})
+	</script>
+</html>

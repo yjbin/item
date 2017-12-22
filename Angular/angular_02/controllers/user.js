@@ -1,0 +1,116 @@
+﻿//用户登录控制器
+app.controller('loginController',function($scope,$rootScope,$routeParams,$http,$location){
+	$rootScope.navTitle="用户登录";
+	$rootScope.navLeftImage="img/search_min.png";
+	$rootScope.navLeftUrl="#/search/1";
+	$scope.username='zz';//初始化账号和密码
+	$scope.password='5555';//现实工作中不会这样写
+	$scope.login=function(){
+		$http({
+			methods:'get',
+			url:loginUrl,
+			params:{
+				username:$scope.username,
+				password:$scope.password
+			}
+		}).success(function(response){
+			//alert(response.code);//如果是0就是成功，2就是失败
+			if(response.code=='0')
+			{
+				$location.url('/userMain');//登录成功跳转到用户中心
+				$rootScope.navRightUrl='#/userMain';//重置链接地址
+				localStorage.isLogin='1';//设置登录成功的状态
+				localStorage.userId=response.data.id;//获取用户id
+				//保存用户的所有信息
+				localStorage.userInfo=JSON.stringify(response.data);
+			}
+			else
+			{
+				alert('登录失败');
+			}
+		}).error(function(){
+			alert('登录连接失败');
+		})
+	}
+})
+//登录后用户中心控制器
+app.controller('userMainController',function($scope,$rootScope,$routeParams,$http,$location){
+	$rootScope.navTitle="用户中心";
+	$rootScope.navLeftImage="img/search_min.png";
+	$rootScope.navLeftUrl="#/search/1";
+	//判断是否真的登录，如果没有登录不让看此页面
+	if(localStorage.isLogin=='1')
+	{
+		var userInfo=JSON.parse(localStorage.userInfo);
+		$scope.username=userInfo.username;
+		$scope.userimage=userInfo.image;
+	}
+	else
+	{
+		alert('请先登录后，在访问此页面');
+		$location.url('/login');
+	}
+	//退出登录
+	$scope.extLogin=function(){
+		alert('退出成功');
+		localStorage.isLogin='0';//重置登录状态
+		localStorage.userInfo='';//把用户信息清空
+		$rootScope.navRightUrl='#/login';//重置右上角头像链接
+		$location.url('/main/0');//退出登录跳转到指定页面（首页）
+	}
+})
+//用户收藏控制器
+app.controller('favoriteListController',function($scope,$rootScope,$routeParams,$http){
+	$rootScope.navTitle="收藏列表";
+	$rootScope.navLeftImage="img/aliwx_common_back_btn_normal.png";
+	$rootScope.navLeftUrl="javascript:history.go(-1)";
+	//alert($routeParams.type);
+	//根据传过来的参数判断是那一类收藏
+	if($routeParams.type==1)
+	{
+		$rootScope.navTitle="阅读收藏";
+	}
+	else if($routeParams.type==4)
+	{
+		$rootScope.navTitle="音乐收藏";
+	}
+	else if($routeParams.type==5)
+	{
+		$rootScope.navTitle="影视收藏";
+	}
+	else
+	{
+		$rootScope.navTitle="收藏列表";
+	}
+	$http({
+		url:getFavoriteUrl,
+		method:'get',
+		params:{
+			type:$routeParams.type,
+			userId:localStorage.userId
+		}
+	}).success(function(response){
+		//alert(response.data.length);
+		//alert(response.data[0].id);
+		//for(var k=0; k<response.data.length; k++)
+		for(var k in response.data)
+		{
+			var v=response.data[k];
+			if($routeParams.type=='1')
+			{
+				v.detailPathUrl="#/readDetail/"+v.id;
+			}
+			if($routeParams.type=='4')
+			{
+				v.detailPathUrl="#/musicDetail/"+v.id;
+			}
+			if($routeParams.type=='5')
+			{
+				v.detailPathUrl="#/movieDetail/"+v.id;
+			}
+		}
+		$scope.itemList=response.data;
+	}).error(function(){
+		alert('收藏连接失败');
+	})
+})

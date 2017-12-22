@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+		<script src="../js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-resource.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<!--思路
+				用bootstrap布局，form表单   table 表格   模态框
+			-->
+		<!--最外部的容器盒子-->
+		<div class="container">
+			<!--表单控件-->
+			<form method="post">
+				<h2 class="text-center">留言板</h2>
+				<div class="form-group">
+					<label for="male">用户名:</label>									<!--数据双向绑定-->
+					<input type="text" class="form-control" id="male" placeholder="请输入···" v-model="userName"/>
+				</div>
+				<div class="form-group">
+					<label for="shmale">年龄:</label>										<!--数据双向绑定-->
+					<input type="text" class="form-control" id="shmale" placeholder="请输入···" v-model="age" />
+				</div>
+				<div class="form-group">
+					<label for="hemale">性别:</label>										<!--数据双向绑定-->
+					<select class="form-control" v-model="sex">
+						<option value="男">男</option>
+						<option value="女">女</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<input type="button" class="btn btn-success" @click="add()" value="添加">
+					
+					<input type="reset" class="btn btn-danger" value="重置">
+				</div>
+			</form>
+
+			<!--表格-->
+			<table class="table table-hover table-bordered text-center ">
+				<tr class="text-danger">
+					<th class="text-center">序号</th>
+					<th class="text-center">名字</th>
+					<th class="text-center">年龄</th>
+					<th class="text-center">性别</th>
+					<th class="text-center">操作</th>
+				</tr>
+				<tr v-for="item in message">
+					<td>{{$index+1}}</td>
+					<td>{{item.userName}}</td>
+					<td>{{item.age}}</td>
+					<td>{{item.sex}}</td>
+					<td>										<!--出现模态框-->
+						<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#layer" @click="nowIndex=$index">删除</button>
+					</td>
+				</tr>
+				<tr>
+					<td class="text-right" colspan="5">
+																				<!--思路：mes里有信息就显示删除全部-->    <!--出现模态框-->
+						<button class="btn btn-danger btn-sm" v-show="message.length!=0"  data-toggle="modal" data-target="#layer" @click="nowIndex=-10">删除全部</button>
+					</td>
+				</tr>
+				<tr>							
+														<!--mes里没有信息就显示暂无数据-->
+					<td colspan="5" class="text-muted" v-show="message.length==0">
+						暂无数据
+					</td>
+				</tr>
+				
+			</table>
+
+			<!--模态框-->
+			<div class="modal fade bs-example-modal-sm" id="layer">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">您确定删除？</h4>
+						</div>
+						<div class="modal-body text-right">
+							<button class="btn btn-primary btn-sm" data-dismiss="modal">取消</button>
+							<button class="btn btn-danger btn-sm" data-dismiss="modal" @click="del(nowIndex)">确认</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		new Vue({
+			el:'.container',
+			data:{
+//				思路:mes这个数组里有信息,就不显示暂无数据,反之,显示.		
+				message:[
+					//初始化数据  ajax请求出来
+					
+				],
+				userName:'',
+				age:'',
+				sex:'',
+				nowIndex:-10,
+			},
+			//vue实例创建好就执行
+			created:function(){
+				this.$http.get('date.json').then(function (result) {
+					//	alert(result.data.s); 	
+						//这里的s就是存放的数组
+						this.message = eval(result).data;
+					//	this.message = result.data;
+						
+					},function(res){
+						alert('网络错误,请稍后再试'+res.status); //状态码
+					}
+				)
+			},
+			methods:{
+				//写入数据
+				add:function(){
+					this.message.push({
+						userName:this.userName,
+						age:this.age,
+						sex:this.sex
+					});
+					//留言后清空输入框的值
+					this.userName='';
+					this.age='';
+					this.sex='';
+				},
+				
+				
+//				删除事件
+				del:function (num) {
+					//因为还要判断是否删除全部，所以在上面存了一个nowIndex判断是否需要删除数组里的全部，
+					//是的话让它的小标小于0，就代表数组为空，否则截取数组里的index位置的下标数据
+		//思路:因为访问最后的确定按钮不到那个循环体中的$index，每一个删除，和全部删除点击的时候类似自己记录自己的位置存一个nowIndex
+				//全部删除时 让这个数组的下标变为<0的数，判断的时候比0小数组清空
+					alert(num);
+					if (num<0) {
+						this.message = [];
+					} else{
+						//哪个点击的删除，就删除哪个   数组的方法 splice(位置,个数)
+						this.message.splice(num,1)
+					}
+			
+					
+				}
+			}
+		})
+	</script>
+
+
+
+
+
+
+		
+</html>

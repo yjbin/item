@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="content">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body ng-controller="box">
+		{{a}}
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('content',[]);
+		app.controller('box',function ($scope) {
+			$scope.a = 0;
+			//angular与原生js的互通
+			var time = null;
+			timer = setInterval(function () {
+					$scope.a++;
+					$scope.$apply();//数据更新或理解成：刷新
+					
+					if ($scope.a>10) {
+						clearInterval(timer)
+					}
+			},1000)
+		})
+	</script>
+</html>

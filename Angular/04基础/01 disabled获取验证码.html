@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head >
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+		<style type="text/css">
+			input{
+				width: 160px;
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body ng-controller="content">
+		<input  class="btn btn-lg btn-success" ng-click="show()" ng-disabled="flg" value="{{item}}"/>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box', []);
+			app.controller('content',function($scope,$interval){
+				
+				$scope.item = "点击获取验证码";
+				
+				$scope.show = function () {
+					$scope.item=5;
+					$scope.flg=true;
+					var timer = $interval(function () {
+						//判断是不是到1了
+						if ($scope.item==1) {
+							$interval.cancel(timer);
+							$scope.item = "点击获取验证码";
+							$scope.flg=false;
+						}else{
+							$scope.item--;
+						}
+					},1000);
+				}
+			})
+	</script>
+</html>

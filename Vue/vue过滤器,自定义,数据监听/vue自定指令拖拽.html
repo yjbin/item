@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_02.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			p{
+				width: 200px;
+				height: 200px;
+				position: absolute;
+				background-color: red;
+				cursor: move;
+				color: #fff;
+				text-align: center;
+				line-height: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<p v-drag>{{str}}</p>
+			<p v-drag>{{str}}</p>
+			<p v-drag>{{str}}</p>
+			<p v-drag>{{str}}</p>
+			<p v-drag>{{str}}</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		Vue.directive('drag',{
+			inserted:function(el){
+				el.onmousedown=function(e){
+					var e = e || window.event;
+					var lf = e.clientX - el.offsetLeft;
+					var tp = e.clientY - el.offsetTop;
+					document.onmousemove = function(ev){
+						
+						var ev = ev || window.event;
+						var lfValue = ev.clientX-lf;
+						var tpValue = ev.clientY-tp;
+						el.style.left = lfValue + "px";
+						el.style.top = tpValue + "px";
+						console.log(lfValue,tpValue)
+					}
+					document.onmouseup = function(){
+						document.onmousemove = null;
+						document.onmouseup= null;
+					}
+				}
+				
+			}
+		})
+		new Vue({
+			el:'#box',
+			data:{
+				str:'来，拖拽！'
+			}
+		})
+	</script>
+</html>

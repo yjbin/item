@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>微博增删改查</title>
+		<link href="../css/weibo.css" rel="stylesheet" type="text/css" />
+		<script src="../js/vue.min_02.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-resource.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<!--
+思路，根据后台来读取数据、写入数据、删除数据、顶某一条数据、踩某一条数据
+开发思想：
+this.$http后面有三个参数。get,post,jsonp如果不写默认是get
+如果加了.then读取数据时写data否则可以不写
+1、用vue中的ajax来先读取数据，通过循环遍历到页面中去
+2、写入数据，根据用户所输入的信息写入到数据库，并且更新当前页面
+3、解决分页，根据接口提供的数据我们对内容进行分页处理
+4、开发顶和踩的功能
+5、开发删除数据的功能
+-->
+	<body>
+		<div class="weibo_demo">
+			<!--留言-->
+			<div class="takeComment">
+																<!--双向绑定输入内容-->
+				<textarea name="textarea" class="takeTextField" v-model="content"></textarea>
+				<div class="takeSbmComment">
+																<!--点击把这条信息存进后台-->
+					<input type="button" class="inputs" value=""  @click="addMes()"/>
+					<span>(可按 Enter 回复)</span>
+				</div>
+			</div>
+			<!--已留-->
+			<div class="commentOn">
+				<div class="noContent" v-if="mesData.length==0">暂无留言</div>
+				<div class="messList">
+					<div class="reply" v-for="item in mesData">
+						<p class="replyContent">{{item.content}}</p>
+						<p class="operation">
+												<!--时间过滤器过滤后台返回的毫秒转化为年，月日，时分秒-->
+							<span class="replyTime">{{item.time|date}}</span>
+							<span class="handle">
+		                    	<a href="javascript:;" class="top" @click="fnAcc(item.id)">{{item.acc}}</a>
+		                        <a href="javascript:;" class="down_icon" @click="fnRef(item.id)">{{item.ref}}</a>
+		                        <a href="javascript:;" class="cut" @click="del(item.id)">删除</a>
+		                    </span>
+						</p>
+					</div>
+
+				</div>
+				 <div class="page">
+		        	<a href="javascript:;" v-for="item in page_count" :class="item.className" @click="getMes(item.num)">{{item.num}}</a>
+		        </div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var Url = 'weibo.php';
+		//自定义过滤器
+		Vue.filter('date',function (obj) {
+			var oDate = new Date(obj*1000);  //毫秒*1000是秒
+			return oDate.getFullYear()+"-"+(oDate.getMonth()+1)+"-"+oDate.getDay()+" "+oDate.getHours()+":"+oDate.getMinutes()+":"+oDate.getSeconds()
+		})
+		//实例对象
+		new Vue({
+			el:'.weibo_demo',
+			data:{
+				mesData:"", //初始化一个字符串，一会用来存获取的数据
+				content:'',	//初始化用户输入的值,和提交的内容双向绑定
+				this_count:1,//当前第几页默认为1
+				page_count:[]  //总共多少页
+			},
+			methods:{
+				//将用户输入的提交后台
+				addMes(){
+					this.$http({
+						url:Url,   //相当于weibo.php?
+						data:{
+							act:'add',		//这里注意用字符串
+							content:this.content
+						}	
+						//上面的已经发送给后台了
+						//后台反馈给页面让用户看
+					}).then(function(result){
+						var arr = result.data;
+						this.mesData.unshift({//添加到最前面用unshift
+							id:arr.id,		//后台返回的最大的id值					
+							time:arr.time,
+							content:this.content,
+							acc:0,
+							ref:0
+						});
+						this.content=""; //提交完后初始化输入框的值
+					}).catch(function(){
+						alert('读取失败')
+					})
+				},
+				//请求数据
+				getMes(n){
+					//点击重置当前页
+					this.this_count=n;
+					//每点击一次调用一次
+					this.setCur(this.page_count.length);
+					this.$http({
+						url:Url,
+						data:{
+							act:'get',
+							page:n  //先默认是第一页
+						}		
+					}).then(function(result){
+						//alert(result.data)
+						
+						this.mesData = result.data;		//将后台请求的数据赋值给vue实例中的变量
+					}).catch(function(){
+						alert('读取失败')
+					})
+				},
+				//将页数进行循环，并判断当前第几页
+				setCur(count){
+					this.page_count=[]; //每次循环之前都清空上一次点击出现的//每次清空分页数组，不清空一直点，一直加
+					for(var i=1;i<=count;i++){
+						//如果相等说明是当前的一页
+						if(i==this.this_count)
+						{
+							//判断当前页				
+												//点击的页数和数组里的对应显示
+							this.page_count.push({num:i,className:'active'});
+						}
+						else
+						{
+							this.page_count.push({num:i,className:''})
+						}
+					}
+				},
+				
+				//读取一共多少页  然后把每一页都展示出来
+				getPage(){
+					this.$http({
+						url:Url,
+						data:{
+							act:'get_page_count'//后台规定读取多少页的参数
+						}		
+					}).then(function(result){
+						var res = result.data;
+						//读取到几页， 把这几页数据显示出来
+						 //     这里的res.count 是后台规定这样写返回页数
+						this.setCur(res.count);  
+					}).catch(function(){
+						alert('读取失败')
+					})
+				},
+				//顶函数			思路：点击顶后台要删除id为点击的id的那条数据、
+				//这里需要注意后台中一条信息只能对应一个id,删除了就没有了，下次添加空过这个用ajax异步请求
+				fnAcc(id){
+					this.$http({
+						url:Url,
+						data:{
+							act:'acc',
+							id:id
+						}
+					}).then(function(res){
+						//这里必须和后台的id对应才是作用的同一个  item.id 就是后台给的
+						for(var i=0;i<this.mesData.length;i++){
+							if(id==this.mesData[i].id){
+								this.mesData[i].acc++;	//点击就自增
+							}
+						}
+					}).catch(function(){
+						alert('读取失败')
+					})
+				},
+				//踩函数
+				fnRef(id){
+					this.$http({
+						url:Url,
+						data:{
+							act:'ref',
+							id:id
+						}
+					}).then(function(res){
+						for(var i=0;i<this.mesData.length;i++){
+							if(id==this.mesData[i].id){
+								this.mesData[i].ref++;
+							}
+						}
+					}).catch(function(){
+						alert('读取失败')
+					})
+				},
+				//点击删除
+				del(id){
+					this.$http({
+						url:Url,
+						data:{
+							act:'del',
+							id:id
+						}
+					}).then(function(res){
+						//location.reload()//刷新页面后台只规定传个del  和要删除的id名后台就处理了
+						location = location
+					}).catch(function(){
+						alert('读取失败')
+					})
+				}
+			},
+			
+			
+			created:function(){
+				this.getMes(1);   //创建完毕就调用请求函数 初始化调用第一页
+				this.getPage()   //调用获取页码读取一共有多少页数据
+			}
+		})
+	</script>
+</html>

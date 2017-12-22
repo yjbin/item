@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="">
+	<head>
+		<meta charset="UTF-8">
+		<title>Angular——课程</title>
+		<script type="text/javascript" src="js/angular.js"></script>
+	</head>
+	<body>
+		<!--
+		ng-init就是初始化值
+		用value是不行，因为ng-model会替换value--
+		-->
+		<div ng-init="stra=0;strb=0;">
+		<input type="text" ng-model="stra">
+		*
+		<input type="text" ng-model="strb">
+		({{stra}}*{{strb}})=>{{stra*strb}}
+		</div>
+	</body>
+</html>

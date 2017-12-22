@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+
+	</head>
+	<body>
+		<div id="box">
+			<input type="text" v-model="str"/>
+			<ul>
+				<li v-for="item in arr|filterBy str">{{item}}</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+			data:{
+				str:"",
+				arr:['aaaccss','bbbdddas','cccdsadcs','dddadvvg','fffgd','gggsffs']
+				}
+			
+		}).$mount('#box')
+	
+	
+	</script>
+</html>

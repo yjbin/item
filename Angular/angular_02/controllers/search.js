@@ -1,0 +1,25 @@
+﻿//搜索控制器
+app.controller('searchController',function($scope,$rootScope,$routeParams,$http){
+	$rootScope.navTitle="用户搜索";
+	$rootScope.navLeftImage="img/aliwx_common_back_btn_normal.png";
+	$rootScope.navLeftUrl="javascript:history.go(-1)";
+	//searchUrl//接口地址
+	//keyword//搜索的关键字
+	$scope.search=function(){
+		//alert(searchUrl+'&'+$scope.str);
+		$http({
+			method:'get',
+			url:searchUrl,
+			params:{
+				keyword:$scope.str
+			}
+		}).success(function(response){
+			//console.log(response.data);
+			$scope.read_list=response.data.read;
+			$scope.music_list=response.data.music;
+			$scope.movie_list=response.data.movie;
+		}).error(function(){
+			alert('搜索连接失败')
+		})
+	}
+})

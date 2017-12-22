@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+	<div class="panel-heading" ng-click="show()">{{title}}</div>
+	<div class="panel-body">
+		<div class="list-group">
+			<li class="list-group-item" ng-repeat="item in users">
+				<span>{{item.name}}</span>
+				<span>{{item.age}}</span>
+				<span>{{item.score}}</span>
+				
+			</li>
+		</div>
+	</div>
+</div>

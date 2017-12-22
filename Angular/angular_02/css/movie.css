@@ -1,0 +1,100 @@
+*{
+	margin: 0px;
+}
+
+body{
+	background-color: #eee;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+
+/*cell*/
+.table-view{
+	background-color: #eee;
+}
+.movie-cell{
+	width: 100%;
+	/*height: 600px;*/
+	background-color: white;
+	margin-bottom: 10px;
+}
+
+.movie-cell-tag{
+	text-align: center;
+	color: #bbb;
+	margin-bottom: 10px;
+	display: none;
+}
+.movie-cell-title{
+	padding-top: 20px;
+	padding-left: 10px;
+	font-size: 18px;
+	color: #666;
+	margin-bottom: 10px;
+}
+
+.movie-cell-author{
+	padding-left: 10px;
+	margin-bottom: 10px;
+	color: #aaa;
+	display: none;
+}
+.movie-cell-icon{
+	padding: 10px;
+}
+.movie-cell-icon img{
+	width: calc(100%);
+}
+.movie-cell-forward{
+	padding-left: 20px;
+	
+	padding-right: 20px;
+	padding-bottom: 10px;
+	color: #aaa;
+}
+.movie-cell-tool{
+	padding-left: 10px;
+	color: #bbb;
+	display: none;
+}
+.movie-cell-subtitle{
+	padding-left: 20px;
+	
+	padding-bottom: 5px;
+}
+
+/*详情*/
+.movie-detail-box{
+	padding-top: 20px;
+	padding-left: 30px;
+	padding-right: 30px;
+	text-align: center;
+	line-height: 30px;
+	color: #666666;
+}
+.movie-detail-box .cover img{
+	width: 100%;
+}
+.movie-detail-box .title{
+	font-size: 24px;
+	margin-bottom: 20px;
+	color: black;
+}
+
+.movie-detail-box .desc{
+	margin-top: 20px;
+}
+.movie-detail-box .background{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	filter: blur(100px);
+}
+

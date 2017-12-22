@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_02.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				text-decoration: none;
+			}
+			#box{
+				margin: 50px auto;
+				width: 400px;
+				height: 400px;	
+				border: 1px solid #000;
+				text-align: center;
+			}
+			nav{
+				width: 100%;
+				overflow: hidden;
+			}
+			nav a{
+				float: left;
+				width: 25%;
+				height: 50px;
+				line-height: 50px;
+				background-color: deepskyblue;
+				color: #fff;
+				font-size: 20px;
+				cursor: pointer;
+			}
+			nav a.active{
+				background-color:deeppink;
+			}
+			#box p{
+				float: left;
+				width: 100%;
+				height: 350px;
+				line-height: 350px;
+				background-color: greenyellow;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<nav>
+				<a :class="{'active':item.show}" href="javascript:;" v-for="(item,index) in list" @click="tab(item,index)">
+									<!--不能随便写a,b所以换成item index-->
+					{{item.name}}
+				</a>		
+			</nav>
+			<p>
+				{{content}}
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+		
+		new Vue({
+			el:'#box',
+			data:{
+				content:'中国',
+				list:[
+					{name:'中国',show:true},
+					{name:'美国',show:false},
+					{name:'法国',show:false},
+					{name:'德国',show:false}
+				]
+			},
+			methods:{
+				tab(item,index) {
+			
+					this.content=item.name;
+					for (var i=0;i<this.list.length;i++) {	
+						this.list[i].show=false;
+					}
+					this.list[index].show = true;
+				}
+			}
+		})
+	</script>
+</html>

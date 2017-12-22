@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Vue——课程</title>
+		<script src="../js/vue.min_02.js" type="text/javascript"></script>
+		<script src="../js/vue-router.min.js" type="text/javascript"></script>
+		<style>
+			.router-link-active{
+				color:red;
+				font-size:18px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="myApp">
+			<ul>
+				<router-link to="/home">首页</router-link>
+				<router-link to="/news">新闻</router-link>
+			</ul>
+			<!--上面是设置路由链接，下面是点了后数据要灌进来-->
+			<div>
+				<router-view></router-view>
+			</div>
+		</div>
+		<script type="text/javascript">
+			//1、组件
+			var Home={
+				template:'<p>我是首页数据信息</p>'
+			};
+			var News={
+				//ES6的写法` `中间加数据tab上面的那个键
+				template:`<div>
+				<h2>新闻列表</h2>
+				<ul>
+					<li>
+						<router-link to="/news/newsList">
+							某一条新闻数据
+						</router-link>
+					</li>
+				</ul>
+				//将路由的内容渲染到这个标签内
+				<router-view></router-view>
+				</div>`
+			};
+	
+			var NewsList={
+				template:'<p>新闻内容</p>'
+			}
+			//2、配置路由
+			const routes=[
+				{path:'/home',component:Home},//首页
+				{
+					path:'/news',
+					component:News,
+					children:[
+						{path:'newsList',component:NewsList}
+					]
+				},
+				{path:'*',redirect:'/home'}//默认跳转地址
+			];
+			//3、生成路由
+			const router=new VueRouter({
+				routes
+			});
+			//4、挂载路由到vue身上
+			new Vue({
+				router,
+				el:'#myApp'
+			})
+		</script>
+	</body>
+</html>

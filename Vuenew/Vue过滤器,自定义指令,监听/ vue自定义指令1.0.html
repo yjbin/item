@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.min_01.js" type="text/javascript" charset="utf-8"></script>
+		
+	</head>
+	<body>
+		<div id="box">
+			{{str}}
+			<input v-focus/>
+			<input  />
+			<span v-test="{a:'lightblue',b:'50px'}">测试数据</span>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//全局的自定义指令，所有的实例都能使用
+		Vue.directive('test',function (json){
+			
+				this.el.style.fontSize=json.b;
+				this.el.style.background=json.a;
+			
+		})
+		
+		
+		//局部的自定义指令，仅限单个实例使用
+		var vm = new Vue({
+			el:"#box",
+			data:{
+				str:"我是组件的数据"
+			}
+			
+		})
+		
+		
+	
+	
+	</script>
+</html>

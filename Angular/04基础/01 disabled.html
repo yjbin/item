@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="box">
+	<head >
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/angular.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body ng-controller="content">
+		<button type="button" ng-disabled="true">按钮</button>
+		<input type="text" ng-disabled="false" />
+		<!--ng-disabled="true"禁用一个表单(输入框,按钮，单选，多选等)-->
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('box', []);
+			app.controller('content',function($scope,$http){
+			
+			})
+	</script>
+</html>
