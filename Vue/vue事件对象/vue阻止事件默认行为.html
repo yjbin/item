@@ -36,5 +36,18 @@
 				}				
 			}
 		})
+
+
+		const app = new Vue({
+			el:"#app",
+			data:{
+				production:[]
+			},
+			created () {
+				fetch("http://localhost:8081/ndrestful/api/cbf/list?pageSize=10&pageNo=1&xzcode=640221"){
+					
+				}
+			}
+		})
 	</script>
 </html>

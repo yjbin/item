@@ -9,8 +9,7 @@
 
 	<body>
 		<div id="box">
-			<<!--span v-test>{{str}}</span>-->
-			页面加载完毕,input显示默认值
+			<!--span v-test>{{str}}</span>-->页面加载完毕,input显示默认值
 			<hr />
 			<input v-test="{a:'red',b:'lightblue',content:'默认值'}" />
 		</div>
@@ -20,7 +19,7 @@
 		Vue.directive('test',function (them) {
 			this.el.value=them.content;
 		//	this.el.style.backgroundColor=them.b;
-			this.el.focus();   //自动获焦
+			this.el.autofocus();   //自动获焦
 		})
 		
 		var vm = new Vue({

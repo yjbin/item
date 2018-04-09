@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+      
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <ul>
+            <li v-for="product in products">
+                {{ product.name }}  {{ product.quantity }}
+                <span v-if="product.quantity === 0"> -- it seal over</span>
+            </li>
+          <h2>{{productSum}}</h2>
+        </ul>
+    </div>
+</body>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            message:"Hello World",
+            products:[
+                "apple",
+                "ara",
+                "watermelearn"
+            ]
+        },
+        created() {
+            fetch('http://api.myjson.com/bins/74l63')
+                .then(response => response.json())
+                .then(json =>{
+                    this.products = json.products
+                })
+        },
+        computed:{
+            productSum (){
+                return this.products.reduce( (sum,product) => {
+                    return sum + product.quantity
+                },0)
+            }
+        }
+        
+    })
+</script>
+</html>
