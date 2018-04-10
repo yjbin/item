@@ -22,6 +22,18 @@
         .error{
             color:#000;
         }
+        .foo{
+            color:#e4393c;
+        }
+        .bar{
+            font-size: 15px
+        }
+        .baz{
+            font-size: 35px
+        }
+        .boo{
+            background: green
+        }
     </style>
 </head>
 <body>
@@ -36,12 +48,32 @@
 
        <p :class="[red,font]">查看</p>
        <hr>
-       <h3 :class="[isSure ? active : '',error]">mes</h3>
+       <h3 :class="[isSure ? active : '',error]">mes</h3> <!-- 推荐 -->
+
+       <!-- 组件调用类名 -->
+       <todo-item class="baz boo"></todo-item>
+
+       <!-- 内联样式:style -->
+       <!-- 对象形式 -->
+       <div :style="{color:activeColor,fontSize:fontSize + 'px'}">内联样式1</div>  
+       <div :style="styleList">内联样式2</div>  <!-- 推荐 -->
+       <!-- 数组形式   有点繁琐这里的变量必须是对象形式   不推荐-->  
+       <div :style="[co,ft]">内联样式3</div>  
+
+
+        <!-- 2.3版本以后 -->
+       <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
     </div>
+    
 </body>
 <script>
-//  注意1： 对象写法注意合写的类名要加引号 2：数组,对象形式中存放的是变量名,变量名对应的才是类名，而且类名要加引号
-//  3:
+     Vue.component('todo-item', {
+        template: '<p class="foo bar">查看模板类名</p>'
+    })
+//  class注意1： 对象写法注意合写的类名要加引号 2：数组,对象形式中存放的是变量名,变量名对应的才是类名，而且类名要加引号
+//  3:组件调用，原生的类名不会覆盖掉模板上的类名，但是相同的样式，以后来的为准
+
+//
     let app = new Vue({
         el:"#app",
         data:{
@@ -50,7 +82,16 @@
             error:null,
             red:'red',
             font:'font20',
-            error:'error'
+            error:'error',
+            activeColor:'#e4393c',
+            fontSize:20,
+            styleList:{
+                color:'blue',
+                fontSize:'50px'
+            },
+            co:{color:'green'},
+            ft:{fontSize:'80px'}
+          
         },
         methods:{
             changed () {
@@ -66,6 +107,10 @@
             }
         }
     })
+
+   
+
+    
 </script>
 
 </html>
