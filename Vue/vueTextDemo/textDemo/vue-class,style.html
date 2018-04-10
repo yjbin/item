@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+        .active{
+            width: 100px;
+            height:100px;
+            background: lightblue;
+        }
+        .red{
+            color:red;
+        }
+        .font20{
+            font-size:20px;
+        }
+        .error{
+            color:#000;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+       <div class="static" v-bind:class="{active:isActive,'text-center':isSure}">
+                      <!--对象写法 -->                     
+       </div>
+       <hr>
+       <button @click="changed">按钮</button>
+       <hr>
+       <button :class="classObject">控制类</button>
+
+       <p :class="[red,font]">查看</p>
+       <hr>
+       <h3 :class="[isSure ? active : '',error]">mes</h3>
+    </div>
+</body>
+<script>
+//  注意1： 对象写法注意合写的类名要加引号 2：数组,对象形式中存放的是变量名,变量名对应的才是类名，而且类名要加引号
+//  3:
+    let app = new Vue({
+        el:"#app",
+        data:{
+            isActive:true,
+            isSure:false,
+            error:null,
+            red:'red',
+            font:'font20',
+            error:'error'
+        },
+        methods:{
+            changed () {
+                this.isActive = !this.isActive
+            }
+        },
+        computed:{
+            classObject(){
+                return {
+                    active: this.isActive && !this.error,
+                    'text-danger': this.error && this.error.type === 'fatal'
+                }
+            }
+        }
+    })
+</script>
+
+</html>
