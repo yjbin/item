@@ -20,7 +20,7 @@
     </div>
 </body>
 <script>
-
+    // 组件注意确保在实例化之前注册
     // props   父向子传递的参数   //$emit('event',data) 子向父传的方法。第一个参数是事件，第二个参数是要传递的数据
     Vue.component('todo-item', {
         props: ["todo"],
