@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>条件渲染</title>
+	<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="app">
+								<!-- v-show 是否隐藏  v-if  是否渲染 -->
+		<!-- v-else 元素必须紧跟在 v-if 或 v-show 元素的后面 -->
+		<ul v-if="categray.length">
+			<li v-for="item in categray">
+				{{item.id}}: {{item.name}}
+				<p v-if="item.id == 0">我是一个p</p>
+			</li>
+		</ul>
+		<div v-else>
+			{{str}}
+		</div>
+		<hr>
+		<!-- 如果想切换对个元素，可以把一个<template>当做包装用 v-if ,通过v-if来控制这个字符串模板是否渲染 -->
+		<template v-if="ok">
+			<h1>ssddsf</h1>
+			<p>dsa</p>
+			<span>dasf</span>
+		</template>
+		<!-- v-show 不支持 <template> 语法。  -->
+		<h1 v-show="ok">Hello!</h1>
+	</div>
+</body>
+<script type="text/javascript">
+	//指令  
+	var vm = new Vue({
+		el: '#app',
+		data: {
+			str: '条件渲染',
+			ok:true,
+			isTrue:true,
+			categray:[
+				{id:0,name:'剃须刀'},
+				{id:1,name:'iphone'},
+				{id:2,name:'ipad'}
+			],
+		}
+	})
+	document.onclick = function(){
+		vm.isTrue = !vm.isTrue,
+		//vm.categray.length = 0;  这样不起作用
+		vm.categray.splice(0);  //这样ok,借调数组的splice方法
+	}
+	
+
+</script>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>指令</title>
+	<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<li v-for="item in categray">
+				{{item.id}}: {{item.name}}
+				<p v-if="item.id == 0">我是一个p</p>
+			</li>
+		</ul>
+		<ol>
+			<li v-for="(value,key,index) of object">
+				{{key}}:{{value}}--下标：{{index}}
+			</li>
+		</ol>
+		
+		<a v-bind:href="url">click</a>
+		<hr>
+		<!-- 缩写 -->
+		<a :href="url">click__1</a>
+		<hr>
+		<button v-on:click.prevent="change">{{str}}</button>
+		<br />
+		<button @click.prevent="change">0^^0</button>
+	</div>
+
+</body>
+<script type="text/javascript">
+	//指令  
+	var vm = new Vue({
+		el: '#app',
+		data: {
+			str: '指令',
+			isShow:true,
+			url:"www.baidu.com",
+			categray:[
+				{id:0,name:'剃须刀'},
+				{id:1,name:'iphone'},
+				{id:2,name:'ipad'}
+			],
+			object:{
+				FirstName: 'John',
+				LastName: 'Doe',
+				Age: 30
+			}
+		},
+		methods:{
+			change(){
+				this.str = "See the change";
+			}
+		}
+	})
+	
+
+</script>
+
+</html>

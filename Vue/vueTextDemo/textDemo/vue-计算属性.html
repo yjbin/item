@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>计算属性</title>
+	<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="app">
+		<p>message:{{ message | capitalize}}</p>
+		<p>revermess: {{ reverseMessage }}</p>
+		<div id="demo">{{ fullName }}</div>
+		<h3>{{sumAll}}</h3>
+
+		<hr>
+		<!-- v-for循环过滤掉不要的数据  后面跟过滤的方法 -->
+		<ul>
+			<li v-for="item of evenNumbers">{{ item }}</li>
+		</ul>
+	</div>
+
+</body>
+<script type="text/javascript">
+	//计算属性只有在它的相关依赖发生改变时才会重新求值   ！！会缓存
+	var vm = new Vue({
+		el: '#app',
+		data: {
+			message:"hello World!",
+			firstName: 'Foo',
+			lastName: 'Bar',
+			arrList:[1,2,3,4,5,6,7,8,9,10],
+			list:[
+				{id:0,name:"巨紫荆"},
+				{id:1,name:"小妖精"},
+				{id:2,name:"狐狸精"},
+				{id:3,name:"蛇精"}
+			],
+			num:10
+		},
+		filters:{
+			capitalize(value){ //这里的参数传递的就是需要过滤的参数
+				if(!value) return
+				value = value.toString();
+				return value.charAt(0).toUpperCase() + value.slice(1)
+			}
+		},
+		computed:{
+			//过滤掉不需要的数据
+			evenNumbers () {
+				return this.arrList.filter( (number) => {
+					return number % 2 === 0
+				})
+			},
+			reverseMessage(){
+				return this.message.split('').reverse().join('');
+			},
+			fullName(){
+				return this.firstName + '' + this.lastName
+			},
+			// 计算属性默认只有get方法，但也可以设置set方法
+			sumAll:{
+				get(){
+					var arr_list = this.list,
+					    sum = 0;
+					arr_list.forEach((item,index)=> {
+						sum += item.id*1
+					});
+					return sum + this.num;	
+				},
+				set(str){
+				  this.num = str;
+				}
+			}
+		},
+		// watch:{
+		// 	firstName: function (val) {
+		// 		this.fullName = val + '' + this.lastName
+		// 	},
+		// 	lastName: function (val) {
+		// 		this.fullName = this.firstName + '' + val
+		// 	}
+		// }
+	});
+	document.onclick = function () {
+		vm.lastName = "老司机，带带我";
+		vm.firstName = "hei baby";
+		vm.sumAll += 100; //set方法直接对这个对象设置，让set方法传递的值指向data中的参数
+	}
+</script>
+
+</html>

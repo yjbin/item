@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>模板</title>
+	<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- v-once插值处内容不更新 -->
+		<p v-once>{{str? str:mes}}</p>  
+		<!-- 花括号中支持三目运算符，支持javascript表达式，但不支持流程语句， -->
+		<!-- 模板表达式都被放在沙盒中，只能访问全局变量的一个白名单，如 Math 和 Date 。你不应该在模板表达式中试图访问用户定义的全局变量。 -->
+		<hr>
+		<p >{{str}}</p>
+		<button @click="change" v-bind:disabled="isShow">btn</button>
+
+		<p v-for="(item,index) in categray">商品: {{ item }}--{{index}}</p>
+		<p>总量：<span v-html="total"></span></p>
+		<br>
+	</div>
+
+</body>
+<script type="text/javascript">
+	
+	var vm = new Vue({
+		el: '#app',
+		data: {
+			str: '生命周期',
+			mes:"信息",
+			total:10,
+			isShow:false,
+			categray:[
+				'剃须刀',
+				'iphone',
+				'ipad'
+			]
+		},
+		methods:{
+			change(){
+				this.str = "See the change";
+			}
+		},
+		// created: function () {			//不要在选项属性或回调上使用箭头函数
+		// 	alert('Vue实例已经创建');    
+		// }	
+	})
+	
+
+</script>
+
+</html>

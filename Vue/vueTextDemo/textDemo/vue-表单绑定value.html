@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>绑定value及修饰符</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+                                 
+    <div id="app">
+       <!-- 绑定value值  会忽略所有表单的value,checked,selected特性的初始值,将vue示列的数据作为来源初始值 -->
+       <!-- 对于单选按钮，勾选框及选择列表选项， v-model 绑定的 value 通常是静态字符串（对于勾选框是逻辑值）： -->
+       <input type="radio" v-model="picked" :value="fft">  
+                                                <!-- 绑定单选的选中 :value -->
+            {{picked}}
+       <input type="checkbox" v-model="toggle">  
+            {{toggle}} 
+       <select v-model="selected">
+           <!-- 字面量对象 -->
+           <option :value="{number:123}">123</option>
+       </select>
+            {{selected}}
+
+            <br>
+        <input type="checkbox" v-model="mes" :true-value="a" :false-value="b">{{mes}}  
+                                        <!-- 复选框的固定写法选中为 :true-value 未选中为 :false-value-->
+                                    <!--修饰符 .lazy  .number  .trim  -->
+        <input type="text" v-model.lazy="str">{{str}}
+        <input type="text" v-model.number="num">{{num}}
+        <input type="text" v-model.trim="message">{{message}}
+    </div>
+</body>
+<script>
+    // .lazy v-model默认是同步的，  v-model.lazy=""   会在change改变完成，input失去焦点后再同步
+    // .number 自动将用户的输入值转为 Number 类型
+    // .trim  自动过滤用户输入的首尾空格，
+    const vm = new Vue({
+        el:"#app",
+        data:{
+            str:"look",
+            num:10,
+            message:"去除首尾空格",
+            a:"aa",
+            b:"bb",
+            picked:"",
+            toggle:"",
+            selected:"",
+            fft:"ingore",
+            mes:""
+        }
+    })
+</script>
+
+</html>

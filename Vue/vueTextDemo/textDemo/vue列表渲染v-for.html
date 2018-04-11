@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>列表渲染v-for</title>
+	<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- 条件过滤 -->
+		<div v-if="categray.length"> 
+			<!-- 同一级的v-for的优先级 -->
+			<p v-for="(item,index) of categray" v-if="index%2==0">商品: {{ item }}-- || --{{index}}</p>
+			<p>总量：<span v-html="total"></span></p>
+		</div>
+	
+		<br>
+		<!-- 渲染对象 -->
+		<ol >
+				    <!-- value key index -->
+			<li v-for="(item,key,index) of items">
+				<p>{{ key }}  --  {{item}} -- {{ index }}</p>
+				<span class="divider"></span>
+			</li>
+		</ol>
+	</div>
+
+
+	
+
+</body>
+<script type="text/javascript">
+	
+	var vm = new Vue({
+		el: '#app',
+		data: {
+			str: '生命周期',
+			total:10,
+			isShow:false,
+			items:{
+				firstName:'apple',
+				data:'watermelan',
+				lastName:'orange'
+			},
+			categray:[
+				'剃须刀',
+				'iphone',
+				'ipad'
+			]
+		}
+	})
+
+										// 注意事项 ：由于 JavaScript 的限制， Vue 不能检测后续变动的数组,用Vue.set()
+	//vm.category[3] = "sha1";
+	//vm.categray.splice(3,0,"sha1");
+	Vue.set(vm.categray, 3, "sha1");
+
+	// 1.当你直接设置一个项的索引时，例如： vm.items[index] = newValue 
+	// 2. 当你修改数组的长度时，例如： vm.items.length = newLength 
+	// 解决1 ：Vue.set(vm.items, index, newValue)  or vm.items.splice(index, 0, newValue)
+	// 解决2： vm.items.splice(newLength)
+	
+
+</script>
+
+</html>

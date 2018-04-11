@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>表单控件v-model</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <!--  v-model 会根据控件类型自动选取正确的方法发来更新元素，
+      会忽略所有表单的value,checked,selected特性的初始值,将vue示列的数据作为来源初始值 -->
+    <div id="app">
+        <input type="text" v-model="message" placeholder="请输入...">
+        {{message}}
+        <textarea name="" id="" cols="30" rows="10" v-model="message">{{message}}</textarea>
+        <hr>
+
+        <label for="checkbox">{{ checked }}</label>
+        <input type="checkbox" v-model="checked" id="checkbox">
+        <hr>
+        <!-- 多个勾选框绑定到同一个数组 -->
+        <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+        <label for="jack">Jack</label>
+        <input type="checkbox" id="john" value="John" v-model="checkedNames">
+        <label for="john">John</label>
+        <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+        <label for="mike">Mike</label>
+        <br>
+        <span>{{ checkedNames }}</span>
+        <hr>
+        <!-- 单选按钮 -->
+        <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span> {{picked}}</span>
+        <hr>
+        <!-- 选择列表 动态渲染-->
+        <select v-model="selected">
+           <option v-for="(item,index) of lists" :value="item.value" :key="index">{{item.text}}</option>
+        </select>
+        <span>{{ selected }}</span>
+    </div>
+</body>
+<script>
+    // v-model 会根据控件类型自动选取正确的方法发来更新元素，
+    //  会忽略所有表单的value,checked,selected特性的初始值,将vue示列的数据作为来源初始值
+    const app = new Vue({
+        el:"#app",
+        data:{
+            message:"Let me a see",
+            checked:false,
+            checkedNames:[],
+            picked:[],
+            selected:"A",
+            lists:[
+                { text: 'One', value: 'A' },
+                { text: 'Two', value: 'B' },
+                { text: 'Three', value: 'C' }
+            ]
+        },
+        methods:{
+           
+        }
+    })
+</script>
+
+</html>

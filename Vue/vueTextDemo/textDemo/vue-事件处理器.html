@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>事件处理器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+                                 
+    <div id="app">
+        <button @click="count++">按钮</button>
+        <p>这个按钮被点击了：{{count}}次</p>
+        <hr>
+        <button @click="say('hi',$event)">内联处理器</button>
+        <!-- !!!!此处传递参数必须一一对应 -->
+        <hr>
+        <button @click="getter">弹框</button>
+                <!-- 事件修饰符 .prevent .stop .self .capture -->
+        <!-- 阻止事件冒泡 -->
+            <a href="" @click.stop="add"></a>   
+        <!-- 提交事件不再重载页面,阻止默认事件 -->
+            <form action="" @submit.prevent="OnSubmit"></form>
+        <!-- 链式写法 -->
+            <a href="" @click.stop.prevent="todo"></a>
+        <!-- 只有修饰符 -->
+        <form action="" @submit.prevent></form>
+        <!-- 添加事件侦听器时使用时间捕获模式 -->
+        <div @click.capture="dothis"></div>
+        <!-- 只当事件在该元素本身触发时回调 -->
+        <div @click.self="dothat"></div>
+
+        <hr>
+                <!-- 按键修饰符 -->
+        <input @keyup.enter="submit">
+        <input @keyup.delete="delete">
+        <input @keyup.ese="esc">
+        <input @keyup.tab="tab">
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el:"#app",
+        data:{
+            name:"vue.js",
+            count:0
+        },
+        methods:{
+            say(mes,ev){
+                var x = ev.clientX;
+                var y = ev.clientY;
+                alert(mes);
+                console.log(ev.target,x,y)
+            },
+            getter(event){
+                alert('hello'+this.name+'!');
+                alert(event.target.tagName)
+            }
+        }
+    })
+    
+</script>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>{{ a }}</h3>
+        <button @click="a = '666'">change</button>
+    </div>
+    <br>
+    <div id="app-1">
+        <p>{{ foo }}</p>
+        <button @click="foo = 'obj changed'">冻结对象属性</button>
+    </div>
+</body>
+<script>
+    const data = {a:1}
+    const vm = new Vue({
+        el:"#app",
+        data:data
+    })
+
+    console.log(vm.a == data.a)
+    vm.a = 2;
+    alert(data.a)
+
+    data.a = 3;
+    console.log(vm.a)
+
+    vm.$data === data ? document.write(true):  document.write(false);
+
+    vm.$el === document.getElementById('app') ?console.log(555) :console.log(999) ;
+
+    vm.$watch('a',function (newValue,oldValue) {
+        vm.$el.style.width = "200px";
+        vm.$el.style.height = "200px";
+        vm.$el.style.background = "lightblue";
+    })
+
+
+    var obj = {
+        foo:"bar"
+    }
+
+    Object.freeze(obj);
+    new Vue({
+        el:"#app-1",
+        data:obj
+    })
+    
+</script>
+
+</html>

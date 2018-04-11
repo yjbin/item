@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>组件</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../../js/vue.js"></script>
     <style>
@@ -12,24 +12,40 @@
 </head>
 <body>
     <div id="app">
+        <input type="text" v-model="newTodoText" @keyup.enter="addTodoText">
         <ol>
-            <todo-item v-for="item in groceryList" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+            <!-- 这里的 is="todo-item" 就相当于 <todo-item></todo-item> -->
+            <li is="todo-item" v-for="(item,index) in todos" :todo="item" @remove="todos.splice(index,1)" :key="index"></li>
         </ol>
     </div>
 </body>
 <script>
+
+    // props   父向子传递的参数   //$emit('event',data) 子向父传的方法。第一个参数是事件，第二个参数是要传递的数据
     Vue.component('todo-item', {
         props: ["todo"],
-        template: "<li>{{ todo.text }}</li>"
-    })
+        template:`
+            <li>\
+            {{ todo }}\
+            <button @click="$emit(\'remove\')">x</button>\  
+            </li>\
+            `
+    });
     const app = new Vue({
         el:"#app",
         data:{
-            groceryList: [
-                { id: 0, text: '橡胶' },
-                { id: 1, text: '橘子' },
-                { id: 2, text: '披萨' }
+            newTodoText:"",
+            todos: [
+                'Do the dishes',
+                'Take out teh trash',
+                'Mow the lawn'
             ]
+        },
+        methods:{
+            addTodoText:function(){
+                this.todos.push(this.newTodoText);
+                this.newTodoText = ''
+            }
         }
     })
 </script>

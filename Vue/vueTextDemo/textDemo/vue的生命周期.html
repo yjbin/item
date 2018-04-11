@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>生命周期</title>
+	<script src="../../js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>
+	<div id="box">
+		{{str}}
+	</div>
+
+</body>
+<script type="text/javascript">
+
+	var vm = new Vue({
+		el: '#box',
+		data: {
+			str: '生命周期',
+		},
+		created: function () {			//不要在选项属性或回调上使用箭头函数
+			alert('Vue实例已经创建');    
+		},
+		beforeMount: function () {
+			alert('编译之前');				//el的选择器已经获取到元素而且在这个{{str}}调用之前操作
+		},
+		mounted: function () {
+			alert('编译之后');
+		},
+		beforeUpdate:function (){
+			alert('更新前');
+		},
+		updated:function(){
+			alert('更新后');
+		},
+		beforeDestroy: function () {
+			alert('销毁之前');
+		},
+		destroyed: function () {
+			alert('销毁之后');
+		}
+		
+		
+	})
+	document.onclick = function () {
+		vm.$data.str = "更改了";
+		//vm.$destroy();
+	}
+
+</script>
+
+</html>
