@@ -24,17 +24,14 @@
 			</li>
 		</ol>
 	</div>
-
-
-	
-
 </body>
 <script type="text/javascript">
-	
+
 	var vm = new Vue({
 		el: '#app',
 		data: {
-			str: '生命周期',
+			a:1,
+			str: '生命周期', 
 			total:10,
 			isShow:false,
 			items:{
@@ -49,7 +46,10 @@
 			]
 		}
 	})
-
+	//Vue 不能检测对象属性的添加或删除：
+	vm.a = 3;//  响应式的
+	vm.b = 2 ; //不是响应式的
+	//Vue.set(object, key, value) //方法向嵌套对象添加响应式属性
 										// 注意事项 ：由于 JavaScript 的限制， Vue 不能检测后续变动的数组,用Vue.set()
 	//vm.category[3] = "sha1";
 	//vm.categray.splice(3,0,"sha1");
@@ -59,6 +59,13 @@
 	// 2. 当你修改数组的长度时，例如： vm.items.length = newLength 
 	// 解决1 ：Vue.set(vm.items, index, newValue)  or vm.items.splice(index, 0, newValue)
 	// 解决2： vm.items.splice(newLength)
+	// vm.$set(vm.items, indexOfItem, newValue)  全局的set方法,全局 Vue.set 的别名：
+
+	//为已有对象赋予多个新属性
+	//  vm.user = Object.assign({}, vm.user, {
+	// 	   age: 27,
+	// 	   favoriteColor: 'Vue Green'
+	//  })
 	
 
 </script>

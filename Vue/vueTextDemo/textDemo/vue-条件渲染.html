@@ -21,10 +21,15 @@
 		<hr>
 		<!-- 如果想切换对个元素，可以把一个<template>当做包装用 v-if ,通过v-if来控制这个字符串模板是否渲染 -->
 		<template v-if="ok">
-			<h1>ssddsf</h1>
-			<p>dsa</p>
-			<span>dasf</span>
+			<label>Username</label>
+			<input placeholder="Enter your username">
 		</template>
+		<template v-else>
+			<label>Email</label>
+			<input placeholder="Enter your email address">
+		</template>
+		<!-- !! 那么在上面的代码中切换 loginType 将不会清除用户已经输入的内容。
+			因为两个模板使用了相同的元素，<input> 不会被替换掉——仅仅是替换了它的 placeholder。 -->
 		<!-- v-show 不支持 <template> 语法。  -->
 		<h1 v-show="ok">Hello!</h1>
 	</div>

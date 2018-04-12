@@ -33,6 +33,10 @@
         <div @click.capture="dothis"></div>
         <!-- 只当事件在该元素本身触发时回调 -->
         <div @click.self="dothat"></div>
+        <!-- 2.14点击事件将只会触发一次 -->
+        <a @:click.once="doThis"></a>
+        <!-- 2.3新增.passive 修饰符 (即滚动行为) 将会立即触发-->
+        <div @:scroll.passive="onScroll"></div>
 
         <hr>
                 <!-- 按键修饰符 -->
