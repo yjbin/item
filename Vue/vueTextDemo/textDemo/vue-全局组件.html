@@ -4,24 +4,38 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>组件</title>
+    <title>全局组件</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../../js/vue.js"></script>
     <style>
     </style>
 </head>
 <body>
+                                            <!-- 组件可以扩展 HTML 元素，（封装可重用的代码。！！--单页面应用） -->
     <div id="app">
         <input type="text" v-model="newTodoText" @keyup.enter="addTodoText">
         <ol>
-            <!-- 这里的 is="todo-item" 就相当于 <todo-item></todo-item> -->
+            <!-- 这里的 is="todo-item" 就相当于 <todo-item></todo-item> 解决有限制的元素渲染时出现的问题 -->
             <li is="todo-item" v-for="(item,index) in todos" :todo="item" @remove="todos.splice(index,1)" :key="index"></li>
         </ol>
+
+        <hr>
+        <!-- 这种字符串模板不会出现上述问题 -->
+        <my-component></my-component>
+        
     </div>
+    <script type="text/x-template" id="x_template">
+        <ul>
+            <li>{{str}}</li>
+            <li @click="show">255</li>
+            <li>555</li>
+        </ul>
+    </script>
 </body>
 <script>
     // 组件注意确保在实例化之前注册
     // props   父向子传递的参数   //$emit('event',data) 子向父传的方法。第一个参数是事件，第二个参数是要传递的数据
+    //全局组件
     Vue.component('todo-item', {
         props: ["todo"],
         template:`
@@ -43,7 +57,21 @@
         },
         //局部的组件,只能在这个实例中调用
         components:{
-            'my-component':Child
+            'my-component':{
+                // ！！！！组件里的data必须是函数形式  return 返回出去
+                data(){
+                    return {
+                        str:'script模板'
+                    }
+                },
+                methods:{
+                    show(){
+                        this.str = "局部的script模板"
+                    },
+                },
+                template:"#x_template"
+            },
+            
         },
         methods:{
             addTodoText:function(){
