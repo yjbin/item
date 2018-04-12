@@ -20,7 +20,7 @@
     </div>
 </body>
 <script>
-
+    //要确保在初始化根实例 之前 注册了组件
     // props   父向子传递的参数   //$emit('event',data) 子向父传的方法。第一个参数是事件，第二个参数是要传递的数据
     Vue.component('todo-item', {
         props: ["todo"],
@@ -40,6 +40,10 @@
                 'Take out teh trash',
                 'Mow the lawn'
             ]
+        },
+        //局部的组件,只能在这个实例中调用
+        components:{
+            'my-component':Child
         },
         methods:{
             addTodoText:function(){
