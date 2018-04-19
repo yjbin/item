@@ -24,7 +24,10 @@
     Vue.component('forcom-item',{
         template:'<button @click="control++">{{ control }}</button>',
         data(){
-            return data
+            //return data   //返回的是同一个对象的引用,因此一个改变会都跟着改变
+            return{
+                control:0   //为每个组件返回全新的数据对象
+            }
         }
     })
     const app = new Vue({
