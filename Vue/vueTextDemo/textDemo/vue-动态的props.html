@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>动态的props</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+                                         
+    <div id="app">
+        <input type="text" v-model="str">
+        <!-- 注意html不区分大小写，所以不是字符串模板需要驼峰需要转换为短横线分割式命名 -->
+        <br>
+        <child :message-Data="str"></child>  
+        <!-- 动态的把父组件的数据传递到子组件上 -->
+    </div>
+    <hr>
+    <div id="box">
+        <br>
+        <!-- 动态的把父组件的所有数据传递到子组件上 -->
+        <todo-item v-bind="todo"></todo-item>
+    </div>
+
+</body>
+<script>
+    /**父向子传递数据  props     |    子向父传递数据用emit                       */
+    Vue.component('child',{
+        props:['messageData'],  //必须是一个数组？
+        template:'<span>{{ messageData }}</span>'
+    })
+    Vue.component('todo-item',{
+        props:['todo'],  
+        template:'<span>{{ todo }}</span>'
+    })
+    const app = new Vue({
+        el:"#app",
+        data:{
+          str:"heollow vue!"
+        }
+    })
+    const box = new Vue({
+        el:"#box",
+        //如果想把父组件的所有属性作为prop进行传递
+        data:{
+          todo: {
+            text: 'Learn Vue',
+            item: 'project'
+          }
+        }
+    })
+</script>
+
+</html>
