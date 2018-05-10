@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>每个组件必须只有一个根元素</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+                                         
+    <div id="app">
+        <!-- 注意html不区分大小写，所以不是字符串模板需要驼峰需要转换为短横线分割式命名 -->
+        <todo-list v-for="item in list" :key="item.id" :title="item.title" :id="item.id"></todo-list>
+    </div>
+
+</body>
+<script>
+    /**父向子传递数据  props     |    子向父传递数据用emit    */
+    Vue.component('todoList',{
+        props:['title','id'],
+        // template:'<h1><button>{{ title }}</button></h1><div>测试一段信息</div>'  
+        //此写法会报错，每个组件必须只有一个根元素 <div></div>!!!!
+        template:'<div><h1><button>{{ title }}</button></h1><div>测试{{ id }}信息</div></div>'
+    })
+    const app = new Vue({
+        el:"#app",
+        data:{
+          list:[
+            { id: 1, title: 'My journey with Vue' },
+            { id: 2, title: 'Blogging with Vue' },
+            { id: 3, title: 'Why Vue is so fun' },
+          ]
+        }
+    })
+</script>
+
+</html>

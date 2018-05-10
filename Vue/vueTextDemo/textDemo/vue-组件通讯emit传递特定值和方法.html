@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>通过事件向父组件传值</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+                                         
+    <div id="app">
+        <div :style="{ fontSize: size + 'em'}">
+            <todo-list v-for="item in list" :key="item.id" :post="item" @father="size += $event"></todo-list>  
+                 <!--父组件接受子组件通过事件传的值 $event" @father="size += $event" -->
+            <!-- <todo-list v-for="item in list" :key="item.id" :post="item" @father="onChange"></todo-list>  -->
+                <!-- 如果这个事件处理函数是一个方法,会作为第一个参数传入这个方法 -->
+        </div>
+         
+    </div>
+
+</body>
+<script>
+    /**父向子传递数据  props     |    子向父传递数据用emit    */
+    Vue.component('todoList',{
+        props:['post'],
+        // template:'<h1><button>{{ title }}</button></h1><div>测试一段信息</div>'  
+        //此写法会报错，每个组件必须只有一个根元素 <div></div>!!!!
+        template:`
+                <div>
+                    <h3>{{ post.title }}</h3>
+                    <button @click="$emit('father',1)">这是一个按钮</button>
+                    <div v-html="post.content"></div>
+                </div>
+            `
+            //$emit 的第二个参数来抛出一个特定的值：用于父组件接收
+    })
+    const app = new Vue({
+        el:"#app",
+        data:{
+           list:[
+            { id: 1, title: 'My journey with Vue', content:"1"},
+            { id: 2, title: 'Blogging with Vue', content:"2" }
+          ],
+          size:1
+        },
+        methods:{
+            onChange: function (val) {
+                this.size += val
+            }
+        }
+    })
+</script>
+
+</html>
