@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>动态的props</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+                                        
+    <hr>
+    <div id="box">
+        <br>
+        <!-- 动态的把父组件的所有数据传递到子组件上 -->
+        <todo-item :todo="todo"></todo-item>
+    </div>
+
+</body>
+<script>
+    Vue.component('todo-item',{
+        props:['todo'],  
+        template:'<div><div>{{ todo.text }}</div><strong>{{ todo.item }}</strong></div>'
+    })
+    const box = new Vue({
+        el:"#box",
+        //如果想把父组件的所有属性作为prop进行传递
+        data:{
+          todo: {
+            text: 'Learn Vue',
+            item: 'project'
+          }
+        }
+    })
+</script>
+
+</html>
