@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>prop是通过引用传递的，子组件改变会影响父组件</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>                         
+    <div id="app">
+        <todo-item :size="normalizedSize"></todo-item>
+    </div>
+
+</body>
+<script>
+    Vue.component('todo-item',{
+        props:['size'],
+        // 以一种原始的值传入且需要进行转换
+        template:'<div><h2>{{ size }}</h2></div>',
+    })
+  
+    const app = new Vue({
+        el:"#app",
+        data:{
+            datas:{
+                id:1,
+                title:"mes say gogo"
+            },
+            str:"hellow Vue!"
+        },
+        computed: {
+            normalizedSize: function () {
+                return this.str.trim().toUpperCase()
+            }
+        },
+
+    })
+</script>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>动态的props</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>                         
+    <div id="app">
+        <todo-item :todo="datas"></todo-item>
+        <!-- 传入一个对象的所有属性 -->
+        <child-item v-bind="second"></child-item> 
+        <!-- 等价于 <child-item :name="second.name" :str="second.str"></child-item> -->
+    </div>
+
+</body>
+<script>
+    Vue.component('todo-item',{
+        props:['todo'],
+        template:'<div><h2>{{ todo.id }}</h2><span>{{ todo.title }}</span></div>',
+    })
+    Vue.component('child-item',{
+        props:['name','str'],
+        template:'<div><h2>{{ name }}</h2><span>{{ str }}</span></div>',
+    })
+  
+    const app = new Vue({
+        el:"#app",
+        data:{
+            datas:{
+                id:1,
+                title:"mes say gogo"
+            },
+            second:{
+                name:000,
+                str:"传入一个对象的所有属性"
+            }
+        },
+
+    })
+</script>
+
+</html>
