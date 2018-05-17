@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>作用域插槽</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <!-- 父组件模板的所有东西都会在父级作用域内编译；子组件模板的所有东西都会在子级作用域内编译 -->
+    <div id="app">
+            <todo-list >
+                <!-- 将 `slotProps` 定义为插槽作用域的名字 -->
+                <template slot-scope="{ todo }">
+                    <!-- 为待办项自定义一个模板，-->
+                    <!-- 通过 `slotProps` 定制每个待办项。-->
+                    <span v-if="todo.isComplete">展示我</span>
+                    {{ todo.content }}
+                </template>
+            </todo-list>
+    </div>
+
+</body>
+<script>
+    Vue.component('todo-list', {
+        data() {
+            return {
+                todos: [{
+                    id: 1,
+                    content: "one",
+                    isComplete:true
+                }, {
+                    id: 2,
+                    content: "second",
+                    isComplete:false
+                }]
+            }
+        },
+       
+        template: `<div>
+                        <ul>
+                            <li v-for="item in todos" :key="item.id">
+                                <slot :todo="item">
+                                    {{ item.content }}
+                                </slot>
+                            </li>
+                        </ul>
+                </div>
+                 `
+        //未命名插槽，会作为所有未匹配到插槽的内容的统一出口
+        //如果组件中有内容,模板理除了slot的内容会展示，若没有，模板里的都会展示出来
+
+    })
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+          
+            
+            
+        },
+
+
+    })
+</script>
+
+</html>

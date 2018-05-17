@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>插槽作用域</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <!-- 父组件模板的所有东西都会在父级作用域内编译；子组件模板的所有东西都会在子级作用域内编译 -->
+    <div id="app">
+        <base-layout url="url">
+           <h1>我是默认内容</h1>
+           <span>{{ xmjdFrom.content }}</span>
+           <!-- <div>{{ url }}</div> -->
+           <!-- 这里可以访问父组件的，根实例的，但是不能访问子级作用域的 -->
+        </base-layout>
+     
+    </div>
+
+</body>
+<script>
+    Vue.component('base-layout', {
+        data() {
+            return {
+                url: "www.baidu.com"
+            }
+        },
+        template: `<div>
+                    <button>我是插槽上面内容</button>
+                    <slot>我是插槽内容</slot>
+                    <footer>我是插槽下面内容</footer>
+                </div>
+                 `
+        //未命名插槽，会作为所有未匹配到插槽的内容的统一出口
+        //如果组件中有内容,模板理除了slot的内容会展示，若没有，模板里的都会展示出来
+       
+    })
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+           xmjdFrom:{
+               id:1,
+               content:"我是最高级的对象属性"
+           } 
+        },
+
+
+    })
+</script>
+
+</html>

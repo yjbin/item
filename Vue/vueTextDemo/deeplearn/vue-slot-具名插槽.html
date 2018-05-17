@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>具名插槽</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <base-layout>
+            <template slot="header">
+                <h1>Here might be a page title</h1>
+            </template>
+
+            <p>A paragraph for the main content.</p>
+            <p>And another one.</p>
+
+            <template slot="footer">
+                <p>Here's some contact info</p>
+            </template>
+        </base-layout>
+        <!-- 另一种 slot 特性的用法是直接用在一个普通的元素上 -->
+        <base-layout>
+            <h1 slot="header">Here might be a page title</h1>
+
+            <p>A paragraph for the main content.</p>
+            <p>And another one.</p>
+
+            <p slot="footer">Here's some contact info</p>
+        </base-layout>
+    </div>
+
+</body>
+<script>
+    Vue.component('base-layout', {
+        data() {
+            return {
+                url: "www.baidu.com"
+            }
+        },
+        template: `<div>
+                    <header>
+                            <slot name="header"></slot>
+                    </header>
+                    <section>
+                            <slot></slot>
+                    </section>
+                    <footer>
+                            <slot name="footer"></slot>
+                    </footer>
+                </div>
+                 `
+                 //未命名插槽，会作为所有未匹配到插槽的内容的统一出口
+       
+    })
+
+    const app = new Vue({
+        el: "#app",
+        data: {
+            // url:"www.4399.com"
+        },
+
+
+    })
+</script>
+
+</html>

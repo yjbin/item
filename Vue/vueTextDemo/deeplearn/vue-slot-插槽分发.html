@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>插槽分发</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>                         
+    <div id="app">
+        <todo-item url="url">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+            </ul>
+            <span>my slot</span>
+        </todo-item>
+    </div>
+
+</body>
+<script>
+    Vue.component('todo-item',{
+        // 以一种原始的值传入且需要进行转换
+        data(){
+            return {
+                url:"www.baidu.com"
+            }
+        },
+        template:'<div><a :href="url" class="nav-link"><slot></slot></a></div>',
+        // slot会替换模板里的内容，可以是html元素，还可以是一个组件
+        //如果 组建中 没有包含一个 <slot> 元素，则任何传入它的内容都会被抛弃。
+    })
+  
+    const app = new Vue({
+        el:"#app",
+        data:{
+            // url:"www.4399.com"
+        },
+        
+
+    })
+</script>
+
+</html>
