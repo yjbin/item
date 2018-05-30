@@ -14,7 +14,7 @@
            <!-- .sync修饰符 真正的双向绑定-->
     <div id="app">
         <!-- <todo-item :title="xmfrom.title" @title="sss"></todo-item> -->
-        <todo-item :title.sync="xmfrom"></todo-item>
+        <todo-item :xxx.sync="xmfrom"></todo-item>
         <!-- 实时更新对象的每个属性 -->
     </div>
 
@@ -22,7 +22,7 @@
 <script>
     Vue.component('todo-item',{
         // 以一种原始的值传入且需要进行转换
-        props:['title'],
+        props:['xxx'],
         data(){
             return{
                 obj:{
@@ -32,10 +32,10 @@
                 
             }
         },
-        template:'<div><button @click="change">{{ title.title }}</button></div>',
+        template:'<div><button @click="change">{{ xxx.title }}</button></div>',
         methods:{
             change(){
-              this.$emit('update:title', this.obj)  //注意这里必须是update:传递的东西
+              this.$emit('update:xxx', this.obj)  //注意这里必须是update:传递的东西
             }
         }
     })
