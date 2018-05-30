@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>异步组件</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+       
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <tab-posts></tab-posts>
+    </div>
+
+</body>
+<script>
+    // 异步组件
+    Vue.component('tab-posts',() =>{
+        import('./my-async-component')
+
+    })
+    new Vue({
+        el: '#app',
+        data: {
+           
+        },
+        computed: {
+          
+        }
+    })
+</script>
+
+</html>
