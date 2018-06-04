@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>访问根组件</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+       
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <tab-posts></tab-posts>
+    </div>
+
+</body>
+<script>
+    //this.$roor访问根组件,this.$parent,访问父组件
+    Vue.component('tab-posts',{
+     data(){
+         return {
+            text:this.$root.str
+         }
+         //获取根组件的数据
+        //  this.$root.str
+         //写入根组件的数据】
+         //this.$root.str = 2;
+         //访问根组件的计算属性
+         //this.$root.bar
+         //访问根组件的方法
+         //this.$root.bar()
+     },
+     methods:{
+         change(){
+            this.$root.bar
+            this.$root.barz()
+            
+         }
+     },
+     template:"<div >{{text}}<button @click='change()'>000</button></div>"
+        
+
+    })
+    new Vue({
+        el: '#app',
+        data: {
+           str:"我是根组件"
+        },
+        methods:{
+            barz(){
+                document.write('***')
+            }
+        },
+        computed: {
+          bar(){
+              alert(1)
+          }
+        }
+    })
+ 
+</script>
+
+</html>

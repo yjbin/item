@@ -21,8 +21,13 @@
 </body>
 <script>
     // 异步组件
-    Vue.component('tab-posts',() =>{
-        import('./my-async-component')
+    Vue.component('tab-posts',(reslove,reject) =>{
+        // import('./my-async-component')// 这个 `import` 函数会返回一个 `Promise` 对象。
+
+        require(['./my-sync-component'],reslove({
+            template:"<div>I am async</div>"
+        }))
+        
 
     })
     new Vue({
@@ -33,6 +38,15 @@
         computed: {
           
         }
+    })
+    //2.3新增处理加载状态
+    //这个是异步组件
+    const asyncomponent =()=>({
+        component:import('./mycompenent.vue'),
+        loading:Loadingcomponent,//加载组件
+        error:Errorcomponent,//错误返回的组件
+        delay:200,
+        timeout:3000
     })
 </script>
 
