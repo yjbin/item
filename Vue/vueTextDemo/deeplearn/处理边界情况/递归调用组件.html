@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ref为子组件赋予id父组件调用</title>
+    <title>递归调用组件</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../../../js/vue.js"></script>
     <style>
@@ -13,9 +13,9 @@
 </head>
 
 <body>
-
+    <!-- v-on监听，$once 只监听一次, $off 停止监听事件 -->
     <div id="app">
-        <tab-posts ref="child_one"></tab-posts>
+        <tab-posts></tab-posts>
     </div>
 
 </body>
@@ -25,12 +25,13 @@
          return {
             
          }
-       
      },
      methods:{
-
+         
      },
-     template:"<div><span>fdsf<input/></span></div>"
+     name:"tab-posts",
+     template:"<div><tab-posts></tab-posts></div>"
+     //递归调用自身一定要给判定条件
 
     })
     new Vue({
@@ -39,14 +40,8 @@
            str:"我是根组件"
         },
         methods:{
-           focus(){
-               this.refs.input.focus()
-               //this.refs访问子组件的id
-               /*  你应该避免在模板或计算属性中访问 $refs .ref只会在组件渲染完成之后生效  */
-           }
-        },
-        computed: {
           
+           
         }
     })
  

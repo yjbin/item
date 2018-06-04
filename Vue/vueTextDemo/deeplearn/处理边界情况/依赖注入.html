@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ref为子组件赋予id父组件调用</title>
+    <title>依赖注入</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../../../js/vue.js"></script>
     <style>
@@ -13,7 +13,7 @@
 </head>
 
 <body>
-
+    <!-- v-on监听，$once 只监听一次, $off 停止监听事件 -->
     <div id="app">
         <tab-posts ref="child_one"></tab-posts>
     </div>
@@ -25,12 +25,11 @@
          return {
             
          }
-       
      },
      methods:{
-
+         inject:['getMap']
      },
-     template:"<div><span>fdsf<input/></span></div>"
+     template:"<div><span>{{inject}}<input/></span></div>"
 
     })
     new Vue({
@@ -39,14 +38,16 @@
            str:"我是根组件"
         },
         methods:{
-           focus(){
-               this.refs.input.focus()
-               //this.refs访问子组件的id
-               /*  你应该避免在模板或计算属性中访问 $refs .ref只会在组件渲染完成之后生效  */
-           }
+            change(){
+                this.$once('hook:beforeDestory',function(){
+                    picker.destory()
+                })
+            }
         },
-        computed: {
-          
+        provide:function(){
+            return {
+                getMap:this.str
+            }
         }
     })
  
