@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>递归调用组件</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <!-- v-on监听，$once 只监听一次, $off 停止监听事件 -->
+    <div id="app">
+        <tab-posts></tab-posts>
+    </div>
+
+</body>
+<script>
+    Vue.component('tab-posts',{
+     data(){
+         return {
+            
+         }
+     },
+     methods:{
+         
+     },
+     name:"tab-posts",
+     template:"<div><tab-posts></tab-posts></div>"
+     //递归调用自身一定要给判定条件
+
+    })
+    new Vue({
+        el: '#app',
+        data: {
+           str:"我是根组件"
+        },
+        methods:{
+          
+           
+        }
+    })
+ 
+</script>
+
+</html>

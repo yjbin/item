@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>v-once</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <!-- v-once组件包含了大量静态内容渲染非常快 会缓存 -->
+    <div id="app">
+        <terms-of-service ></terms-of-service>
+    </div>
+
+</body>
+<script>
+    Vue.component('terms-of-service', {
+    template: `
+        <div v-once>
+        <h1>Terms of Service</h1>
+        ... a lot of static content ...
+        </div>
+    `
+    })
+    new Vue({
+        el: '#app',
+        data: {
+           str:"我是根组件"
+        },
+        methods:{
+           
+        },
+       
+    })
+ 
+</script>
+
+</html>
