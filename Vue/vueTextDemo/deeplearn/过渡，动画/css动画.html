@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>过渡，动画</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+        .fade-enter-active{
+            animation: text-scale .5s ease;
+        }
+        .fade-leave-active{
+            animation: text-scale .5s ease;
+        }
+        @-webkit-keyframes text-scale{
+            0%{
+                transform: scale(0);
+            }
+            50%{
+                transform: scale(2);
+            }
+            100%{
+                transform: scale(1);
+            }
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="show =!show">toggle</button>
+        <transition name="fade">
+            <!-- name控制类 -->
+            <p v-show="show">淘宝里的“店小二”、网络公司的营销人员、奔驰在大街小巷的送餐员……在中国，你所能见到的许多职场人员，都可能与电子商务有关。如今，电商已经渗透到中国人日常生活的每一个细节之中，成为推动中国经济发展的发动机和催化剂。
+
+                    　　电商对中国整体就业形势有何影响？又将表现出怎样的趋势？
+                    　　就业规模逾4000
+                    　　在北京市朝阳区，有一家名为“盒马鲜生”的超市常常人满为患。这家以“线上电商+线下门店”为主要经营模式的“新零售”超市，设有店长、厨师及拣货员、柜台服务、配送等岗位。据悉，一家“盒马鲜生”门店带动的就业岗位约为300多个，按照目前全国46家门店测算，“盒马鲜生”一共提供了上万个就业岗位。若加上上游的生产制造、快递物流等相关就业人数，这个数字将更为庞大。</p>
+        </transition>
+    </div>
+
+</body>
+<script>
+    /* 过渡的类名 */
+    //v-enter 进入过渡的开始状态
+    //v-enter-active 过渡的过程
+    //v-enter-to 过渡的结束状态
+    //v-leave 离开过渡的开始状态
+    //v-leave-active 离开时的过程
+    //v-leave-to 离开过渡的结束状态
+
+    new Vue({
+        el: '#app',
+        data: {
+            show:true
+        },
+        methods:{
+
+        },
+        computed: {
+            
+        }
+    })
+</script>
+
+</html>

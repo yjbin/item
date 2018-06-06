@@ -20,6 +20,7 @@
 
 </body>
 <script>
+    // 组件见循环引用的时候同过异步的方式来解决
     Vue.component('tab-posts',{
      data(){
          return {
@@ -29,7 +30,7 @@
      methods:{
          
      },
-     name:"tab-posts",
+     name:"tab-posts",  //递归组件只能通过name来完成
      template:"<div><tab-posts></tab-posts></div>"
      //递归调用自身一定要给判定条件
 

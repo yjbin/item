@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>过渡，动画</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+        .fade-enter-active, .fade-leave-active{
+            transition: all .5s ease;
+        }
+        .fade-enter, .fade-leave{
+            transform: translateX(10px);
+            opacity: 0;
+        }
+        
+        
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="show =!show">toggle</button>
+        <transition name="fade">
+            <!-- name控制类 -->
+            <p v-show="show">hellow</p>
+        </transition>
+    </div>
+
+</body>
+<script>
+    /* 过渡的类名 */
+    //v-enter 进入过渡的开始状态
+    //v-enter-active 过渡的过程
+    //v-enter-to 过渡的结束状态
+    //v-leave 离开过渡的开始状态
+    //v-leave-active 离开时的过程
+    //v-leave-to 离开过渡的结束状态
+    Vue.component('tab-posts', {
+        data: function () {
+            
+        },
+        template: `
+
+        `
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+            show:true
+        },
+        methods:{
+
+        },
+        computed: {
+            
+        }
+    })
+</script>
+
+</html>

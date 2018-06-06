@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>过渡</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+  
+</style>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="show =!show">toggle</button>
+        <transition
+        v-on:before-enter="beforeEnter"
+        v-on:enter="enter"
+        v-on:after-enter="afterEnter"
+        v-on:enter-cancelled="enterCancelled"
+
+        v-on:before-leave="beforeLeave"
+        v-on:leave="leave"
+        v-on:after-leave="afterLeave"
+        v-on:leave-cancelled="leaveCancelled"
+        >
+        <!-- ... -->
+        </transition>
+    </div>
+
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            show:true
+        },
+        methods:{
+            beforeEnter: function (el) {
+            },
+            // 此回调函数是可选项的设置
+            // 与 CSS 结合时使用
+            enter: function (el, done) {
+                done() //防止被同步调用，
+            },
+            afterEnter: function (el) {
+            },
+            enterCancelled: function (el) {
+            },
+            beforeLeave: function (el) {
+            },
+            leave: function (el, done) {
+                done()
+            },
+            afterLeave: function (el) {
+            },
+            // leaveCancelled 只用于 v-show 中
+            leaveCancelled: function (el) {
+            }
+        },
+        computed: {
+            
+        }
+    })
+</script>
+
+</html>

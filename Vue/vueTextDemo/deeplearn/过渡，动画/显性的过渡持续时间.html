@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>过渡持续时间 使用 duration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+    .fade-enter-active,.fade-leave-active{
+        transtion:all 0.5 ease
+    }
+    .fade-enter,.fade.leave{
+        transform: translateX(10px);
+        opacity: 0;
+    }
+</style>
+</head>
+<body>
+
+    <div id="app">
+        <button @click="show =!show">toggle</button>
+        <transition name="fade" :duration="1000">
+            <p v-show="show">hellow</p>
+        </transition>
+        <transition name="fade" :duration="{enter:500,leave:800}">
+                <p v-show="show">world</p>
+        </transition>
+        <!-- 出事渲染的过渡 同样也可以自定义类 -->
+        <transition name="fade" :duration="600" apper>
+                <p v-show="show">你好，世界</p>
+        </transition>
+    </div>
+
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            show:true
+        },
+        methods:{
+
+        },
+        computed: {
+            
+        }
+    })
+</script>
+
+</html>
