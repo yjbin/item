@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>可复用的过渡</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 1s ease;
+        }
+
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 表的排序过渡  v-move   fade-move -->
+    <div id="app">
+        <my-special-transition></my-special-transition>
+    </div>
+
+</body>
+<script>
+    Vue.component('my-special-transition', {
+  template: '\
+    <transition\
+      name="fade"\
+      mode="out-in"\
+      v-on:before-enter="beforeEnter"\
+      v-on:after-enter="afterEnter"\
+    >\
+      <slot></slot>\
+    </transition>\
+  ',
+  methods: {
+    beforeEnter: function (el) {
+      // ...
+    },
+    afterEnter: function (el) {
+      // ...
+    }
+  }
+})
+    new Vue({
+        el: '#app',
+        data: {
+           
+        },
+
+        methods: {
+            
+        }
+    })
+</script>
+
+</html>

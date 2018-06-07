@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>列表的过渡</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 1s ease;
+        }
+
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 表的排序过渡  v-move   fade-move -->
+    <div id="app">
+        <button @click="add">add</button>
+        <button @click="remove">remove</button>
+        <ul>
+            <!-- tag需要过渡的元素 -->
+            <transition-group name="fade" mode="out-in" tag="li">
+                <li v-for="item in list" :key="item.id">{{item.name}}</li>
+            </transition-group>
+        </ul>
+    </div>
+
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            list: [{
+                    id: 0,
+                    name: "小明"
+                },
+                {
+                    id: 1,
+                    name: "小花"
+                },
+                {
+                    id: 2,
+                    name: "小英"
+                }
+            ]
+        },
+
+        methods: {
+            add(){
+                this.list.push({id:Math.random()*this.list.length,name:"小影"})
+            },
+            remove(){
+                this.list.splice(this.list.length-1,this.list.length)
+            }
+        }
+    })
+</script>
+
+</html>

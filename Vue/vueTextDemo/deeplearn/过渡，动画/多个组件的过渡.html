@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>多个组件的过渡</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+         .fade-enter-active, .fade-leave-active{
+            transition: opacity 1s ease;
+        }
+        .fade-enter, .fade-leave-to{
+            opacity: 0;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="radio" name="file" @click="change()">A
+        <input type="radio" name="file" @click="edit()">B
+        <transition name="fade" mode="out-in">
+            <component v-bind:is="componentId"></component>
+        </transition>
+    </div>
+
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            componentId:'v-a'
+        },
+        components:{
+            'v-a':{
+                template:"<div>componentA</div>"
+            },
+            'v-b':{
+                template:"<div>componentB</div>"
+            }
+        },
+        methods: {
+            change(){
+                this.componentId = 'v-a'
+            },
+            edit(){
+                this.componentId = 'v-b'
+            },
+        }
+    })
+</script>
+
+</html>
