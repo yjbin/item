@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>状态侦听器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+
+    <div id="app">
+
+            <input v-model.number="number" type="number" step="20">
+            <p>{{ animatedNumber  }}</p>
+    
+    </div>
+
+</body>
+<script>
+
+    new Vue({
+        el: '#app',
+        data: {
+            number:0,
+            num:0
+        },
+        computed: {
+            animatedNumber(){
+                return this.num.toFixed(0)
+            }
+        },
+        watch:{
+            number: function(newValue) {
+                TweenLite.to(this.$data, 0.5, { num: newValue });
+            }
+        }
+    })
+</script>
+
+</html>

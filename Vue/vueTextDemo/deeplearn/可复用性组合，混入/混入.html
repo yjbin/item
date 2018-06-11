@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>混入</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+  
+</head>
+<body>
+<!-- 混入对象可以包含任意组件选项 -->
+    <div id="app">
+        
+    </div>
+
+</body>
+<script>
+    // 错误时候出现的组件？，提示？
+    var myMixin = {
+        methods:{
+            hello(){
+                document.write('hellow form minxin')
+            }
+        },
+        created(){
+            this.hello()
+        }
+    }
+
+    var Component = Vue.extend({
+        mixins:[myMixin]
+    })
+    var comment = new Component()
+
+</script>
+
+</html>

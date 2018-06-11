@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>选项合并</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+  
+</head>
+<body>
+
+</body>
+<script>
+    // 混入对象的钩子将在组件自身钩子之前调用。 //会先进行一次浅合并(一层属性深度，组件的属性,方法 > 混入的!)
+    var myMixin = {
+        data(){
+            return {
+                message:"我是 mixin",
+                foo:"xmplate"
+            }
+        },
+        methods:{
+            add(){
+                console.log('混入add')
+            },
+            change(){
+                console.log('change')
+            }
+        },
+        created(){
+            console.log('先渲染Mixin')
+        }
+    }
+
+    var vm = new Vue({
+        mixins:[myMixin],
+        data(){
+            return {
+                message: '我是组件',
+                bar: 'def'
+            }
+        },
+        methods:{
+            add(){
+                console.log('组件add')
+            },
+            updated(){
+                console.log('updaet')
+            }
+        },
+        created(){
+            console.log('先渲染组件')
+            console.log(this.$data)
+           
+        }
+    })
+
+    vm.change() // => change
+    vm.updated() // => "updated"
+    vm.add() // => "组件add"
+</script>
+
+</html>
