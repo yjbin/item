@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>自定义指令</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>                         
+    <div id="app">
+            <input v-focus type="text">
+    </div>
+
+</body>
+<script>
+    // 全局的指令
+    // Vue.directive('focus',{
+    //     inserted: function (el) {
+    //         // 聚焦元素
+    //         el.focus()
+    //     }
+    // })
+    
+    const app = new Vue({
+        el:"#app",
+        data:{
+           
+        },
+        //局部的指令
+        directives:{
+            focus:{
+                bind(){
+                        //只调用一次
+                },
+                inserted(el,binding,vnode){
+                    //el ,绑定的元素
+                    // binding 一个对象
+                    
+                    //Vue 编译生成的虚拟节点
+                    //被绑定元素插入父节点时调用 
+                    el.focus()
+                },
+                update(){
+
+                },
+                componentUpdated(){
+
+                },
+                unbind(){
+                    //只调用一次
+                }
+            }
+        },
+        computed: {
+           
+        },
+
+    })
+</script>
+
+</html>
