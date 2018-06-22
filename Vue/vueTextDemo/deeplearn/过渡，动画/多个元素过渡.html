@@ -9,9 +9,13 @@
     <script src="../../../js/vue.js"></script>
     <style>
          .fade-enter-active, .fade-leave-active{
-            transition: all 1s ease;
+            transition: all 0.5s ease;
         }
-        .fade-enter, .fade-leave{
+        .fade-enter{
+            transform: translateX(60px);
+            opacity: 0;
+        }
+        .fade-leave{
             transform: translateX(50px);
             opacity: 0;
         }
