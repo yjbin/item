@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>render</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+       
+    </div>
+</body>
+<script>
+    Vue.component('artic-head', {
+        render: function (createElement) {
+            return createElement(
+                //参数
+                'div',  //要渲染的标签
+                {
+                    //一个包含相关属性的数据对象data
+                    'class':{
+                        foo:true,
+                        bar:false
+                    },
+                    style:{
+                        color:'red',
+                        fontSize:'14px'
+                    },
+                    //正常的html特性
+                    attrs:{
+                        id:'foo'
+                    },
+                    //组件props
+                    props:{
+                        myProp:'bar'
+                    },
+                    //dom属性
+                    domProps:{
+                        innerHTML:'bar'
+                    },
+                    //事件监听
+                    on:{
+                        click:this.clickHandler
+                    },
+                    //vm.$emit出发的事件
+                    nativeOn:{
+                        click:this.nativeClickHandler
+                    },
+                    //自定义指令
+                    directives:[
+                        {
+                            name:'my-custon-directive',
+                            value:'2',
+                            expression:'1 + 1',
+                            arg:'foo',
+                            modifiers:{
+                                bar:true
+                            }
+                        }
+                    ],
+                    //作用域插槽
+                    scopedSlots:{
+                        default:props =>createElement('span',props.text)
+                    },
+                    slot:'name-of-slot',
+                    key:'myKey',
+                    ref:'myRef'
+                },
+                [
+                    //(VNodes)
+                    '一些文字',
+                    createElement('h1','今日头条'),
+                    createElement(Mycomponent,{
+                        props:{
+                            someProp:'foobar'
+                        }
+                    })
+                ]
+            )
+        },
+        props: {
+            level: {
+                type: Number,
+                required: true
+            }
+        }
+    })
+    const app = new Vue({
+        el: "#app",
+        data: {
+
+        }
+    })
+</script>
+
+</html>
