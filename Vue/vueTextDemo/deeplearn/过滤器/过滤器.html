@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>过滤器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+
+</body>
+<script>
+    //使用地方 1.花括号 {{ message | capitalize }}  2.v-bind 表达式 <div v-bind:id="message |capitalize | filter-date"></div>  
+    //过滤器可以串联,可以接收参数 {{ message | filterA('arg1', arg2) }}
+    // filterA 被定义为接收三个参数的过滤器函数。其中 message 的值作为第一个参数，普通字符串 'arg1' 作为第二个参数，表达式 arg2 的值作为第三个参数。
+   	//第一个参数是过滤的内容  这里是num
+    //第二个参数开始，是我们自己定义的参数
+    //至少要接收一个参数(要过滤的内容),可以有多个参数，参数可以是一个或多个变量
+    Vue.filter('capitalize', function (value) {
+        if (!value) return ''
+        value = value.toString()
+        return value.charAt(0).toUpperCase() + value.slice(1)
+    })
+	Vue.filter('filter-date',function (a) {
+        var oDate = new Date(a);
+        return oDate.getFullYear()+'-'+(oDate.getMonth()+1)+'-'+oDate.getDate()+" "+oDate.getHours()+":"+oDate.getMinutes()+":"+oDate.getSeconds();
+    })
+		
+    new Vue({
+        // ...
+    })
+</script>
+
+</html>

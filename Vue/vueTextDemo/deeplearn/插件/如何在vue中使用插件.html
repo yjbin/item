@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>                         
+   
+</body>
+<script>
+    import el_element from 'ele-ment';
+    Vue.use(el_element) //调用插件
+
+    Vue.use(le_element,{someOption:true}) //会自动阻止多次注册相同插件，届时只会注册一次该插件。
+
+    //在CommonJS的模块环境中应该始终显示地调用Vue.use()
+    var Vue = require('vue'); 
+    var VueRouter = require('vue-router')
+    Vue.use(VueRouter)
+</script>
+
+</html>

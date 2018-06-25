@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue.js"></script>
+    <style>
+    </style>
+</head>
+<body>                         
+   
+</body>
+<script>
+    //插件应当有一个公开方法 install 。这个方法的第一个参数是 Vue 构造器，第二个参数是一个可选的选项对象：
+    myPlugin.install = function(Vue,options){
+        //添加全局方法或属性
+        Vue.myGlobalMethod = function(){
+            doSomething()
+        }
+        //添加全局指令
+        Vue.directives('my-directive',{
+
+        })
+        //注入组件
+        Vue.mixin({
+            created:function(){
+                
+            }
+        })
+        //添加实例方法
+        Vue.prototype.$myMethod = function(opt){
+
+        }
+    }
+</script>
+
+</html>
