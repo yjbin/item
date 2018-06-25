@@ -14,6 +14,7 @@
     </div>
 </body>
 <script>
+    //组件树中的所有 VNodes 必须是唯一的
     var getChildren = function(child){
         return children.map(function(node){
             return node.children? getChildren(node.children):node.text
