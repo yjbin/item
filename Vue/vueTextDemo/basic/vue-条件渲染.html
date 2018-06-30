@@ -51,7 +51,7 @@
 	})
 	document.onclick = function(){
 		vm.isTrue = !vm.isTrue,
-		//vm.categray.length = 0;  这样不起作用
+		//vm.categray.length = 0;  //这样不起作用
 		vm.categray.splice(0);  //这样ok,借调数组的splice方法
 	}
 	
