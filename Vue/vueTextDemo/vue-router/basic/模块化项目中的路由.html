@@ -14,16 +14,54 @@
 </head>
 <body>
     <div id="app">
-      
+        <button @click="goBack()">返回上一页</button>
+        <router-link to="/home">首页</router-link>
+        <router-link to="/news">新闻</router-link>
+        <router-view></router-view>
+    </div>
 </body>
 <script>
+    //1.定义组件，也可以从其他文件import进来
+    var Home = { 
+        template:"<h3>我是home</h3>" 
+    }
+    var News = { 
+        template:"<h3>新闻news</h3>" 
+    }
+    //2.定义路由
+    const routes = [
+        {path:'/home',component:Home},
+        {path:'/news',component:News},
+        {path:'*',redirect:'/home'},
+    ]
+    //3.创建路由实例
+    const router  = new VueRouter({
+        routes:routes   //缩写,相当于routes:routes
+    })
+
+    //4.创建和挂载根实例
+    // const app = new Vue({
+    //     router
+    // }).$mount('#app');
     new Vue({
+        router,
         el: '#app',
         data: {
            
         },
+        methods: {
+            //this.$router 访问路由器
+            goBack () {
+                window.history.length > 1
+                    ? this.$router.go(-1)
+                    : this.$router.push('/')
+                    console.log(this.$route.path)
+            }
+        },
         computed: {
-          
+            username () {
+                return this.$route.params.username
+            }
         }
     })
    
