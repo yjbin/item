@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>基础学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue2.5.js"></script>
+    <script src="../../../js/vue-router3.0.js"></script>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div id="app">
+       <h1>hellow App!</h1>
+       <p>
+           <!-- 使用router-link 组件来导航 -->
+           <!-- 通过传入'to'指定链接 -->
+           <!-- router-link 默认会被渲染成一个'<a>'标签-->
+               <router-link to="/foo">go to foo</router-link>
+               <router-link to="/bar">go to bar</router-link>
+            <!-- 路由出口 -->
+            <!-- 路由匹配到的组件将渲染在这里 -->
+            <router-view></router-view>
+       </p>
+    </div>
+</body>
+<script>
+//      在模块化工程中使用
+//      import Vue  form 'vue'
+//      import VueRouter from 'vue-router'
+//         用法  Vue.use(VueRouter)
+
+    new Vue({
+        el: '#app',
+        data: {
+           
+        },
+        computed: {
+          
+        }
+    })
+   
+</script>
+
+</html>
