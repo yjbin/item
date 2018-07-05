@@ -14,9 +14,11 @@
 </head>
 <body>
     <div id="app">
-        <h3>路由</h3>
         <router-link to="/user">user</router-link>
-        <router-view></router-view>
+        <!-- 匹配多个出口 -->
+        <router-view class="view one"></router-view>
+        <router-view class="view two" name="a"></router-view>
+        <router-view class="view three" name="b"></router-view>
       </div>
 </body>
 <script>
@@ -25,43 +27,26 @@
         template: `
                 <div class="user">
                     <h2>User列表</h2>
-                    <ul>
-                        <li>
-                            <router-link to="/user/profile">
-                                    新闻中心
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link to="/user/posts">
-                                    资源中心
-                            </router-link>
-                        </li>
-                    </ul>
-                    <router-view></router-view>
                 </div>
                 `
     }
-    const UserProfile = {
-        template:'<div>用户1111</div>'
+    const Bar = {
+        template:'<div>文章</div>'
     }
-    const UserPosts = {
-        template:'<div>用户2222</div>'
+    const Baz = {
+        template:'<div>主体内容</div>'
     }
+
     //2.定义路由
     const router = new VueRouter({
         routes: [
             {   path: '/user', 
-                component: User,
-                children:[
-                    {
-                        path: 'profile',
-                        component: UserProfile
-                    },{
-                        path: 'posts',
-                        component: UserPosts
-                    }
-                ]
-
+                name:"User", 
+                components: {  //匹配多个出口这里要加上 s
+                    default: User,  //如果 router-view 没有设置名字，那么默认为 default
+                    a: Bar,
+                    b: Baz,
+                }
             },
         ]
     })

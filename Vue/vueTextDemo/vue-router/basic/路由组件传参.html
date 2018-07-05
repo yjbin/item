@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>基础学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue2.5.js"></script>
+    <script src="../../../js/vue-router3.0.js"></script>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/user">user</router-link>
+        <router-view></router-view>
+      </div>
+</body>
+<script>
+    //props  将组件和路由解耦
+    const User = {
+        props:['id'],
+        template: `
+                <div class="user">
+                    <h2>User {{ $route.params.id }}</h2>
+                </div>
+                `
+    }
+    const router = new VueRouter({
+        routes: [
+            {   path: '/user:id', 
+                name:"User", 
+                component:User,
+                props:true
+            },// 对于包含命名视图的路由，必须分别为每个命名视图添加 `props` 选项：
+        ]
+    })
+    new Vue({
+        router,
+        el: '#app',
+        data: {
+           
+        },
+        methods: {
+            //this.$router 访问路由器
+
+        },
+        computed: {
+           
+        }
+    })
+   
+</script>
+
+</html>

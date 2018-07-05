@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>基础学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue2.5.js"></script>
+    <script src="../../../js/vue-router3.0.js"></script>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>路由</h3>
+        <router-link to="/user">user</router-link>
+        <router-view></router-view>
+      </div>
+</body>
+<script>
+    //1.定义组件，也可以从其他文件import进来
+    const User = {
+        template: `
+                <div class="user">
+                    <h2>User列表</h2>
+                    <ul>
+                        <li>
+                            <router-link to="/user/profile">
+                                    资源中心
+                            </router-link>
+                        </li>
+                    </ul>
+                    <router-view></router-view>
+                </div>
+                `
+    }
+    const UserProfile = {
+        template:'<div>用户1111</div>'
+    }
+
+    //2.定义路由
+    const router = new VueRouter({
+        routes: [
+            {   path: '/user', 
+                component: User,
+                name:"User",   //给路由命名，<router-link :to="{ name: 'user'}">User</router-link> 可以这样使用
+                children:[
+                    {
+                        path: 'profile',
+                        component: UserProfile
+                    }
+                ]
+
+            },
+        ]
+    })
+    new Vue({
+        router,
+        el: '#app',
+        data: {
+           
+        },
+        methods: {
+            //this.$router 访问路由器
+
+        },
+        computed: {
+           
+        }
+    })
+   
+</script>
+
+</html>

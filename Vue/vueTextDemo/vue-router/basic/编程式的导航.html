@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>基础学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue2.5.js"></script>
+    <script src="../../../js/vue-router3.0.js"></script>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>路由</h3>
+        <router-link to="/user">user</router-link>
+        <router-view></router-view>
+      </div>
+</body>
+<script>
+   //router.push相当于<router-link to=""> 跳转到
+    router.push('home') //字符串形式
+    router.push({paht:"home"})//对象
+    router.push({name:"user",params:{ userId:123 }}) //命名路由
+    router.push({ path: 'register', query: { plan: 'private' }})
+    
+    router.replace(location,onComplete,onAbort)  //替换掉当前的 history 记录
+    router.go(n)  ==   window.history.go(n)
+    new Vue({
+        router,
+        el: '#app',
+        data: {
+           
+        },
+        methods: {
+            //this.$router 访问路由器
+
+        },
+        computed: {
+           
+        }
+    })
+   
+</script>
+
+</html>
