@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>过渡效果</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue2.5.js"></script>
+    <script src="../../../js/vue-router3.0.js"></script>
+    <style>
+        .slide-fade{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left:0;
+            right: 0;
+        }
+        .slide-fade-enter-active {
+            transition: all 1.2s ease;
+        }
+        .slide-fade-leave-active {
+            transition: all .1s cubic-bezier(2.0, 0.5, 0.8, 1.0);
+        }
+        .slide-fade-enter, .slide-fade-leave-to{
+            left:0;
+            right: 0;
+            transform: translateX(50px);
+            opacity: 0;
+        }
+        .profile-enter-active, .profile-leave-active{
+            transition: all 1s ease;
+        }
+        .profile-enter, .profile-leave-to{
+            opacity: 0;
+            transform: scale(1);
+        }
+        .posts-enter-active, .posts-leave-active{
+            transition: all 1s ease;
+        }
+        .posts-enter, .posts-leave-to{
+            opacity: 0;
+            transform: translateY(50px);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/user">user</router-link>
+        <!-- 这样会给所有的路由都设置一样的过渡效果 -->
+        <transition name="slide-fade" mode="out-in">
+            <router-view></router-view>
+        </transition>
+      </div>
+</body>
+<script>
+    
+    //1.定义组件，也可以从其他文件import进来
+    const User = {
+        template: `
+                <div class="user">
+                    <h2>User列表</h2>
+                    <ul>
+                        <li>
+                                <router-link to="/user/profile">
+                                        新闻中心
+                                </router-link>             
+                        </li>
+                        <li>
+                                <router-link to="/user/posts">
+                                        资源中心
+                                </router-link>
+                        </li>
+                    </ul>
+                    <router-view></router-view>
+                </div>
+                `
+    }
+    const UserProfile = {
+        template:`<transition name="profile">
+                    <div><span>用户1111</span></div>
+                <transition>
+                `
+    }
+    const UserPosts = {
+        template:`<transition name="posts">
+                <div><span>用户2222</span></div>
+                <transition>
+                `
+    }
+    //2.定义路由
+    const router = new VueRouter({
+        routes: [
+            {   path: '/user', 
+                component: User,
+                //三种写法
+                // redirect:"/user/posts",  //重定向，默认展示第二页
+
+                // redirect:{ name:"posts" },
+
+                redirect: to => {
+                    // 方法接收 目标路由 作为参数
+                    // return 重定向的 字符串路径/路径对象
+                    return "/user/posts"
+                },
+                children:[
+                    {
+                        path: 'profile',
+                        name:"profile",
+                        component: UserProfile
+                    },{
+                        path: 'posts',
+                        name:"posts",
+                        component: UserPosts
+                    }
+                ]
+            },
+        ]
+    })
+    new Vue({
+        router,
+        el: '#app',
+        data: {
+           
+        },
+        methods: {
+
+        },
+    })
+   
+</script>
+
+</html>

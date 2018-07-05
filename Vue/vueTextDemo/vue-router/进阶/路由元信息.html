@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>路由元信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../../js/vue2.5.js"></script>
+    <script src="../../../js/vue-router3.0.js"></script>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/user">user</router-link>
+        <router-view></router-view>
+      </div>
+</body>
+<script>
+    //路由匹配到的所有路由记录会暴露为 $route 对象 (还有在导航守卫中的路由对象) 的 $route.matched 数组
+    const User = {
+        template: `
+                <div class="user">
+                    <h2>User列表</h2>
+                    <router-link to="/user/bar"></router-link>
+                    <router-view></router-view>
+                </div>
+                `,
+    }
+    const Bar = {
+        template: `
+                <div>
+                    <h2>bar</h2>
+                </div>
+                `,
+    }
+    
+    const router = new VueRouter({
+        routes: [
+            {   path: '/user', 
+                name:"User", 
+                component: User,
+                children:[
+                    {
+                        path:'bar',
+                        component:Bar,
+                        meta:{
+                            requiresAuth: true
+                        }
+                    }
+                ]
+            },
+        ]
+    })
+    //在全局导航守卫中检查元字段
+    router.beforeEach((to, from, next) => {
+        if (to.matched.some(record => record.meta.requiresAuth)) {
+            // 检查用户是否登录，未登录返回登录页
+            if (!auth.loggedIn()) {
+            next({
+                path: '/login',
+                query: { redirect: to.fullPath }
+            })
+            } else {
+            next()
+            }
+        } else {
+            next() // 确保一定要调用 next()
+        }
+    })
+
+
+
+    new Vue({
+        router,
+        el: '#app',
+        data: {
+           
+        },
+        methods: {
+
+        },
+        mounted() {
+            const arr = this.$router.matched;
+            console.log(arr)
+        },
+    })
+   
+</script>
+
+</html>
