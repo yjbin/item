@@ -57,7 +57,7 @@
             },
         ]
     })
-    //在全局导航守卫中检查元字段
+    //在全局导航守卫中检查元字段  $route.matched 来检查路由记录中的 meta 字段
     router.beforeEach((to, from, next) => {
         if (to.matched.some(record => record.meta.requiresAuth)) {
             // 检查用户是否登录，未登录返回登录页
