@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>mapState</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/vuex.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+
+</body>
+<script>
+  //当一个组件需要获取多个状态时候,使用 mapState 辅助函数帮助我们生成计算属性
+  import mapState from "vuex"
+  export default{
+    computed:mapState({
+        count:state =>state.count,
+        // 传字符串参数 'count' 等同于 `state => state.count`
+        countAlias: 'count',
+        //为了能够使用'this'获取局部数据状态，必须使用局部函数
+        countPlusLocalState(state){
+            return state.count + this.localCount
+        }
+    })
+      // 对象展开运算符
+    // computed: {
+    //     localComputed () { /* ... */ },
+    //     // 使用对象展开运算符将此局部对象混入到外部对象中,使用一个工具函数将多个对象合并为一个
+    //     ...mapState({
+    //         // ...
+    //     })
+    // }
+  //当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。
+//   computed: mapState([
+//     // 映射 this.count 为 store.state.count
+//     'count'
+//   ])
+
+
+}
+//使用 Vuex 并不意味着你需要将所有的状态放入 Vuex。虽然将所有的状态放到 Vuex 会使状态变化更显式和易调试，
+//但也会使代码变得冗长和不直观。如果有些状态严格属于单个组件，最好还是作为组件的局部状态
+</script>
+
+</html>

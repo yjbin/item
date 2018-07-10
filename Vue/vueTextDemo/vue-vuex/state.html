@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>state</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/vuex.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+
+</body>
+<script>
+    //在 Vue 组件中获得 Vuex 状态
+    const Counter = {
+        template:`
+        <div>{{ count }}</div>
+        `,
+        computed: {
+            count () {
+            return this.$store.state.count
+            }
+        }
+    }
+    const store = new Vuex.Store({
+        state: {
+            count: 0
+        },
+        mutations: { //提交 mutation 的方式，不会直接改变 store.state.count
+            increment (state) {
+                state.count++
+            }
+        }
+    })
+    const app = new Vue({
+        el: "#app",
+        //模块化工程中 把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件
+        //通过在根实例中注册 store 选项，该 store 实例会注入到根组件下的所有子组件中，且子组件能通过 this.$store 访问到
+        store,
+        components: { Counter },
+        template: `
+            <div class="app">
+            <counter></counter>
+            </div>
+        `
+    })
+</script>
+
+</html>
