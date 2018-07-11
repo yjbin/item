@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>mapGetter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/vuex.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+
+</body>
+<script>
+     import { mapGetters } from './mapgetter'
+    const store = new Vuex.Store({
+        state: {
+            count:0,
+            todos:[
+                { id: 1, text: '11' , done: true },
+                { id: 2, text: '222', done: false }
+            ]
+        },
+//getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
+        getters: {
+            //Getter 接受 state 作为其第一个参数
+            //通过属性访问
+            doneTodos: state => {
+                return state.todos.filter(todo => todo.done) //返回todo.done为真的数组
+            },
+            //Getter 也可以接受其他 getters 作为第二个参数
+            doneTodosCount: (state, getters) => {
+                return getters.doneTodos[0].id
+            },
+            //通过方法访问  id是传入的参数，返回与之匹配的数据
+            getTodoById: (state) => (id) => {
+                return state.todos.find(todo => todo.id === id)  //返回数组中第一个与之匹配的值
+            }
+            //相当于
+            // var getTodoById = function(state,getters){
+            //     return function(id){
+            //         return state.todos.find(function(todo){
+            //              return todo.id === id
+            //         })
+            //     }
+            // }
+        },
+        mutations: { //提交 mutation 的方式，不会直接改变 store.state.count
+            increment (state) {
+                state.count++
+            }
+        }
+    })
+  //mapGetters 辅助函数仅仅是将 store 中的 getter 映射到局部计算属性
+
+  const app = new Vue({
+        el: "#app",
+        store,
+        template:`
+            <div>
+                <h2>{{ doneTodos }}</h2>
+                <p>{{ doneTodosCount }}</p>
+            </div>
+        `
+    })
+
+</script>
+
+</html>

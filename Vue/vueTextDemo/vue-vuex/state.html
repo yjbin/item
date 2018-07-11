@@ -22,22 +22,31 @@
     //在 Vue 组件中获得 Vuex 状态
     const Counter = {
         template:`
-        <div>{{ count }}</div>
+        <div>
+        <p>{{ count }}</p>
+        <button @click="change">改变</button>
+        </div>
         `,
         computed: {
-            count () {
-            return this.$store.state.count
+            count () {//这里的计算属性去拿vuex里的state的count值
+                return this.$store.state.count
+            }
+        },
+        methods:{
+            change(){
+                this.$store.commit('increment')   
             }
         }
     }
     const store = new Vuex.Store({
         state: {
-            count: 0
+            count: 0 //直立式存储的数据,只能通过mutations改变
         },
         mutations: { //提交 mutation 的方式，不会直接改变 store.state.count
-            increment (state) {
-                state.count++
-            }
+            // increment (state) {
+            //     state.count++
+            // }
+            increment:state =>state.count++
         }
     })
     const app = new Vue({
