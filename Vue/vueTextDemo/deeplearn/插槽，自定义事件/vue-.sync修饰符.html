@@ -14,7 +14,9 @@
            <!-- .sync修饰符 真正的双向绑定-->
     <div id="app">
         <!-- <todo-item :title="xmfrom.title" @title="sss"></todo-item> -->
-        <todo-item :xxx.sync="xmfrom"></todo-item>
+        <todo-item :xxx.sync="xmfrom"></todo-item>  
+        <!-- 语法糖 -->
+        <!-- <todo-item :xxx="xmfrom" @update:xxx="val => xmfrom = val"></todo-item> -->
         <!-- 实时更新对象的每个属性 -->
     </div>
 
