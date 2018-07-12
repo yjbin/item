@@ -19,9 +19,14 @@
 
 </body>
 <script>
-  //当一个组件需要获取多个状态时候,使用 mapState 辅助函数帮助我们生成计算属性
+  //当一个组件需要获取多个状态时候,使用 mapState 辅助函数帮助我们生成计算属性相当与映射
   import { mapState } from 'vuex'
-
+  const state = {
+    userInfo: { phone: 111 }, //用户信息
+    orderList: [{ orderno: '1111' }], //订单列表
+    orderDetail: null, //订单产品详情
+    login: false, //是否登录
+  }
   export default{
     computed:mapState ({
         count:state =>state.count,
@@ -32,21 +37,19 @@
             return state.count + this.localCount
         }
     })
-      // 对象展开运算符
-    //在实例中使用
+      // 对象展开运算符在实例中使用
     // computed: {
     //     // 使用对象展开运算符将此局部对象混入到外部对象中,使用一个工具函数将多个对象合并为一个
-    //     ...mapState({
-    //         // ...  例如把router对象或者stroe对象传递进去 会直接映射到当前的实例的this
-    //     })
+    //     ...mapState([
+    //         'orderList', //映射到当前实例，可使用this.orderList
+    //         'login'
+    //     ])
     // }
     //当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。
     //   computed: mapState([
     //     // 映射 this.count 为 store.state.count
     //     'count'
     //   ])
-
-
 }
 //使用 Vuex 并不意味着你需要将所有的状态放入 Vuex。虽然将所有的状态放到 Vuex 会使状态变化更显式和易调试，
 //但也会使代码变得冗长和不直观。如果有些状态严格属于单个组件，最好还是作为组件的局部状态
