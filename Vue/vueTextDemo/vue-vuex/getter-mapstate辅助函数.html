@@ -19,7 +19,7 @@
 
 </body>
 <script>
-     import { mapGetters } from './mapgetter'
+    //  import { mapGetters } from 'Vuex'
     const store = new Vuex.Store({
         state: {
             count:0,
@@ -35,22 +35,10 @@
             doneTodos: state => {
                 return state.todos.filter(todo => todo.done) //返回todo.done为真的数组
             },
-            //Getter 也可以接受其他 getters 作为第二个参数
-            doneTodosCount: (state, getters) => {
-                return getters.doneTodos[0].id
-            },
             //通过方法访问  id是传入的参数，返回与之匹配的数据
             getTodoById: (state) => (id) => {
                 return state.todos.find(todo => todo.id === id)  //返回数组中第一个与之匹配的值
             }
-            //相当于
-            // var getTodoById = function(state,getters){
-            //     return function(id){
-            //         return state.todos.find(function(todo){
-            //              return todo.id === id
-            //         })
-            //     }
-            // }
         },
         mutations: { //提交 mutation 的方式，不会直接改变 store.state.count
             increment (state) {
@@ -58,17 +46,30 @@
             }
         }
     })
-  //mapGetters 辅助函数仅仅是将 store 中的 getter 映射到局部计算属性
 
   const app = new Vue({
         el: "#app",
         store,
         template:`
             <div>
-                <h2>{{ doneTodos }}</h2>
-                <p>{{ doneTodosCount }}</p>
+                <p>{{ doneTodos }}</p>
+                <p>{{ getTodoById(2) }}</p> 
             </div>
-        `
+        `,
+        //mapGetters支持计算属性传入参数
+        computed: {
+        // 使用对象展开运算符将 getter 混入 computed 对象中
+            ...Vuex.mapGetters([
+            'doneTodos',
+            'getTodoById'
+            // ...
+            ])
+            //如果你想将一个 getter 属性另取一个名字，使用对象形式
+            // mapGetters({
+            // // 把 `this.doneCount` 映射为 `this.$store.getters.doneTodosCount`
+            // doneCount: 'doneTodosCount'
+            // })
+        }
     })
 
 </script>
