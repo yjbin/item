@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>actions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/vuex.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+    </div>
+</body>
+<script>
+    const store = new Vuex.Store({
+        state: {
+            count:0,
+            todos:[
+                { id: 1, text: '11' , done: true },
+                { id: 2, text: '222', done: false }
+            ]
+        },
+        getters: {
+            doneTodos: state => {
+                return state.todos.filter(todo => todo.done) 
+            },
+        },
+        mutations: { 
+            increment (state,obj) {
+                state.count += obj.num
+            }
+        },
+        actions:{
+            incrementAsync ({ commit },obj) {
+                //返回一个异步执行的promise对象
+                return new Promise((resolve,reject) =>{
+                    setTimeout(() => {
+                        commit('increment',obj)
+                        resolve()//执行成功
+                    }, 1000)
+                })
+            }
+            //现在可以使用  store.dispatch('incrementAsync').then(() => {}) 去执行完成之后的回调    
+        }
+    })
+    //在另外一个 action 中也可以
+    // actions: {
+    //     actionB ({ dispatch, commit }) {
+    //         return dispatch('actionA').then(() => {
+    //         commit('someOtherMutation')
+    //         })
+    //     }
+    // }
+    const app = new Vue({
+        el: "#app",
+        store,
+        methods:{
+            change(){
+                this.$store.dispatch('incrementAsync',{num:9,id:1});
+            }
+        },
+        computed:{
+            count(){
+                return this.$store.state.count
+            }
+        },
+        template:`
+            <div>
+                <p>{{ count }}</p>
+                <button @click="change">btn</button>
+            </div>
+        `
+    })
+</script>
+
+</html>

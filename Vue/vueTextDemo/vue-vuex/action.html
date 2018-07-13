@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>actions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/vuex.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+    </div>
+
+</body>
+<script>
+    //Action 提交的是 mutation，而不是直接变更状态。Action 可以包含任意-----异步操作。
+    //Action 通过 store.dispatch 方法触发   store.dispatch('increment')
+    const store = new Vuex.Store({
+        state: {
+            count:0,
+            todos:[
+                { id: 1, text: '11' , done: true },
+                { id: 2, text: '222', done: false }
+            ]
+        },
+        getters: {
+            doneTodos: state => {
+                return state.todos.filter(todo => todo.done) //返回todo.done为真的数组
+            },
+        },
+        mutations: { 
+            increment (state,obj) {
+                state.count += obj.num
+            }
+        },
+        //Actions 函数接受一个与 store 实例具有相同方法和属性的 context 对象
+        actions:{
+            ac_increment (context){
+                context.commit('increment')
+                //context.state获取state ,context.getters获取getters对象
+            },
+            //异步提交 + 参数解构  +  荷载
+            incrementAsync ({ commit },obj) {
+                setTimeout(() => {
+                    commit('increment',obj)
+                }, 500)
+            }
+
+        }
+
+    })
+    const app = new Vue({
+        el: "#app",
+        store,
+        methods:{
+            //Action 通过 store.dispatch 方法触发
+            change(){
+                this.$store.dispatch('incrementAsync',{num:9,id:1});
+            }
+           
+        },
+        computed:{
+            count(){
+                return this.$store.state.count
+            }
+        },
+        template:`
+            <div>
+                <p>{{ count }}</p>
+                <button @click="change">btn</button>
+            </div>
+        `
+    })
+</script>
+
+</html>
