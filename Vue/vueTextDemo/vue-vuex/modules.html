@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>modules</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/vuex.js"></script>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p>{{ countA }}</p>
+        <p>{{ countB }}</p>
+        <P>{{ count }}</P>
+        <p>{{ doubleCountA }}</p>
+        <p>{{ doubleCountB }}</p>
+        <p>
+          <button @click="incrementA">incrementA</button>
+          <button @click="incrementB">incrementB</button>
+        </p>
+        <p>
+            <button @click="ac_increment">ac_increment</button>
+        </p>
+      </div>
+</body>
+<script>
+//出现情况  --解决store非常庞大时难以管理，Vuex 允许我们将 store 分割成模块每个模块拥有自己的
+// state、mutation、action、getter、甚至是嵌套子模块——从上至下进行同样方式的分割
+    const moduleA = {
+        state: { 
+            count:0
+        },
+        //对于模块内部的 mutation 和 getter，接收的第一个参数是模块的局部状态对象。
+        mutations: { 
+            incrementA(state){
+                state.count++
+            }
+        },
+        //对于模块内部的 getter，根节点状态会作为第三个参数暴露出来
+        getters: { 
+            doubleCountA (state,getters,rootState) {
+                return state.count * 2 + rootState.count
+            }
+        },
+        //对于模块内部的 action，局部状态通过 context.state 暴露出来 根节点状态则为 context.rootState
+        actions: { 
+            ac_increment ({ state, commit, rootState }) {
+                if ((state.count + rootState.count) %2 == 1) {
+                    setTimeout(() => {
+                        commit('incrementA')
+                    }, 500);
+                }
+            }
+        }
+    }
+    const moduleB = {
+        state: { 
+            count:10
+        },
+        mutations: { 
+            incrementB:state => state.count++
+        },
+        getters: { 
+            doubleCountB (state) {
+                return state.count * 2
+            }
+        },
+        actions: { 
+            
+        }
+    }
+    const store = new Vuex.Store({
+       state:{
+           count:100
+       },
+       modules:{
+        a: moduleA,
+        b: moduleB
+       }
+    })
+    const app = new Vue({
+        el: "#app", 
+        store,
+        methods: {
+            incrementA () {
+                store.commit('incrementA')   
+            },
+            incrementB () {
+                store.commit('incrementB')   
+            },
+            ac_increment (){
+                store.dispatch('ac_increment')
+            }
+        },
+        computed:{
+            count(){
+                return store.state.count 
+            },
+            countA(){
+                return store.state.a.count 
+                //不同模块访问state时要带上模块名称
+            },
+            countB(){
+                return store.state.b.count 
+            },
+            doubleCountA(){
+                return store.getters.doubleCountA 
+            },
+            doubleCountB(){
+                return store.getters.doubleCountB
+            },
+           
+        }
+    })
+</script>
+
+</html>
