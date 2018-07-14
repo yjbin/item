@@ -31,6 +31,9 @@
         mutations: { 
             increment (state,obj) {
                 state.count += obj.num
+            },
+            someOtherMutation(state){
+                state.count += 55
             }
         },
         actions:{
@@ -39,27 +42,28 @@
                 return new Promise((resolve,reject) =>{
                     setTimeout(() => {
                         commit('increment',obj)
-                        resolve()//执行成功
+                        resolve()//执行成功后续可使用.then
                     }, 1000)
                 })
+            }, 
+            //在另外一个 action 中也可以
+            actionB ({ dispatch, commit }) {
+                return dispatch('actionA').then(() => {
+                    commit('someOtherMutation')
+                })
             }
-            //现在可以使用  store.dispatch('incrementAsync').then(() => {}) 去执行完成之后的回调    
         }
     })
-    //在另外一个 action 中也可以
-    // actions: {
-    //     actionB ({ dispatch, commit }) {
-    //         return dispatch('actionA').then(() => {
-    //         commit('someOtherMutation')
-    //         })
-    //     }
-    // }
     const app = new Vue({
         el: "#app",
         store,
         methods:{
             change(){
-                this.$store.dispatch('incrementAsync',{num:9,id:1});
+                //因为action离面返回的是个promise
+                 //现在可以使用  store.dispatch('incrementAsync').then(() => {}) 去执行完成之后的回调 
+                this.$store.dispatch('incrementAsync',{num:9,id:1}).then(() =>{
+                    window.alert('分发完成了！请处理其它的事物')
+                });
             }
         },
         computed:{
