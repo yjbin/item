@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>modules</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../../js/vue.js"></script>
+    <script src="../../js/vuex.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+
+    </div>
+</body>
+<script>
+    const store = new Vuex.Store({
+        modules: {
+            account:{
+                namespaced: true,
+                state:{
+                    someMutation(){
+
+                    }
+                },
+                getters:{
+                    isAdmin (state, getters, rootState, rootGetters) {  }, // -> getters['account/isAdmin']
+                    someOtherGetter: state => {  }
+                },
+                //若需要在全局命名空间内分发 action 或提交 mutation，将 { root: true } 作为第三参数传给 dispatch 或 commit 
+                actions: {
+                    someAction ({ dispatch, commit, getters, rootGetters }) {
+                        dispatch('someOtherAction', null, { root: true })
+                        // commit('someMutation', null, { root: true }
+                    }// -> dispatch('account/login')
+                    
+                },
+                mutations: {
+                    login () { } // -> commit('account/login')
+                },
+                // 嵌套模块
+                modules: {
+                    // 继承父模块的命名空间
+                    myPage: {
+                        state: {  },
+                        getters: {
+                            profile () {  } // -> getters['account/profile']
+                        }
+                    },
+                    // 进一步嵌套命名空间
+                    posts: {
+                        namespaced: true,
+                        state: {  },
+                        getters: {
+                            popular () {  } // -> getters['account/posts/popular']
+                        }
+                    }
+                }
+            }
+        }
+    })
+    const app = new Vue({
+        el: "#app",
+        store,
+        computed: {
+           
+        },
+        methods: {
+           
+        }
+    })
+    //模块动态注册在 store 创建之后，你可以使用 store.registerModule 方法注册模块
+    store.registerModule('myModule', {
+        // ...
+    })
+</script>
+
+</html>
